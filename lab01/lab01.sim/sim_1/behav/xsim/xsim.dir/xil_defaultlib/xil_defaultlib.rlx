@@ -4,8 +4,8 @@ Jun 16 2023
 19:55:58
 C:/Users/vivat/Desktop/hwlab/lab01/lab01.sim/sim_1/behav/xsim/glbl.v,1683266558,verilog,,,,glbl,,,,,,,,
 C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testDFlipFlop.v,1692631475,verilog,,,,testDFlipFlop,,,,,,,,
-C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testShift.v,1692632865,verilog,,,,testShift,,,,,,,,
-C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/tester.v,1692462271,verilog,,,,tester,,,,,,,,
-C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/DFlipFlop.v,1692631993,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testDFlipFlop.v,,DFlipFlop,,,,,,,,
-C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/fulladder.v,1692461914,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/tester.v,,fulladder,,,,,,,,
-C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/shifter.v,1692632345,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testShift.v,,shiftA;shiftB,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testShift.v,1692687287,verilog,,,,testShift,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/tester.v,1693288963,verilog,,,,tester,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/DFlipFlop.v,1692686054,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testDFlipFlop.v,,DFlipFlop,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/fulladder.v,1693289499,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/tester.v,,fulladder;fulladder2,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sources_1/new/shifter.v,1692686053,verilog,,C:/Users/vivat/Desktop/hwlab/lab01/lab01.srcs/sim_1/new/testShift.v,,shiftA;shiftB,,,,,,,,
