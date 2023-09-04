@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1.1 (64-bit)
+# SW Build 3900603 on Fri Jun 16 19:31:24 MDT 2023
+# IP Build 3900379 on Sat Jun 17 05:28:05 MDT 2023
+# SharedData Build 3899622 on Fri Jun 16 03:34:24 MDT 2023
+# Start of session at: Tue Sep  5 01:10:46 2023
+# Process ID: 6924
+# Current directory: C:/Users/vivat/Desktop/hwlab/lab02/lab02.runs/impl_1
+# Command line: vivado.exe -log system.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source system.tcl -notrace
+# Log file: C:/Users/vivat/Desktop/hwlab/lab02/lab02.runs/impl_1/system.vdi
+# Journal file: C:/Users/vivat/Desktop/hwlab/lab02/lab02.runs/impl_1\vivado.jou
+# Running On: VT_MBP, OS: Windows, CPU Frequency: 3200 MHz, CPU Physical cores: 4, Host memory: 8584 MB
+#-----------------------------------------------------------
+source system.tcl -notrace
