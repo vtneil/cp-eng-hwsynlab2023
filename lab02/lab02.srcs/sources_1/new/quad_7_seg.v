@@ -18,10 +18,10 @@ module quad_7_seg(output wire [6:0] seg,
     
     always @(q) begin
         case (q)
-            2'b00: nums = num3;
-            2'b01: nums = num2;
-            2'b10: nums = num1;
-            2'b11: nums = num0;
+            2'b00: nums <= num3;
+            2'b01: nums <= num2;
+            2'b10: nums <= num1;
+            2'b11: nums <= num0;
         endcase
     end
 endmodule
