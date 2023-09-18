@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/vivat/Desktop/hwlab/lab03/lab03.runs/impl_opt/quad_bcd.tcl"
+  variable script "C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab03/lab03.runs/impl_opt/quad_bcd.tcl"
   variable category "vivado_impl"
 }
 
@@ -115,9 +115,6 @@ proc step_failed { step } {
 OPTRACE "impl_opt" END { }
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 
 OPTRACE "impl_opt" START { ROLLUP_1 }
 OPTRACE "Phase: Write Bitstream" START { ROLLUP_AUTO }
@@ -126,13 +123,11 @@ start_step write_bitstream
 set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
-  set_param checkpoint.writeSynthRtdsInDcp 1
-  set_param chipscope.maxJobs 1
-  set_param synth.incrementalSynthesisCache C:/Users/vivat/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-5772-VT_MBP/incrSyn
-  set_param xicom.use_bs_reader 1
+  set_param general.maxThreads 16
+  set_param chipscope.maxJobs 4
   set_param runs.launchOptions { -jobs 1  }
   open_checkpoint quad_bcd_routed.dcp
-  set_property webtalk.parent_dir C:/Users/vivat/Desktop/hwlab/lab03/lab03.cache/wt [current_project]
+  set_property webtalk.parent_dir C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab03/lab03.cache/wt [current_project]
 set_property TOP quad_bcd [current_fileset]
 OPTRACE "read constraints: write_bitstream" START { }
 OPTRACE "read constraints: write_bitstream" END { }

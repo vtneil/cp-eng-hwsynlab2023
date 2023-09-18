@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/vivat/Desktop/hwlab/lab03/lab03.runs/impl_opt'
+HD_PWD='C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab03/lab03.runs/impl_opt'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_opt" LaunchPart="xc7a35tcpg236-1" LaunchTime="1694500774" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_opt/quad_bcd.dcp">
+<GenRun Id="synth_opt" LaunchPart="xc7a35tcpg236-1" LaunchTime="1695027395" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_opt/quad_bcd.dcp">
   <File Type="PA-TCL" Name="quad_bcd.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="quad_bcd_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="quad_bcd_reports.tcl"/>
@@ -100,7 +100,9 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

@@ -1,8 +1,8 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2023.1.1 (win64) Build 3900603 Fri Jun 16 19:31:24 MDT 2023
-| Date         : Tue Sep 12 13:43:35 2023
-| Host         : VT_MBP running 64-bit major release  (build 9200)
+| Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
+| Date         : Mon Sep 18 16:06:09 2023
+| Host         : VT_ZENBOOK running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file quad_bcd_control_sets_placed.rpt
 | Design       : quad_bcd
 | Device       : xc7a35t
@@ -74,17 +74,20 @@ Table of Contents
 |     Clock Signal     |        Enable Signal       |           Set/Reset Signal           | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------------+----------------------------+--------------------------------------+------------------+----------------+--------------+
 |  clk_IBUF_BUFG       |                            |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db02/btn_stable_i_1__0_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db03/btn_stable_i_1__1_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db04/btn_stable_i_1__2_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db07/btn_stable_i_1__4_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db05/btn_stable_i_1__3_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db08/btn_stable_i_1__5_n_0 |                                      |                1 |              1 |         1.00 |
-|  clk_out_reg_i_2_n_0 | db09/btn_stable_i_1__6_n_0 |                                      |                1 |              1 |         1.00 |
 |  clk_out_reg_i_2_n_0 | db01/btn_stable_i_1_n_0    |                                      |                1 |              1 |         1.00 |
 |  clk_out_reg_i_2_n_0 | db1/btn_stable_i_1__7_n_0  |                                      |                1 |              1 |         1.00 |
 |  clk_out_reg_i_2_n_0 | db2/btn_stable_i_1__8_n_0  |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db03/btn_stable_i_1__1_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db02/btn_stable_i_1__0_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db04/btn_stable_i_1__2_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db07/btn_stable_i_1__4_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db05/btn_stable_i_1__3_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db09/btn_stable_i_1__6_n_0 |                                      |                1 |              1 |         1.00 |
+|  clk_out_reg_i_2_n_0 | db08/btn_stable_i_1__5_n_0 |                                      |                1 |              1 |         1.00 |
 |  nolabel_line25/CLK  |                            |                                      |                1 |              2 |         2.00 |
+|  clk_out_reg_i_2_n_0 | db01/sel                   | db01/btn_stable_i_1_n_0              |                1 |              5 |         5.00 |
+|  clk_out_reg_i_2_n_0 | db1/counter[4]_i_1__7_n_0  | db1/btn_stable_i_1__7_n_0            |                1 |              5 |         5.00 |
+|  clk_out_reg_i_2_n_0 | db2/counter[4]_i_1__8_n_0  | db2/btn_stable_i_1__8_n_0            |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 | db02/counter[4]_i_1__0_n_0 | db02/btn_stable_i_1__0_n_0           |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 | db03/counter[4]_i_1__1_n_0 | db03/btn_stable_i_1__1_n_0           |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 | db04/counter[4]_i_1__2_n_0 | db04/btn_stable_i_1__2_n_0           |                1 |              5 |         5.00 |
@@ -92,9 +95,6 @@ Table of Contents
 |  clk_out_reg_i_2_n_0 | db05/counter[4]_i_1__3_n_0 | db05/btn_stable_i_1__3_n_0           |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 | db08/counter[4]_i_1__5_n_0 | db08/btn_stable_i_1__5_n_0           |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 | db09/counter[4]_i_1__6_n_0 | db09/btn_stable_i_1__6_n_0           |                1 |              5 |         5.00 |
-|  clk_out_reg_i_2_n_0 | db01/sel                   | db01/btn_stable_i_1_n_0              |                1 |              5 |         5.00 |
-|  clk_out_reg_i_2_n_0 | db2/counter[4]_i_1__8_n_0  | db2/btn_stable_i_1__8_n_0            |                1 |              5 |         5.00 |
-|  clk_out_reg_i_2_n_0 | db1/counter[4]_i_1__7_n_0  | db1/btn_stable_i_1__7_n_0            |                1 |              5 |         5.00 |
 |  clk_out_reg_i_2_n_0 |                            | sb2/set9999                          |                5 |              8 |         1.60 |
 |  clk_out_reg_i_2_n_0 |                            | sb2/out_reg_0                        |                4 |              8 |         2.00 |
 |  clk_IBUF_BUFG       |                            | nolabel_line24/clear                 |                8 |             32 |         4.00 |
