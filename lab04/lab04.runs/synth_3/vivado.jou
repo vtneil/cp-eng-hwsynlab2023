@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Tue Sep 19 13:05:43 2023
+# Process ID: 16324
+# Current directory: C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab04/lab04.runs/synth_3
+# Command line: vivado.exe -log system_3.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_3.tcl
+# Log file: C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab04/lab04.runs/synth_3/system_3.vds
+# Journal file: C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab04/lab04.runs/synth_3\vivado.jou
+# Running On: VT_ZENBOOK, OS: Windows, CPU Frequency: 2400 MHz, CPU Physical cores: 8, Host memory: 34156 MB
+#-----------------------------------------------------------
+source system_3.tcl -notrace

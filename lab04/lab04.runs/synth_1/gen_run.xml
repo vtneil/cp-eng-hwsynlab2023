@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1695064321" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/system_3.dcp">
-  <File Type="PA-TCL" Name="system_1.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="system_1_drc_synth.rpt"/>
-  <File Type="REPORTS-TCL" Name="system_1_reports.tcl"/>
-  <File Type="RDS-RDS" Name="system_1.vds"/>
-  <File Type="RDS-UTIL" Name="system_1_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="system_1_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="system_1.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="system_1_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="system_1_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1695102523" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/system_3.dcp">
+  <File Type="PA-TCL" Name="system_2.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="system_2_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="system_2_reports.tcl"/>
+  <File Type="RDS-RDS" Name="system_2.vds"/>
+  <File Type="RDS-UTIL" Name="system_2_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="system_2_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="system_2.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="system_2_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="system_2_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/imports/new/clk_div.v">
@@ -54,7 +54,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/ram_block.v">
+    <File Path="$PSRCDIR/sources_1/new/rom_block.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -70,21 +70,14 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/stack.v">
+    <File Path="$PSRCDIR/sources_1/new/system_2.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/system_1.v">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/rom_block.v">
+    <File Path="$PSRCDIR/sources_1/new/system_3.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -92,7 +85,23 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/system_3.v">
+    <File Path="$PSRCDIR/sources_1/new/ram_block.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/stack.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/system_1.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -118,7 +127,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="system_1"/>
+      <Option Name="TopModule" Val="system_2"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

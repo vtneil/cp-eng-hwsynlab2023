@@ -1,0 +1,57 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.1 (win64) Build 3865809 Sun May  7 15:05:29 MDT 2023
+| Date         : Tue Sep 19 13:31:01 2023
+| Host         : VT_ZENBOOK running 64-bit major release  (build 9200)
+| Command      : report_drc -file system_3_drc_routed.rpt -pb system_3_drc_routed.pb -rpx system_3_drc_routed.rpx
+| Design       : system_3
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 4
++-----------+----------+----------------------------+------------+
+| Rule      | Severity | Description                | Violations |
++-----------+----------+----------------------------+------------+
+| PDRC-153  | Warning  | Gated clock check          | 2          |
+| REQP-1840 | Warning  | RAMB18 async control check | 2          |
++-----------+----------+----------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PDRC-153#1 Warning
+Gated clock check  
+Net pbL/sp/out_reg_0 is a gated clock net sourced by a combinational pin pbL/sp/op_mode_reg[0]_LDC_i_1/O, cell pbL/sp/op_mode_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net pbU/sp/out_reg_1 is a gated clock net sourced by a combinational pin pbU/sp/op_mode_reg[1]_LDC_i_1/O, cell pbU/sp/op_mode_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+REQP-1840#1 Warning
+RAMB18 async control check  
+The RAMB18E1 lut_calc4b/data_reg has an input control pin lut_calc4b/data_reg/ADDRARDADDR[12] (net: lut_calc4b/ADDRARDADDR[0]) which is driven by a register (op_mode_reg[0]_C) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+REQP-1840#2 Warning
+RAMB18 async control check  
+The RAMB18E1 lut_calc4b/data_reg has an input control pin lut_calc4b/data_reg/ADDRARDADDR[13] (net: lut_calc4b/ADDRARDADDR[1]) which is driven by a register (op_mode_reg[1]_C) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
+

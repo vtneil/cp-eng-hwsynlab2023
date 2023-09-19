@@ -37,7 +37,6 @@ module stack #(
             
         end else begin
             if (push & ~overflow) begin
-                
                 if (sp == ADDR_SIZE - 1) overflow <= 1'b1;
                 else begin
                     fp <= sp;

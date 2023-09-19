@@ -17,7 +17,7 @@ module system_1(
     // Parameters
     parameter CLK_DIV1 = 32'd2;
     parameter CLK_DIV2 = 32'd500_000;
-    parameter RAM_ADDR_BITS = 8;
+    parameter RAM_ADDR_BITS = 4;
     parameter RAM_SIZE = 2 ** RAM_ADDR_BITS;
     
     // Clocks
@@ -48,7 +48,7 @@ module system_1(
     stack #(
         .DATA_WIDTH(8),
         .ADDR_BITS(RAM_ADDR_BITS)
-    ) stack(data_o, overflow, underflow, sp, num, bbtnU, bbtnC, bbtnD, iclk);
+    ) stack(data_o, overflow, underflow, sp[RAM_ADDR_BITS - 1:0], num, bbtnU, bbtnC, bbtnD, iclk);
     
     assign {digits[1], digits[0]} = sp;
     assign {digits[3], digits[2]} = data_o;
