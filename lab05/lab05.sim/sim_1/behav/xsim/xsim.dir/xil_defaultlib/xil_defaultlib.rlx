@@ -1,0 +1,16 @@
+0.7
+2020.2
+Jun 16 2023
+19:55:58
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.sim/sim_1/behav/xsim/glbl.v,1683266558,verilog,,,,glbl,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sim_1/new/sim_alu.v,1696258712,verilog,,,,sim_alu,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/adder.v,1696255591,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/alu.v,,adder,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/alu.v,1696258047,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/control.v,,alu,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/control.v,1696264096,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/extender.v,,control,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/extender.v,1696255653,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v,,extender,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v,1696264878,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/mux2_1.v,,memory,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/mux2_1.v,1696255667,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nanocpu.v,,mux2_1,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nano_sc_system.v,1696263377,verilog,,,,nano_sc_system,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nanocpu.v,1696263676,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/regfile.v,,nanocpu,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/regfile.v,1696262039,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/rom.v,,regfile,,,,,,,,
+C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/rom.v,1696260700,verilog,,C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nano_sc_system.v,,rom,,,,,,,,
