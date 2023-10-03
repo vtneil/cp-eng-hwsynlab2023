@@ -21,17 +21,26 @@ module nano_03_system #(
     clk_div clk_div_i(iclk, clk, CLK_DIV1);
     clk_div clk_div_d(dclk, clk, CLK_DIV2);
     
-    // Display
-    wire [3:0] digits [3:0];
-    quad_7_seg main_display(seg, an, dp, dclk, digits[3], digits[2], digits[1], digits[0]);
-    
-    // LEDs
-    assign led = sw;
-    
     // Inputs
     wire rst;
     wire nrst = ~rst;
     push_button pb_rst(rst, btnC, iclk);
+    
+    // Display
+    wire [3:0] digits [3:0];
+    wire all_digits = {digits[3], digits[2], digits[1], digits[0]};
+    quad_7_seg main_display(seg, 
+        an, 
+        dp, 
+        dclk, 
+        (rst) ? 4'd8 : digits[3], 
+        (rst) ? 4'd8 : digits[2], 
+        (rst) ? 4'd8 : digits[1], 
+        (rst) ? 4'd8 : digits[0]
+    );
+    
+    // LEDs
+    assign led = sw;
     
     // Variables
     reg [3:0] a;
@@ -72,12 +81,12 @@ module nano_03_system #(
         .DATA_WIDTH(DATA_WIDTH),
         .ADDR_WIDTH(ADDR_WIDTH)
     ) user_memory(
-        data, 
-        d_address[ADDR_WIDTH + 1:2], 
+        data,
+        d_address[ADDR_WIDTH - 1:0], 
         mem_wr, 
         iclk,
         sw,
-        {digits[3], digits[2], digits[1], digits[0]}
+        all_digits
     );
 
 endmodule

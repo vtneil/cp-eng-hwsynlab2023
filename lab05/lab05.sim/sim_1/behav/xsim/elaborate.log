@@ -18,8 +18,8 @@ Compiling module xil_defaultlib.mux2_1
 Compiling module xil_defaultlib.alu
 Compiling module xil_defaultlib.control
 Compiling module xil_defaultlib.nanocpu
-Compiling module xil_defaultlib.rom(PROG_FILE="prog3.mem")
-Compiling module xil_defaultlib.memory(DATA_FILE="data.mem")
+Compiling module xil_defaultlib.rom(PROG_FILE="lab05_02.mem")
+Compiling module xil_defaultlib.memory(DATA_FILE="empty32x16.mem...
 Compiling module xil_defaultlib.nano_sc_system
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot nano_sc_system_behav

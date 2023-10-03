@@ -21,8 +21,8 @@ module sim_alu();
     integer j;
     initial begin
         #0
-        A = 32'd99;
-        B = 32'd31;
+        A = 32'd1;
+        B = 32'd2;
         Cin = 1;
         for (i = 0; i < 8; i = i + 1) begin
             #50

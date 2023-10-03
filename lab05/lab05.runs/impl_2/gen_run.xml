@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1696309801">
+<GenRun Id="impl_2" LaunchPart="xc7a35tcpg236-1" LaunchTime="1696318031">
   <File Type="ROUTE-PWR" Name="nano_03_system_power_routed.rpt"/>
   <File Type="PA-TCL" Name="nano_03_system.tcl"/>
   <File Type="ROUTE-PWR-SUM" Name="nano_03_system_power_summary_routed.pb"/>
@@ -156,22 +156,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/io_memory.v">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/hwlab/lab05_srcs/memory.v">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../lab05_srcs/memory.v"/>
-        <Attr Name="ImportTime" Val="1696255707"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/imports/hwlab/lab05_srcs/mux2_1.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../lab05_srcs/mux2_1.v"/>
@@ -233,15 +217,17 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/nano_031_system.v">
+    <File Path="$PSRCDIR/sources_1/imports/hwlab/lab05_srcs/memory.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../lab05_srcs/memory.v"/>
+        <Attr Name="ImportTime" Val="1696255707"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/address_decoder.v">
+    <File Path="$PSRCDIR/sources_1/new/nano_031_system.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -369,9 +355,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2023"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>

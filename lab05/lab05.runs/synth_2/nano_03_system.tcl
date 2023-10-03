@@ -70,13 +70,8 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_2" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
 set_param chipscope.maxJobs 4
-set_param synth.incrementalSynthesisCache C:/Users/vivat/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-16872-VT_ZENBOOK/incrSyn
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -112,8 +107,6 @@ read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/extender.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/hex_to_7_seg.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v
-  C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v
-  C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/mux2_1.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nanocpu.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/new/push_button.v

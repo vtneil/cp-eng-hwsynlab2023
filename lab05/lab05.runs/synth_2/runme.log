@@ -14,7 +14,7 @@ ECHO is off.
     ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source nano_03_system.tcl -notrace
-create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 454.262 ; gain = 158.133
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 455.148 ; gain = 159.969
 Command: read_checkpoint -auto_incremental -incremental C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/utils_1/imports/synth_2/nano_03_system.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/utils_1/imports/synth_2/nano_03_system.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -27,25 +27,23 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 2304
-INFO: [Synth 8-11241] undeclared symbol 'mem_wr', assumed default net type 'wire' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:34]
-INFO: [Synth 8-11241] undeclared symbol 'iclk', assumed default net type 'wire' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:35]
-INFO: [Synth 8-11241] undeclared symbol 'data', assumed default net type 'wire' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:75]
+INFO: [Synth 8-7075] Helper process launched with PID 1356
+INFO: [Synth 8-11241] undeclared symbol 'data', assumed default net type 'wire' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:84]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1273.734 ; gain = 411.758
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1273.109 ; gain = 410.773
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'nano_03_system' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:3]
 INFO: [Synth 8-6157] synthesizing module 'clk_div' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/clk_div.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'clk_div' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/clk_div.v:3]
-INFO: [Synth 8-6157] synthesizing module 'quad_7_seg' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/quad_7_seg.v:3]
-INFO: [Synth 8-6157] synthesizing module 'hex_to_7_seg' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/hex_to_7_seg.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'hex_to_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/hex_to_7_seg.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'quad_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/quad_7_seg.v:3]
 INFO: [Synth 8-6157] synthesizing module 'push_button' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/new/push_button.v:3]
 INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/debouncer.v:3]
 	Parameter DEBOUNCE_TIME bound to: 2500000 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'debouncer' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/debouncer.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'push_button' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/new/push_button.v:3]
+INFO: [Synth 8-6157] synthesizing module 'quad_7_seg' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/quad_7_seg.v:3]
+INFO: [Synth 8-6157] synthesizing module 'hex_to_7_seg' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/hex_to_7_seg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'hex_to_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/hex_to_7_seg.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'quad_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab04/lab04.srcs/sources_1/imports/new/quad_7_seg.v:3]
 INFO: [Synth 8-6157] synthesizing module 'nanocpu' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nanocpu.v:9]
 INFO: [Synth 8-6157] synthesizing module 'adder' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/adder.v:9]
 	Parameter WIDTH bound to: 30 - type: integer 
@@ -78,43 +76,29 @@ INFO: [Synth 8-6157] synthesizing module 'io_mapped_memory' [C:/Users/vivat/Desk
 	Parameter DATA_FILE bound to: empty32x16.mem - type: string 
 	Parameter DATA_WIDTH bound to: 32 - type: integer 
 	Parameter ADDR_WIDTH bound to: 16 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'memory' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v:9]
-	Parameter DATA_FILE bound to: empty32x16.mem - type: string 
-	Parameter DATA_WIDTH bound to: 32 - type: integer 
-	Parameter ADDR_WIDTH bound to: 16 - type: integer 
-INFO: [Synth 8-3876] $readmem data file 'empty32x16.mem' is read successfully [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v:28]
-WARNING: [Synth 8-639] system function call 'time' not supported [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v:33]
-INFO: [Synth 8-251] 0 - mem[xxxx] -  xxxxxxxx (x)
- [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v:33]
-INFO: [Synth 8-6155] done synthesizing module 'memory' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/memory.v:9]
-INFO: [Synth 8-6157] synthesizing module 'io_memory' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:3]
-	Parameter DATA_WIDTH bound to: 32 - type: integer 
-	Parameter ADDR_WIDTH bound to: 16 - type: integer 
-WARNING: [Synth 8-639] system function call 'time' not supported [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:30]
-INFO: [Synth 8-251] 0 - mem[xxxx] -  xxxxxxxx (x)
- [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:30]
-WARNING: [Synth 8-567] referenced signal 'io_in' should be on the sensitivity list [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:22]
-WARNING: [Synth 8-567] referenced signal 'data_out' should be on the sensitivity list [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:22]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:35]
-INFO: [Synth 8-6155] done synthesizing module 'io_memory' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_memory.v:3]
+INFO: [Synth 8-3876] $readmem data file 'empty32x16.mem' is read successfully [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:25]
+WARNING: [Synth 8-567] referenced signal 'io_in' should be on the sensitivity list [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:28]
 INFO: [Synth 8-6155] done synthesizing module 'io_mapped_memory' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:3]
+WARNING: [Synth 8-689] width (1) of port connection 'io_out' does not match port width (16) of module 'io_mapped_memory' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:89]
 INFO: [Synth 8-6155] done synthesizing module 'nano_03_system' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:3]
 WARNING: [Synth 8-6014] Unused sequential element z_flag_reg was removed.  [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nanocpu.v:117]
-WARNING: [Synth 8-3848] Net mem_wr in module/entity io_mapped_memory does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:34]
-WARNING: [Synth 8-3848] Net iclk in module/entity io_mapped_memory does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/io_mapped_memory.v:35]
+WARNING: [Synth 8-3848] Net digits[3] in module/entity nano_03_system does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:30]
+WARNING: [Synth 8-3848] Net digits[2] in module/entity nano_03_system does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:30]
+WARNING: [Synth 8-3848] Net digits[1] in module/entity nano_03_system does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:30]
+WARNING: [Synth 8-3848] Net digits[0] in module/entity nano_03_system does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/new/nano_03_system.v:30]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1383.898 ; gain = 521.922
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1402.738 ; gain = 540.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1383.898 ; gain = 521.922
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1402.738 ; gain = 540.402
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1383.898 ; gain = 521.922
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1402.738 ; gain = 540.402
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.017 . Memory (MB): peak = 1383.898 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.015 . Memory (MB): peak = 1402.738 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -125,31 +109,31 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/nano_03_system_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1410.246 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1478.969 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1410.246 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1478.969 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:19 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -168,22 +152,23 @@ Detailed RTL Component Info :
 	                2 Bit    Registers := 1     
 	                1 Bit    Registers := 5     
 +---RAMs : 
+	            1024K Bit	(32769 X 32 bit)          RAMs := 1     
 	             1024 Bit	(32 X 32 bit)          RAMs := 1     
 +---Muxes : 
 	   3 Input   32 Bit        Muxes := 1     
 	   2 Input   32 Bit        Muxes := 5     
-	   6 Input   32 Bit        Muxes := 1     
+	   4 Input   32 Bit        Muxes := 1     
 	   2 Input   30 Bit        Muxes := 2     
 	   6 Input   16 Bit        Muxes := 1     
 	   2 Input    5 Bit        Muxes := 1     
 	   4 Input    4 Bit        Muxes := 1     
-	   2 Input    4 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 4     
 	   5 Input    3 Bit        Muxes := 1     
 	   5 Input    2 Bit        Muxes := 1     
 	   8 Input    1 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 7     
+	   2 Input    1 Bit        Muxes := 8     
 	   4 Input    1 Bit        Muxes := 1     
-	   5 Input    1 Bit        Muxes := 2     
+	   5 Input    1 Bit        Muxes := 3     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -202,25 +187,65 @@ Start Cross Boundary and Area Optimization
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-3917] design nano_03_system has port dp driven by constant 1
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 1478.969 ; gain = 616.633
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++---------------+------------+---------------+----------------+
+|Module Name    | RTL Object | Depth x Width | Implemented As | 
++---------------+------------+---------------+----------------+
+|rom            | mem        | 32x32         | LUT            | 
+|nano_03_system | p_0_out    | 32x32         | LUT            | 
++---------------+------------+---------------+----------------+
+
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+|Module Name    | RTL Object                | Inference | Size (Depth x Width) | Primitives                      | 
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+|nano_03_system | main_cpu/REGFILE/regs_reg | Implied   | 32 x 32              | RAM32M x 12                     | 
+|nano_03_system | user_memory/mem_reg       | Implied   | 64 K x 32            | RAM16X1S x 32 RAM256X1S x 4096  | 
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 1478.969 ; gain = 616.633
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping Report
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+|Module Name    | RTL Object                | Inference | Size (Depth x Width) | Primitives                      | 
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+|nano_03_system | main_cpu/REGFILE/regs_reg | Implied   | 32 x 32              | RAM32M x 12                     | 
+|nano_03_system | user_memory/mem_reg       | Implied   | 64 K x 32            | RAM16X1S x 32 RAM256X1S x 4096  | 
++---------------+---------------------------+-----------+----------------------+---------------------------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:27 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:27 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -238,37 +263,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -281,42 +306,52 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+-------+------+
-|      |Cell   |Count |
-+------+-------+------+
-|1     |BUFG   |     1|
-|2     |CARRY4 |     5|
-|3     |LUT1   |     2|
-|4     |LUT2   |     5|
-|5     |LUT3   |     1|
-|6     |LUT4   |     2|
-|7     |LUT5   |     1|
-|8     |LUT6   |     4|
-|9     |FDRE   |    20|
-|10    |IBUF   |    13|
-|11    |OBUF   |    24|
-+------+-------+------+
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |BUFG      |     2|
+|2     |CARRY4    |    22|
+|3     |LUT1      |     5|
+|4     |LUT2      |    40|
+|5     |LUT3      |     4|
+|6     |LUT4      |   101|
+|7     |LUT5      |    35|
+|8     |LUT6      |   220|
+|9     |MUXF7     |    18|
+|10    |MUXF8     |     3|
+|11    |RAM16X1S  |     1|
+|12    |RAM256X1S |   128|
+|13    |RAM32M    |    10|
+|14    |RAM32X1D  |     4|
+|15    |FDRE      |    53|
+|16    |IBUF      |    14|
+|17    |OBUF      |    24|
++------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:31 . Memory (MB): peak = 1478.969 ; gain = 616.633
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:29 . Memory (MB): peak = 1410.246 ; gain = 521.922
-Synthesis Optimization Complete : Time (s): cpu = 00:00:24 ; elapsed = 00:00:31 . Memory (MB): peak = 1410.246 ; gain = 548.270
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:30 . Memory (MB): peak = 1478.969 ; gain = 540.402
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:32 . Memory (MB): peak = 1478.969 ; gain = 616.633
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1410.246 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 5 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1478.969 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 186 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1410.246 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1478.969 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 143 instances were transformed.
+  RAM16X1S => RAM32X1S (RAMS32): 1 instance 
+  RAM256X1S => RAM256X1S (MUXF7(x2), MUXF8, RAMS64E(x4)): 128 instances
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 10 instances
+  RAM32X1D => RAM32X1D (RAMD32(x2)): 4 instances
 
-Synth Design complete | Checksum: 74731b07
+Synth Design complete | Checksum: d2a01e00
 INFO: [Common 17-83] Releasing license: Synthesis
-68 Infos, 10 Warnings, 0 Critical Warnings and 0 Errors encountered.
+59 Infos, 10 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:36 . Memory (MB): peak = 1410.246 ; gain = 928.309
+synth_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:37 . Memory (MB): peak = 1478.969 ; gain = 995.637
 INFO: [Common 17-1381] The checkpoint 'C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.runs/synth_2/nano_03_system.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file nano_03_system_utilization_synth.rpt -pb nano_03_system_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Oct  3 12:10:48 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue Oct  3 14:27:58 2023...
