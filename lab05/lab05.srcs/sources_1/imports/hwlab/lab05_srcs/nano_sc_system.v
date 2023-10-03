@@ -20,8 +20,8 @@ reg		clock;
 reg		nreset;
 
 nanocpu	CPU(p_address,p_data,d_address,d_data,mem_wr,clock,nreset);
-rom 	#(.PROG_FILE("lab05_02.init"), .ADDR_WIDTH(ADDR_WIDTH)) PROGMEM(p_data,p_address[ADDR_WIDTH + 1:2]);
-memory 	#(.DATA_FILE("data.list"), .ADDR_WIDTH(ADDR_WIDTH)) DATAMEM(d_data,d_address[ADDR_WIDTH + 1:2],mem_wr,clock);
+rom 	#(.PROG_FILE("prog3.mem"), .ADDR_WIDTH(ADDR_WIDTH)) PROGMEM(p_data,p_address[ADDR_WIDTH + 1:2]);
+memory 	#(.DATA_FILE("data.mem"), .ADDR_WIDTH(ADDR_WIDTH)) DATAMEM(d_data,d_address[ADDR_WIDTH + 1:2],mem_wr,clock);
 
 initial begin
 	$dumpfile("nano_sc_system.dump");

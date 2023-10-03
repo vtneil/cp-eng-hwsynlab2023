@@ -19,17 +19,17 @@ module alu(
     
     assign z = ~| S;
     
-    always @(A or B or alu_ops)
+    always @(A or B or Cin or alu_ops)
     begin
         case (alu_ops)
-        3'b001: {Cout, S} = A - B;
-        3'b010: {Cout, S} = {1'b0, A | B};
-        3'b011: {Cout, S} = {1'b0, A & B};
-        3'b100: {Cout, S} = {1'b0, A ^ B};
-        3'b101: {Cout, S} = {1'b0, -A};
-        3'b110: {Cout, S} = {1'b0, ~A};
-        3'b111: {Cout, S} = {1'b0, ~B};
-        default: {Cout, S} = A + B + Cin;	
+        3'b001: {Cout, S} <= A - B;
+        3'b010: {Cout, S} <= {1'b0, A | B};
+        3'b011: {Cout, S} <= {1'b0, A & B};
+        3'b100: {Cout, S} <= {1'b0, A ^ B};
+        3'b101: {Cout, S} <= {1'b0, -A};
+        3'b110: {Cout, S} <= {1'b0, ~A};
+        3'b111: {Cout, S} <= {1'b0, ~B};
+        default: {Cout, S} <= A + B + Cin;	
         endcase
     end
     

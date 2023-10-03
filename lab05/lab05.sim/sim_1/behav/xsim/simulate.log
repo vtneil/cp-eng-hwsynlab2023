@@ -1,97 +1,190 @@
 Time resolution is 1 ps
          2 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        20 - mem[0000] -  xxxxxxxx (         x)
+        20 - mem[1555] -  xxxxxxxx (         x)
 
          6 - A(REG[ 0]) -  00000000 (         0), B(REG[ 0]) -  00000000 (         0)
-         6 - REG[ 0] <- 00000000 (         0)
+         6 - REG[ 0] <- 00005555 (     21845)
 
-        60 - mem[1555] -  00000001 (         1)
+        60 - mem[9555] -  xxxxxxxx (         x)
 
-        10 - A(REG[ 1]) -  00000000 (         0), B(REG[ 1]) -  00000000 (         0)
-        10 - REG[ 1] <- 00005555 (     21845)
+        10 - A(REG[ 0]) -  00005555 (     21845), B(REG[ 0]) -  00005555 (     21845)
+        10 - REG[ 0] <- aaaa5555 (2863289685)
 
-       100 - mem[2aaa] -  xxxxxxxx (         x)
+       100 - mem[1555] -  xxxxxxxx (         x)
 
-        14 - A(REG[ 2]) -  00000000 (         0), B(REG[ 2]) -  00000000 (         0)
-        14 - REG[ 2] <- 0000aaaa (     43690)
+        14 - A(REG[ 1]) -  00000000 (         0), B(REG[ 1]) -  00000000 (         0)
+        14 - REG[ 1] <- 00005555 (     21845)
 
-       140 - mem[3fff] -  xxxxxxxx (         x)
+       140 - mem[5555] -  xxxxxxxx (         x)
 
-        18 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        18 - REG[ 3] <- 0000ffff (     65535)
+        18 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 1]) -  00005555 (     21845)
+        18 - REG[ 1] <- 55555555 (1431655765)
 
        180 - mem[eaaa] -  xxxxxxxx (         x)
 
-        22 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        22 - REG[ 3] <- ffffaaab (4294945451)
+        22 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+        22 - REG[ 3] <- ffffaaaa (4294945450)
 
-       220 - mem[3fff] -  xxxxxxxx (         x)
+       220 - mem[9555] -  xxxxxxxx (         x)
 
-        26 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        26 - REG[ 3] <- 0000ffff (     65535)
+       260 - MEM[9555] <- ffffaaaa (4294945450)
+        26 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 3]) -  ffffaaaa (4294945450)
+        30 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 5]) -  00000000 (         0)
+        30 - REG[ 5] <- xxxxxxxx (         x)
 
-       260 - mem[0000] -  xxxxxxxx (         x)
+       300 - mem[2aaa] -  xxxxxxxx (         x)
 
-        30 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        30 - REG[ 3] <- 00000000 (         0)
+        34 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        38 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       380 - mem[9555] -  xxxxxxxx (         x)
 
-       300 - mem[3fff] -  00000001 (         1)
+        42 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        42 - REG[ 0] <- aaaa5555 (2863289685)
 
-        34 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        34 - REG[ 3] <- 0000ffff (     65535)
+        46 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        46 - REG[ 0] <- aaaa5555 (2863289685)
 
-       340 - mem[eaaa] -  xxxxxxxx (         x)
+       460 - mem[5555] -  xxxxxxxx (         x)
 
-        38 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        38 - REG[ 3] <- ffffaaab (4294945451)
+        50 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+        50 - REG[ 1] <- 55555555 (1431655765)
 
-        42 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        42 - REG[ 3] <- ffffaaaa (4294945450)
+        54 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+        54 - REG[ 1] <- 55555555 (1431655765)
 
-       420 - mem[d555] -  xxxxxxxx (         x)
+       540 - mem[eaaa] -  xxxxxxxx (         x)
 
-        46 - A(REG[ 1]) -  00005555 (     21845), B(REG[ 2]) -  0000aaaa (     43690)
-        46 - REG[ 3] <- ffff5555 (4294923605)
+        58 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+        58 - REG[ 3] <- ffffaaaa (4294945450)
 
-       460 - mem[xxxx] -  xxxxxxxx (         x)
+       580 - mem[9555] -  xxxxxxxx (         x)
 
-        50 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        54 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        58 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        62 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        66 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        70 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        74 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        78 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        82 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        86 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        90 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        94 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-        98 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       102 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       106 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       110 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       114 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       118 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       122 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       126 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       130 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       134 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       138 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       142 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       146 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       150 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       154 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       158 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       162 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       166 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       170 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       174 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       178 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       182 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       186 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       190 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       194 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       198 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-       202 - A(REG[ x]) -  xxxxxxxx (         x), B(REG[ x]) -  xxxxxxxx (         x)
-$finish called at time : 2040 ns : File "C:/Users/vivat/Desktop/hwlab/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nano_sc_system.v" Line 35
+       620 - MEM[9555] <- ffffaaaa (4294945450)
+        62 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 3]) -  ffffaaaa (4294945450)
+        66 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 5]) -  xxxxxxxx (         x)
+        66 - REG[ 5] <- xxxxxxxx (         x)
+
+       660 - mem[2aaa] -  xxxxxxxx (         x)
+
+        70 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        74 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       740 - mem[9555] -  xxxxxxxx (         x)
+
+        78 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        78 - REG[ 0] <- aaaa5555 (2863289685)
+
+        82 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+        82 - REG[ 0] <- aaaa5555 (2863289685)
+
+       820 - mem[5555] -  xxxxxxxx (         x)
+
+        86 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+        86 - REG[ 1] <- 55555555 (1431655765)
+
+        90 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+        90 - REG[ 1] <- 55555555 (1431655765)
+
+       900 - mem[eaaa] -  xxxxxxxx (         x)
+
+        94 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+        94 - REG[ 3] <- ffffaaaa (4294945450)
+
+       940 - mem[9555] -  xxxxxxxx (         x)
+
+       980 - MEM[9555] <- ffffaaaa (4294945450)
+        98 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 3]) -  ffffaaaa (4294945450)
+       102 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 5]) -  xxxxxxxx (         x)
+       102 - REG[ 5] <- xxxxxxxx (         x)
+
+      1020 - mem[2aaa] -  xxxxxxxx (         x)
+
+       106 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       110 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+      1100 - mem[9555] -  xxxxxxxx (         x)
+
+       114 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       114 - REG[ 0] <- aaaa5555 (2863289685)
+
+       118 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       118 - REG[ 0] <- aaaa5555 (2863289685)
+
+      1180 - mem[5555] -  xxxxxxxx (         x)
+
+       122 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       122 - REG[ 1] <- 55555555 (1431655765)
+
+       126 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       126 - REG[ 1] <- 55555555 (1431655765)
+
+      1260 - mem[eaaa] -  xxxxxxxx (         x)
+
+       130 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+       130 - REG[ 3] <- ffffaaaa (4294945450)
+
+      1300 - mem[9555] -  xxxxxxxx (         x)
+
+      1340 - MEM[9555] <- ffffaaaa (4294945450)
+       134 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 3]) -  ffffaaaa (4294945450)
+       138 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 5]) -  xxxxxxxx (         x)
+       138 - REG[ 5] <- xxxxxxxx (         x)
+
+      1380 - mem[2aaa] -  xxxxxxxx (         x)
+
+       142 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       146 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+      1460 - mem[9555] -  xxxxxxxx (         x)
+
+       150 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       150 - REG[ 0] <- aaaa5555 (2863289685)
+
+       154 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       154 - REG[ 0] <- aaaa5555 (2863289685)
+
+      1540 - mem[5555] -  xxxxxxxx (         x)
+
+       158 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       158 - REG[ 1] <- 55555555 (1431655765)
+
+       162 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       162 - REG[ 1] <- 55555555 (1431655765)
+
+      1620 - mem[eaaa] -  xxxxxxxx (         x)
+
+       166 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+       166 - REG[ 3] <- ffffaaaa (4294945450)
+
+      1660 - mem[9555] -  xxxxxxxx (         x)
+
+      1700 - MEM[9555] <- ffffaaaa (4294945450)
+       170 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 3]) -  ffffaaaa (4294945450)
+       174 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 5]) -  xxxxxxxx (         x)
+       174 - REG[ 5] <- xxxxxxxx (         x)
+
+      1740 - mem[2aaa] -  xxxxxxxx (         x)
+
+       178 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       182 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+      1820 - mem[9555] -  xxxxxxxx (         x)
+
+       186 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       186 - REG[ 0] <- aaaa5555 (2863289685)
+
+       190 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 0]) -  aaaa5555 (2863289685)
+       190 - REG[ 0] <- aaaa5555 (2863289685)
+
+      1900 - mem[5555] -  xxxxxxxx (         x)
+
+       194 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       194 - REG[ 1] <- 55555555 (1431655765)
+
+       198 - A(REG[ 1]) -  55555555 (1431655765), B(REG[ 1]) -  55555555 (1431655765)
+       198 - REG[ 1] <- 55555555 (1431655765)
+
+      1980 - mem[eaaa] -  xxxxxxxx (         x)
+
+       202 - A(REG[ 0]) -  aaaa5555 (2863289685), B(REG[ 1]) -  55555555 (1431655765)
+       202 - REG[ 3] <- ffffaaaa (4294945450)
+
+      2020 - mem[9555] -  xxxxxxxx (         x)
+
+$finish called at time : 2040 ns : File "C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab05/lab05.srcs/sources_1/imports/hwlab/lab05_srcs/nano_sc_system.v" Line 35

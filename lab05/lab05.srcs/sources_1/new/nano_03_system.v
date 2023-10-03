@@ -23,14 +23,15 @@ module nano_03_system #(
     
     // Display
     wire [3:0] digits [3:0];
-    quad_7_seg(seg, an, dp, dclk, digits[3], digits[2], digits[1], digits[0]);
+    quad_7_seg main_display(seg, an, dp, dclk, digits[3], digits[2], digits[1], digits[0]);
     
     // LEDs
     assign led = sw;
     
     // Inputs
-    wire nrst;
-    push_button pb_rst(~nrst, btnC, iclk);
+    wire rst;
+    wire nrst = ~rst;
+    push_button pb_rst(rst, btnC, iclk);
     
     // Variables
     reg [3:0] a;
@@ -44,8 +45,6 @@ module nano_03_system #(
     wire [DATA_WIDTH - 1:0] d_address;
     wire mem_wr;
     wire [DATA_WIDTH - 1:0] d_data;
-    reg iclk;
-    reg nrst;
     
     // CPU
     nanocpu	main_cpu(
@@ -60,56 +59,25 @@ module nano_03_system #(
     
     // Program Memory
     rom #(
-        .PROG_FILE("lab05_03.init"), 
+        .PROG_FILE("lab05_03.mem"), 
         .ADDR_WIDTH(ADDR_WIDTH)
     ) program_memory(
         p_data, 
         p_address[ADDR_WIDTH + 1:2]
     );
     
-    // Address Decoder
-    wire memory_select = (d_address < 'hFFE0) ? 1'b1 : 1'b0;
-    wire io_select = ~memory_select;
-    wire user_memory_data = (io_select) ? {ADDR_WIDTH{1'dZ}} : d_data;
-    
-    // User Memory
-    memory #(
-        .DATA_FILE("data.list"), 
+    // Memory
+    io_mapped_memory #(
+        .DATA_FILE("empty32x16.mem"), 
+        .DATA_WIDTH(DATA_WIDTH),
         .ADDR_WIDTH(ADDR_WIDTH)
     ) user_memory(
-        user_memory_data, 
+        data, 
         d_address[ADDR_WIDTH + 1:2], 
-        mem_wr & memory_select, 
-        iclk
+        mem_wr, 
+        iclk,
+        sw,
+        {digits[3], digits[2], digits[1], digits[0]}
     );
-    
-    // I/O handler
-    reg [3:0] digit_reg0, digit_reg1, digit_reg2, digit_reg3;
-    assign digits[0] = digit_reg0;
-    assign digits[1] = digit_reg1;
-    assign digits[2] = digit_reg2;
-    assign digits[3] = digit_reg3;
-    
-    reg [ADDR_WIDTH - 1:0] io_in;
-    assign d_data = (mem_wr & io_select) ? io_in : {DATA_WIDTH{1'bZ}};
-    
-    always @(posedge iclk) begin
-        if (io_select) begin
-            if (mem_wr) begin
-                case (d_address)
-                    'hFFE0: io_in <= {DATA_WIDTH-4'b0, sw[3:0]};
-                    'hFFE4: io_in <= {DATA_WIDTH-4'b0, sw[7:4]};
-                    'hFFE8: io_in <= {DATA_WIDTH-4'b0, sw[11:8]};
-                endcase
-            end else begin
-                case (d_address)
-                    'hFFF0: digit_reg0 <= d_data;
-                    'hFFF4: digit_reg1 <= d_data;
-                    'hFFF8: digit_reg2 <= d_data;
-                    'hFFFC: digit_reg3 <= d_data;
-                endcase
-            end
-        end
-    end
 
 endmodule

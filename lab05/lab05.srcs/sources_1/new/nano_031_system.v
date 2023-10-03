@@ -23,31 +23,31 @@ module nano_031_system #(
     
     // Display
     wire [3:0] digits [3:0];
-    quad_7_seg(seg, an, dp, dclk, digits[3], digits[2], digits[1], digits[0]);
+    quad_7_seg main_display(seg, an, dp, dclk, digits[3], digits[2], digits[1], digits[0]);
     
     // LEDs
     assign led = sw;
     
     // Inputs
-    wire nrst;
-    push_button pb_rst(~nrst, btnC, iclk);
+    wire rst;
+    wire nrst = ~rst;
+    push_button pb_rst(rst, btnC, iclk);
     
     // Variables
     wire [31:0] a;
     wire [31:0] b;
-    reg [31:0] c;
-    reg z;
-    reg cout;
+    wire [31:0] c;
+    wire z;
+    wire cout;
     wire [3:0] op_in;
     
     assign a[3:0] = sw[3:0];
     assign b[3:0] = sw[7:4];
     assign op_in = sw[11:8];
     
-    assign digits[0] = a[3:0];
-    assign digits[1] = b[3:0];
-    assign {digits[3], digits[2]} = c[7:0];
+    assign {digits[3], digits[2], digits[1], digits[0]} = (nrst) ? {c[7:0], b[3:0], a[3:0]} : 16'd0;
     
     // ALU
     alu i_alu(c, z, cout, a, b, 1'b0, op_in[2:0]);
+    
 endmodule
