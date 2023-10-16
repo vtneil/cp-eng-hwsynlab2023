@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://www.rapidtables.com/convert/number/hex-to-binary.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script async="" src="./Hex to Binary Converter_files/tagmng8.js.download"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="./Hex to Binary Converter_files/rapid02.css">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.rapidtables.com/lib/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="https://www.rapidtables.com/lib/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://www.rapidtables.com/lib/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="https://www.rapidtables.com/lib/favicon/manifest.json">
+<link rel="mask-icon" href="https://www.rapidtables.com/lib/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://www.rapidtables.com/lib/favicon/favicon.ico">
+<meta name="msapplication-config" content="/lib/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<meta name="format-detection" content="telephone=no">
+
+<link rel="stylesheet" href="./Hex to Binary Converter_files/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<title>Hex to Binary Converter</title>
+<meta name="description" content="Hexadecimal to binary number conversion calculator.">
+<style>
+   h1 { font-size:1.6rem; }
+   h2 { font-size:1.4rem; }
+   h4 { font-size:1.2rem; }
+   #calcform { max-width:500px; padding:20px; background:#f0eedc; border:1px solid #e0e0e0; border-radius:7px; } 
+   #calcform button img { filter:invert(100%); }
+   #calcform .btn span { font-weight:bold; font-size:large; }
+   #calcform .input-group sub { font-size:large; }
+   .table { max-width: 200px; }
+</style>
+
+<script async="" src="./Hex to Binary Converter_files/pg.rapidtables.com.js.download"></script><script async="" src="./Hex to Binary Converter_files/js"></script><meta http-equiv="origin-trial" content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9"></head>
+<body>
+<div id="header">
+<div>
+<div id="logo"><a href="https://www.rapidtables.com/">RapidTables</a></div>
+<div class="gcse-search"></div>
+<div id="tooldiv">
+<a href="https://www.rapidtables.com/convert/number/hex-to-binary.html#" onclick="OnPageSearch()"><img width="24" height="24" title="Search" src="./Hex to Binary Converter_files/search_black_24dp.svg" loading="lazy"><span> Search</span></a>
+<a href="https://www.rapidtables.com/convert/number/hex-to-binary.html#" onclick="OnPageShare()"><img width="24" height="24" title="Share" src="./Hex to Binary Converter_files/share_black_24dp.svg" loading="lazy"><span> Share</span></a>
+</div>
+</div>
+</div>
+<div id="wrapper">
+<div id="nav">
+
+<a href="https://www.rapidtables.com/">Home</a>›<a href="https://www.rapidtables.com/convert/index.html">Conversion</a>›<a href="https://www.rapidtables.com/convert/number/index.html">Number conversion</a>›<a href="https://www.rapidtables.com/convert/number/hex-to-binary.html">Hex to binary</a>
+
+</div>
+<div id="lcol">
+<div id="doc">
+
+<h1>Hex to Binary converter</h1>
+<form id="calcform" name="calcform" autocomplete="off">
+<div id="unitnav" class="form-row">
+<div class="form-group col">
+<label for="unit1">From</label>
+<select id="unit1" class="form-control">
+<option value="binary">Binary</option>
+<option value="decimal">Decimal</option>
+<option value="octal">Octal</option>
+<option value="hex" selected="">Hexadecimal</option>
+<option value="ascii">Text</option>
+</select>
+</div>
+<div class="form-group col">
+<label for="unit2">To</label>
+<select id="unit2" class="form-control">
+<option value="binary" selected="">Binary</option>
+<option value="decimal">Decimal</option>
+<option value="octal">Octal</option>
+<option value="hex">Hexadecimal</option>
+<option value="ascii">Text</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label for="x">Enter hex number</label>
+<div class="input-group">
+<input type="text" id="x" name="x" class="form-control form-control-lg" required="" autofocus="">
+<div class="input-group-append">
+<span class="input-group-text"><sub>16</sub></span>
+</div>
+</div>
+</div>
+<div class="form-group">
+<button type="button" title="Convert" class="btn btn-success" onclick="convert()"><span>=</span> Convert</button>
+<button type="reset" title="Reset" class="btn btn-secondary"><span>×</span> Reset</button>
+<button type="button" title="Swap conversion" class="btn btn-secondary" onclick="location.href=&#39;binary-to-hex.html&#39;;"><span></span><span>⇅</span> Swap</button>
+</div>
+<div class="form-group">
+<label for="y" id="ylabel">Binary number</label>
+<div class="input-group">
+<textarea rows="2" id="y" class="form-control form-control-lg" readonly=""></textarea>
+<div class="input-group-append">
+<span class="input-group-text"><sub>2</sub></span>
+</div>
+</div>
+</div>
+<div class="form-group">
+<label for="y2" id="y2label">Decimal number</label>
+<div class="input-group">
+<textarea rows="2" id="y2" class="form-control form-control-lg" readonly=""></textarea>
+<div class="input-group-append">
+<span class="input-group-text"><sub>10</sub></span>
+</div>
+</div>
+</div>
+<div class="form-group form-check">
+<input type="checkbox" class="form-check-input" id="group" onclick="ongroup()">
+<label class="form-check-label" for="group">Digit grouping</label>
+</div>
+<div class="form-group">
+<label for="calc">Calculation</label>
+<textarea rows="6" id="calc" class="form-control" readonly=""></textarea>
+</div>
+</form>
+<p><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html">Binary to Hex converter ►</a></p>
+
+
+<div id="adngin-bottom_01-0"></div>
+
+<h2>How to convert hex to binary</h2>
+<p>Convert every hex digit (start lowest digit) to 4 binary digits, with this table:</p>
+<table class="table table-sm">
+<tbody><tr>
+<th>Hex</th>
+<th>Binary</th>
+</tr>
+<tr>
+<td>0</td>
+<td>0000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0001</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0010</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0011</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0100</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0101</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0110</td>
+</tr>
+<tr>
+<td>7</td>
+<td>0111</td>
+</tr>
+<tr>
+<td>8</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>9</td>
+<td>1001</td>
+</tr>
+<tr>
+<td>A</td>
+<td>1010</td>
+</tr>
+<tr>
+<td>B</td>
+<td>1011</td>
+</tr>
+<tr>
+<td>C</td>
+<td>1100</td>
+</tr>
+<tr>
+<td>D</td>
+<td>1101</td>
+</tr>
+<tr>
+<td>E</td>
+<td>1110</td>
+</tr>
+<tr>
+<td>F</td>
+<td>1111</td>
+</tr>
+</tbody></table>
+<h4>Example</h4>
+<p>Convert hex 6C<sub>16</sub> to binary:</p>
+<p>6C<sub>16</sub> = 6 C = 110 1100 = 1101100<sub>2</sub></p>
+<br>
+<p><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html">Binary to Hex converter ►</a></p>
+<p>&nbsp;</p>
+<hr>
+<h2>See also</h2>
+<ul class="seealso">
+<li><a href="https://www.rapidtables.com/convert/number/how-hex-to-binary.html">How to convert hex to binary</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html">Binary to Hex converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-to-decimal.html">Hex to Decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/math/number/Numeral_system.html">Numeral systems</a></li>
+<li><a href="https://www.rapidtables.com/convert/index.html">Conversion</a></li>
+</ul>
+
+</div>
+<div id="fdbk">
+<h2 id="feedback">Write how to improve this page</h2>
+<form id="fdbkform">
+<textarea id="fdbkarea" rows="4" minlength="30" maxlength="1000" placeholder="Your message ..." required="" class="form-control"></textarea>
+<span id="fdbkmsg"></span>
+<button type="submit" class="btn btn-secondary" onclick="OnSubFb()">Submit Feedback</button>
+</form>
+</div>
+</div>
+<div id="rcol">
+
+<div id="adngin-right_sidebar-0"></div>
+
+<h5>NUMBER CONVERSION</h5>
+<ul>
+<li><a href="https://www.rapidtables.com/convert/number/ascii-hex-bin-dec-converter.html">ASCII,Hex,Binary,Decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ascii-to-binary.html">ASCII text to binary converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ascii-to-hex.html">ASCII text to hex converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/base-converter.html">Base converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/binary-converter.html">Binary converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/binary-to-ascii.html">Binary to ASCII text converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/binary-to-decimal.html">Binary to decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/binary-to-hex.html">Binary to hex converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/date-to-roman-numerals.html">Date to roman numerals converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/decimal-to-fraction.html">Decimal to fraction converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/decimal-to-percent.html">Decimal to percent converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/decimal-to-binary.html">Decimal to binary converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/decimal-to-octal.html">Decimal to octal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/decimal-to-hex.html">Decimal to hex converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/degrees-to-degrees-minutes-seconds.html">Degrees to deg,min,sec converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/degrees-minutes-seconds-to-degrees.html">Deg,min,sec to degrees converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/degrees-to-radians.html">Degrees to radians converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/fraction-to-decimal.html">Fraction to decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/fraction-to-percent.html">Fraction to percent converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-dec-bin-converter.html">Hex/decimal/octal/binary converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-to-ascii.html">Hex to ASCII text converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-to-binary.html">Hex to binary converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-to-decimal.html">Hex to decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/octal-to-decimal.html">Octal to decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/percent-to-decimal.html">Percent to decimal converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/percent-to-fraction.html">Percent to fraction converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/Percent_to_PPM.html">Percent to ppm converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/PPM_to_Percent.html">ppm to percent converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ppm-to-ppb.html">ppm to ppb converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ppm-to-ppt.html">ppm to ppt converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ppb-to-ppm.html">ppb to ppm converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ppt-to-ppm.html">ppt to ppm converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/ppm-converter.html">ppm converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/radians-to-degrees.html">Radians to degrees converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/roman-numerals-converter.html">Roman numerals converter</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/scientific-notation-converter.html">Scientific notation converter</a></li>
+</ul>
+<h5>RAPID TABLES</h5>
+<ul>
+<li><a href="mailto:?subject=RapidTables%20website&amp;body=Please%20checkout%20this%20site:%20https://www.rapidtables.com">Recommend Site</a></li>
+<li><a href="https://www.rapidtables.com/convert/number/hex-to-binary.html#feedback">Send Feedback</a></li>
+<li><a href="https://www.rapidtables.com/about/about.html">About</a></li>
+</ul>
+
+</div>
+</div>
+<div id="footer">
+<a href="https://www.rapidtables.com/index.html">Home</a> |
+<a href="https://www.rapidtables.com/web/index.html">Web</a> |
+<a href="https://www.rapidtables.com/math/index.html">Math</a> |
+<a href="https://www.rapidtables.com/electric/index.html">Electricity</a> |
+<a href="https://www.rapidtables.com/calc/index.html">Calculators</a> |
+<a href="https://www.rapidtables.com/convert/index.html">Converters</a> |
+<a href="https://www.rapidtables.com/tools/index.html">Tools</a>
+<p>©
+<a href="https://www.rapidtables.com/">RapidTables.com</a> |
+<a href="https://www.rapidtables.com/about/about.html" rel="nofollow">About</a> |
+<a href="https://www.rapidtables.com/about/terms.html" rel="nofollow">Terms of Use</a> |
+<a href="https://www.rapidtables.com/about/privacy.html" rel="nofollow">Privacy Policy</a> |
+<a href="https://www.rapidtables.com/about/cookies.html" rel="nofollow">Manage Cookies</a>
+</p>
+</div>
+
+<div id="adngin-adhesive-0"></div>
+
+
+<script src="./Hex to Binary Converter_files/bignumber.min.js.download"></script>
+<script async="" src="./Hex to Binary Converter_files/unitnav.js.download"></script>
+
+<script>
+"use strict";var xelem=document.getElementById("x"),yelem=document.getElementById("y"),y2elem=document.getElementById("y2"),groupelem=document.getElementById("group"),calcelem=document.getElementById("calc");function GetURLParams(){for(var e,t=window.location.href,l=/[?&]([^=#]+)=([^&#]*)/g,n={};e=l.exec(t);)n[e[1]]=e[2];return n}function ongroup(){""!=xelem.value&&convert()}function pad(e,t,l){return -1!=e.indexOf(".")||-1!=e.indexOf("-")?e:(l=l||"0",(e+="").length>=t?e:Array(t-e.length+1).join(l)+e)}function convert(){var e=xelem.value;e=(e=e.replace("0x","")).replace("0X","");try{var t=new BigNumber(e,16);xelem.style.backgroundColor="white"}catch(l){xelem.style.backgroundColor="#fff0f0";return}var n=t.toString(2),r=t.toString(10),i=n=pad(n,4*e.length);groupelem.checked&&(n=digitgroup(n,4," "),r=digitgroup(r,3," ")),yelem.value=n,y2elem.value=r;var a=yelem.value.match(/\d/g),g=y2elem.value.match(/\d/g),o="Binary number",u="Decimal number";null!=a&&(o+=" ("+a.length+(1==a.length?" digit)":" digits)")),null!=g&&(u+=" ("+g.length+(1==g.length?" digit)":" digits)")),document.getElementById("ylabel").innerHTML=o,document.getElementById("y2label").innerHTML=u,calcelem.value="Convert each hex digit to 4 binary digits (see conversion table below):\n",calcelem.value+=e+"\n= ",e.length>1&&(calcelem.value+=digitgroup(e,1," ")+"\n= "),i.length>4&&(calcelem.value+=digitgroup(i,4," ")+"\n= "),calcelem.value+=i}function digitgroup(e,t,l){if("N/A"==e)return e;var n=e.split(".")[0],r=e.split(".")[1],i="",a="",g=RegExp("(.{"+t+"})","g");return""!=n&&void 0!=n&&("-"==n[0]&&(i="-",n=n.substring(1,n.length)),i+=a=n.substring(0,n.length%t),n=(n=(n=n.substring(n.length%t,n.length)).replace(g,"$1 ")).substring(0,n.length-1),""!=a&&""!=n&&(i+=l),i+=n),""!=r&&void 0!=r&&(i+=".",i+=r.replace(g,"$1 ")),i}window.addEventListener("DOMContentLoaded",function(){var e=GetURLParams();void 0!==e.x&&(document.title=e.x+" hex to binary conversion",xelem.value=e.x,convert())});
+</script>
+
+
+
+
+
+</body></html>
