@@ -14,7 +14,7 @@ ECHO is off.
     ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source system_uart.tcl -notrace
-create_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 454.633 ; gain = 159.863
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 455.402 ; gain = 160.871
 Command: read_checkpoint -auto_incremental -incremental C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/utils_1/imports/synth_1/system_uart.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/utils_1/imports/synth_1/system_uart.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -27,10 +27,9 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 22408
-INFO: [Synth 8-11241] undeclared symbol 'switch', assumed default net type 'wire' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:31]
+INFO: [Synth 8-7075] Helper process launched with PID 21396
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:05 . Memory (MB): peak = 1274.324 ; gain = 411.703
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 1273.863 ; gain = 411.887
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'system_uart' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:3]
 INFO: [Synth 8-6157] synthesizing module 'clk_div' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/clk_div.v:3]
@@ -39,51 +38,33 @@ INFO: [Synth 8-6157] synthesizing module 'quad_7_seg' [C:/Users/vivat/Desktop/cp
 INFO: [Synth 8-6157] synthesizing module 'hex_to_7_seg' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/hex_to_7_seg.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'hex_to_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/hex_to_7_seg.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'quad_7_seg' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/quad_7_seg.v:3]
-INFO: [Synth 8-6157] synthesizing module 'switch_button' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:31]
-	Parameter BUTTON_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'push_button' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:32]
+INFO: [Synth 8-6157] synthesizing module 'switch_button' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
+	Parameter DEBOUNCE_COUNT bound to: 1000000 - type: integer 
+	Parameter BUTTON_WIDTH bound to: 1 - type: integer 
 INFO: [Synth 8-6157] synthesizing module 'debouncer' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/debouncer.v:3]
 	Parameter DEBOUNCE_COUNT bound to: 1000000 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'debouncer' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/debouncer.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'switch_button' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:31]
-WARNING: [Synth 8-689] width (1) of port connection 'q' does not match port width (16) of module 'switch_button' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:31]
-INFO: [Synth 8-6157] synthesizing module 'uart_core' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_core.v:3]
-	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
-	Parameter BAUD_RATE bound to: 9600 - type: integer 
-	Parameter DATA_BITS bound to: 8 - type: integer 
-	Parameter BUFFER_SIZE bound to: 64 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'switch_button' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
 INFO: [Synth 8-6157] synthesizing module 'single_pulser' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/single_pulser.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'single_pulser' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/single_pulser.v:3]
-INFO: [Synth 8-6157] synthesizing module 'uart_tx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:107]
-	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
-	Parameter BAUD_RATE bound to: 9600 - type: integer 
-	Parameter DATA_BITS bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:107]
-INFO: [Synth 8-6157] synthesizing module 'sync_fifo' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:3]
-	Parameter DEPTH bound to: 64 - type: integer 
-	Parameter DATA_WIDTH bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'sync_fifo' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'push_button' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:32]
+INFO: [Synth 8-6157] synthesizing module 'switch_button__parameterized0' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
+	Parameter BUTTON_WIDTH bound to: 16 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'switch_button__parameterized0' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
 INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
 	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
 	Parameter BAUD_RATE bound to: 9600 - type: integer 
 	Parameter DATA_BITS bound to: 8 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
-INFO: [Synth 8-6155] done synthesizing module 'uart_core' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_core.v:3]
-WARNING: [Synth 8-6104] Input port 'RsTx' has an internal driver [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:68]
+INFO: [Synth 8-6157] synthesizing module 'uart_tx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:120]
+	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
+	Parameter BAUD_RATE bound to: 9600 - type: integer 
+	Parameter DATA_BITS bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:120]
+WARNING: [Synth 8-7071] port 'tx_active' of module 'uart_tx' is unconnected for instance 'tx_handler' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:75]
+WARNING: [Synth 8-7023] instance 'tx_handler' of module 'uart_tx' has 6 connections declared, but only 5 given [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:75]
 INFO: [Synth 8-6155] done synthesizing module 'system_uart' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:3]
-WARNING: [Synth 8-6014] Unused sequential element clk_cnt_reg was removed.  [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:141]
-WARNING: [Synth 8-6014] Unused sequential element clk_cnt_reg was removed.  [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:41]
-WARNING: [Synth 8-6014] Unused sequential element idx_reg was removed.  [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:42]
-WARNING: [Synth 8-3848] Net rx_b in module/entity uart_rx does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:29]
-WARNING: [Synth 8-3848] Net switches in module/entity system_uart does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:30]
-WARNING: [Synth 8-3848] Net sig_read in module/entity system_uart does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:58]
-WARNING: [Synth 8-7129] Port rx_byte[7] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[6] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[5] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[4] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[3] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[2] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[1] in module uart_rx is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rx_byte[0] in module uart_rx is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[15] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[14] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[13] in module system_uart is either unconnected or has no load
@@ -99,20 +80,19 @@ WARNING: [Synth 8-7129] Port led[4] in module system_uart is either unconnected 
 WARNING: [Synth 8-7129] Port led[3] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[2] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[1] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[0] in module system_uart is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1366.609 ; gain = 503.988
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1366.609 ; gain = 503.988
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 1366.609 ; gain = 503.988
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1366.609 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1365.781 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -123,67 +103,76 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/system_uart_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1409.051 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1473.043 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1409.051 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1473.043 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:14 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:14 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:14 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_tx'
-INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_rx'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
-              STATE_IDLE |                                0 |                              000
-      STATE_TX_START_BIT |                                1 |                              001
+              STATE_IDLE |                              000 |                              000
+      STATE_TX_START_BIT |                              001 |                              001
+      STATE_TX_DATA_BITS |                              010 |                              011
+       STATE_TX_STOP_BIT |                              011 |                              010
+           STATE_CLEANUP |                              100 |                              110
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_tx'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-              STATE_IDLE |                                0 |                              000
-      STATE_RX_START_BIT |                                1 |                              001
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_rx'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:14 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:15 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input   32 Bit       Adders := 1     
-	   2 Input    6 Bit       Adders := 4     
+	   2 Input   32 Bit       Adders := 2     
+	   2 Input   12 Bit       Adders := 1     
+	   2 Input   11 Bit       Adders := 1     
+	   2 Input    8 Bit       Adders := 1     
+	   2 Input    3 Bit       Adders := 2     
 	   2 Input    2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 2     
-	                8 Bit    Registers := 3     
-	                3 Bit    Registers := 1     
+	               12 Bit    Registers := 1     
+	               11 Bit    Registers := 1     
+	                8 Bit    Registers := 4     
+	                3 Bit    Registers := 3     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 43    
-+---RAMs : 
-	              512 Bit	(64 X 8 bit)          RAMs := 2     
+	                1 Bit    Registers := 51    
 +---Muxes : 
+	   2 Input   12 Bit        Muxes := 1     
+	   6 Input   12 Bit        Muxes := 1     
+	   2 Input   11 Bit        Muxes := 1     
+	   6 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 1     
 	   4 Input    4 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 10    
+	   2 Input    3 Bit        Muxes := 10    
+	   5 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   3 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 4     
+	   5 Input    1 Bit        Muxes := 14    
+	   6 Input    1 Bit        Muxes := 3     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -216,7 +205,6 @@ WARNING: [Synth 8-7129] Port led[4] in module system_uart is either unconnected 
 WARNING: [Synth 8-7129] Port led[3] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[2] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[1] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[0] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[15] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[14] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[13] in module system_uart is either unconnected or has no load
@@ -233,54 +221,26 @@ WARNING: [Synth 8-7129] Port sw[3] in module system_uart is either unconnected o
 WARNING: [Synth 8-7129] Port sw[2] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[1] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[0] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-3332] Sequential element (the_uart/tx_handler/FSM_sequential_state_reg) is unused and will be removed from module system_uart.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin RsTx with 1st driver pin 'the_uart/tx_handler/tx_serial_reg/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:139]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin RsTx with 2nd driver pin 'RsTx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:3]
-WARNING: [Synth 8-3332] Sequential element (the_uart/rx_handler/FSM_sequential_state_reg) is unused and will be removed from module system_uart.
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[7]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[6]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[5]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[4]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[3]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[2]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[1]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[0]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
-CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:16 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:17 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:21 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:21 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Timing Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:12 ; elapsed = 00:00:21 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -298,37 +258,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished IO Insertion : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -341,40 +301,46 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+------+------+
-|      |Cell  |Count |
-+------+------+------+
-|1     |BUFG  |     1|
-|2     |LUT1  |     1|
-|3     |LUT2  |     5|
-|4     |LUT3  |     3|
-|5     |FDRE  |     2|
-|6     |IBUF  |     2|
-|7     |OBUF  |    12|
-|8     |OBUFT |    16|
-+------+------+------+
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     8|
+|3     |LUT1   |     4|
+|4     |LUT2   |    11|
+|5     |LUT3   |     9|
+|6     |LUT4   |    25|
+|7     |LUT5   |    22|
+|8     |LUT6   |    43|
+|9     |FDRE   |    88|
+|10    |FDSE   |    11|
+|11    |IBUF   |     2|
+|12    |OBUF   |    14|
+|13    |OBUFT  |    15|
++------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 26 critical warnings and 36 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:24 . Memory (MB): peak = 1409.051 ; gain = 503.988
-Synthesis Optimization Complete : Time (s): cpu = 00:00:14 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.051 ; gain = 546.430
+Synthesis finished with 0 errors, 0 critical warnings and 33 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:25 . Memory (MB): peak = 1473.043 ; gain = 503.805
+Synthesis Optimization Complete : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1409.051 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1473.043 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1409.051 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1473.043 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: 7f63e9b2
+Synth Design complete | Checksum: 2305f80c
 INFO: [Common 17-83] Releasing license: Synthesis
-46 Infos, 68 Warnings, 26 Critical Warnings and 0 Errors encountered.
+45 Infos, 50 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:31 . Memory (MB): peak = 1409.051 ; gain = 927.012
+synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:32 . Memory (MB): peak = 1473.043 ; gain = 989.926
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
-INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
 INFO: [Common 17-1381] The checkpoint 'C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.runs/synth_1/system_uart.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file system_uart_utilization_synth.rpt -pb system_uart_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Mon Oct 16 23:18:56 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 17 03:54:04 2023...

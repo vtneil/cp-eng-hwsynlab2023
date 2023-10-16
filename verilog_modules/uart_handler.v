@@ -11,7 +11,7 @@ module uart_rx #(
     input wire clk
 );
     
-    localparam CLK_PER_BIT        = CLOCK_SPEED / BAUD_RATE;
+    localparam CLK_PER_BIT        = CLOCK_SPEED / BAUD_RATE / (DATA_BITS + 2);
     localparam COUNTER_WIDTH      = $clog2(DATA_BITS);
     
     localparam STATE_IDLE         = 3'b000;
@@ -23,11 +23,13 @@ module uart_rx #(
     reg rx_data_tmp;
     reg rx_data;
     
-    reg [DATA_BITS - 1:0] clk_cnt;
+    reg [$clog2(CLK_PER_BIT):0] clk_cnt;
     reg [COUNTER_WIDTH - 1:0] idx;
     reg [2:0] state;
     reg [DATA_BITS - 1:0] rx_b;
     reg cplt;
+    
+    reg preclock;
     
     always @(posedge clk) begin
         rx_data_tmp <= rx_data_in;
@@ -37,6 +39,7 @@ module uart_rx #(
     always @(posedge clk) begin
         case (state)
             STATE_IDLE: begin
+                preclock <= 1'b0;
                 cplt <= 1'b0;
                 clk_cnt <= 'd0;
                 idx <= 'd0;
@@ -89,9 +92,19 @@ module uart_rx #(
                 end
             end
             
-            STATE_CLEANUP: begin  // 1 clock rx_cplt bit high
-                state <= STATE_IDLE;
-                cplt <= 1'b0;
+            STATE_CLEANUP: begin  // 2 clock rx_cplt bit high
+                case (preclock)
+                    1'b0: begin
+                        state <= STATE_CLEANUP;
+                        cplt <= 1'b1;
+                        preclock <= 1'b1;
+                    end
+                    1'b1: begin
+                        state <= STATE_IDLE;
+                        cplt <= 1'b0;
+                        preclock <= 1'b0;
+                    end
+                endcase
             end
             
             default:
@@ -117,7 +130,7 @@ module uart_tx #(
     input wire clk
 );
 
-    localparam CLK_PER_BIT        = CLOCK_SPEED / BAUD_RATE;
+    localparam CLK_PER_BIT        = CLOCK_SPEED / BAUD_RATE / (DATA_BITS + 2);
     localparam COUNTER_WIDTH      = $clog2(DATA_BITS);
     
     localparam STATE_IDLE         = 3'b000;
@@ -126,21 +139,27 @@ module uart_tx #(
     localparam STATE_TX_STOP_BIT  = 3'b010;
     localparam STATE_CLEANUP      = 3'b110;
     
-    reg [DATA_BITS - 1:0] clk_cnt;
+    reg [$clog2(CLK_PER_BIT):0] clk_cnt;
     reg [COUNTER_WIDTH - 1:0] idx;
     reg [2:0] state;
     reg [DATA_BITS - 1:0] tx_data;
     reg active;
     reg cplt;
+    reg tx_enb;
+    
+    reg preclock;
+    
+    always @(posedge clk) tx_enb <= tx_en;
     
     always @(posedge clk) begin
         case (state)
             STATE_IDLE: begin
+                preclock <= 1'b0;
                 tx_serial <= 1'b1;
                 cplt <= 1'b0;
                 clk_cnt <= 'd0;
                 idx <= 'd0;
-                if (tx_en == 1'b1) begin
+                if (tx_enb == 1'b1) begin
                     active <= 1'b1;
                     tx_data <= tx_byte;
                     state <= STATE_TX_START_BIT;
@@ -190,9 +209,19 @@ module uart_tx #(
                 end
             end
             
-            STATE_CLEANUP: begin  // 1 clock rx_cplt bit high
-                state <= STATE_IDLE;
-                cplt <= 1'b0;
+            STATE_CLEANUP: begin  // 2 clock rx_cplt bit high
+                case (preclock)
+                    1'b0: begin
+                        state <= STATE_CLEANUP;
+                        cplt <= 1'b1;
+                        preclock <= 1'b1;
+                    end
+                    1'b1: begin
+                        state <= STATE_IDLE;
+                        cplt <= 1'b0;
+                        preclock <= 1'b0;
+                    end
+                endcase
             end
             
             default:

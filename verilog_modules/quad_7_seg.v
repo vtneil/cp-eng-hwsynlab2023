@@ -8,15 +8,14 @@ module quad_7_seg(
     input wire [3:0] num3,
     input wire [3:0] num2,
     input wire [3:0] num1,
-    input wire [3:0] num0,
-    input wire [3:0] en
+    input wire [3:0] num0
 );
     reg [1:0] q;
     reg [3:0] nums;
     
     hex_to_7_seg hex7seg(seg, nums);
     
-    assign an = ~{~q[1] & ~q[0] & en[3], ~q[1] & q[0] & en[2], q[1] & ~q[0] & en[1], q[1] & q[0] & en[0]};
+    assign an = ~{~q[1] & ~q[0], ~q[1] & q[0], q[1] & ~q[0], q[1] & q[0]};
     assign dp = 1'b1;
     
     always @(posedge clk) q <= q + 1;
