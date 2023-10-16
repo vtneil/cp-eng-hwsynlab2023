@@ -18,8 +18,8 @@ module sync_fifo #(
     reg [DATA_WIDTH - 1:0] fifo [0:DEPTH - 1];
     
     // Set Default values on reset.
-    always@(posedge clk) begin
-        if(!nrst) begin
+    always @(posedge clk) begin
+        if (!nrst) begin
           w_ptr <= 0; r_ptr <= 0;
           data_out <= 0;
         end
@@ -35,7 +35,7 @@ module sync_fifo #(
     
     // To read data from FIFO
     always @(posedge clk) begin
-        if(r_en & !empty) begin
+        if (r_en & !empty) begin
           data_out <= fifo[r_ptr];
           r_ptr <= r_ptr + 1;
         end

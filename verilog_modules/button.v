@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module push_button #(
-    parameter DEBOUNCE_COUNT = 32'd2_500_000,
-    parameter BUTTON_WIDTH = 4
+    parameter DEBOUNCE_COUNT = 32'd1_000_000,
+    parameter BUTTON_WIDTH = 1
 ) (
     output wire [BUTTON_WIDTH - 1:0] q,
     input wire [BUTTON_WIDTH - 1:0] d,
@@ -29,7 +29,7 @@ module push_button #(
 endmodule
 
 module switch_button #(
-    parameter DEBOUNCE_COUNT = 32'd2_500_000,
+    parameter DEBOUNCE_COUNT = 32'd1_000_000,
     parameter BUTTON_WIDTH = 1
 ) (
     output wire [BUTTON_WIDTH - 1:0] q,
