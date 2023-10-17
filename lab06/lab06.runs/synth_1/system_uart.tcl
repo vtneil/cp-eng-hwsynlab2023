@@ -70,14 +70,8 @@ proc create_report { reportName command } {
   }
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
-set_param general.maxThreads 16
 set_param chipscope.maxJobs 4
-set_param synth.incrementalSynthesisCache C:/Users/vivat/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-21512-VT_ZENBOOK/incrSyn
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -110,6 +104,9 @@ read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/ram_block.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/rom_block.v
   C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/stack.v
+  C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_vga.v
+  C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/vga_sync.v
+  C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/delayer.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

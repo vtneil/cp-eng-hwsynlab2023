@@ -56,8 +56,8 @@ module uart_core #(
         .data_in(data_in),
         .clk(clk),
         .nrst(nrst),
-        .w_en(sig_tx_delay),
-        .r_en(sig_tx)
+        .w_en(sig_tx),
+        .r_en(sig_tx_delay)
     );
     
     // Rx Part

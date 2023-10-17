@@ -1,6 +1,6 @@
 Time resolution is 1 ps
 Time: 0, Input: 0, Output: x
-Time: 5000, Input: 0, Output: 0
+Time: 15000, Input: 0, Output: 0
 Time: 120000, Input: 1, Output: 0
 Time: 130000, Input: 0, Output: 0
 Time: 135000, Input: 0, Output: 1

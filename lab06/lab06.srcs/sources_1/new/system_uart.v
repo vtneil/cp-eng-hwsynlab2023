@@ -41,14 +41,14 @@ module system_uart(
     
     reg [7:0] rdata_rx;
     reg [7:0] rdata_tx;
-    
-    assign data_tx = data_rx + 8'd1;
 
     assign {digits[3], digits[2]} = rdata_rx;
     assign {digits[1], digits[0]} = rdata_tx;
     
     // LEDs
-    assign led = {data_rx, data_tx};
+//    assign led = {data_rx, data_tx};
+    assign led[7:0] = data_tx;
+    assign data_tx = rdata_tx;
         
     // State Machine and Signals
     reg sig_write;
@@ -81,7 +81,7 @@ module system_uart(
         .rx_full(rx_full),
         .rx_empty(rx_empty),
         
-        .data_in(data_tx),
+        .data_in(rdata_tx),
         .port_rx(RsTx),
         .pulse_rx(sig_read),
         .pulse_tx(sig_write),
@@ -91,11 +91,22 @@ module system_uart(
     
     always @(posedge iclk) begin
         rdata_rx <= data_rx;
-        rdata_tx <= data_tx;
-        
-        if (btn) begin
+    end
+    
+    always @(posedge iclk) begin
+        if (btnC) begin
             sig_write <= 1'b1;
+            rdata_tx <= "q";
+        end else begin
+            sig_write <= 1'b0;
+            rdata_tx <= 'd255;
         end
+    end
+    
+    reg stat;
+    assign led[15] = stat;
+    always @(posedge tx_cplt) begin
+        stat <= ~stat;
     end
 
 endmodule

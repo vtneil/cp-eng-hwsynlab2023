@@ -14,7 +14,7 @@ ECHO is off.
     ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source system_uart.tcl -notrace
-create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 455.402 ; gain = 160.871
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 455.078 ; gain = 159.270
 Command: read_checkpoint -auto_incremental -incremental C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/utils_1/imports/synth_1/system_uart.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/utils_1/imports/synth_1/system_uart.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -25,11 +25,11 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
-INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 21396
+INFO: [Synth 8-7075] Helper process launched with PID 25052
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 1273.863 ; gain = 411.887
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1273.457 ; gain = 411.789
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'system_uart' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:3]
 INFO: [Synth 8-6157] synthesizing module 'clk_div' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/clk_div.v:3]
@@ -52,20 +52,30 @@ INFO: [Synth 8-6155] done synthesizing module 'push_button' (0#1) [C:/Users/viva
 INFO: [Synth 8-6157] synthesizing module 'switch_button__parameterized0' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
 	Parameter BUTTON_WIDTH bound to: 16 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'switch_button__parameterized0' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/button.v:3]
-INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
+INFO: [Synth 8-6157] synthesizing module 'uart_core' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_core.v:3]
 	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
 	Parameter BAUD_RATE bound to: 9600 - type: integer 
 	Parameter DATA_BITS bound to: 8 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
+	Parameter BUFFER_SIZE bound to: 8 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'delayer' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/delayer.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'delayer' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/delayer.v:3]
 INFO: [Synth 8-6157] synthesizing module 'uart_tx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:120]
 	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
 	Parameter BAUD_RATE bound to: 9600 - type: integer 
 	Parameter DATA_BITS bound to: 8 - type: integer 
 INFO: [Synth 8-6155] done synthesizing module 'uart_tx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:120]
-WARNING: [Synth 8-7071] port 'tx_active' of module 'uart_tx' is unconnected for instance 'tx_handler' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:75]
-WARNING: [Synth 8-7023] instance 'tx_handler' of module 'uart_tx' has 6 connections declared, but only 5 given [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:75]
+INFO: [Synth 8-6157] synthesizing module 'sync_fifo' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:3]
+	Parameter DEPTH bound to: 8 - type: integer 
+	Parameter DATA_WIDTH bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'sync_fifo' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:3]
+INFO: [Synth 8-6157] synthesizing module 'uart_rx' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
+	Parameter CLOCK_SPEED bound to: 100000000 - type: integer 
+	Parameter BAUD_RATE bound to: 9600 - type: integer 
+	Parameter DATA_BITS bound to: 8 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'uart_rx' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_handler.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'uart_core' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/uart_core.v:3]
 INFO: [Synth 8-6155] done synthesizing module 'system_uart' (0#1) [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:3]
-WARNING: [Synth 8-7129] Port led[15] in module system_uart is either unconnected or has no load
+WARNING: [Synth 8-3848] Net sig_read in module/entity system_uart does not have driver. [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sources_1/new/system_uart.v:55]
 WARNING: [Synth 8-7129] Port led[14] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[13] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[12] in module system_uart is either unconnected or has no load
@@ -73,26 +83,19 @@ WARNING: [Synth 8-7129] Port led[11] in module system_uart is either unconnected
 WARNING: [Synth 8-7129] Port led[10] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[9] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[8] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[7] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[6] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[5] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[4] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[3] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[2] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[1] in module system_uart is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
+Finished RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1367.586 ; gain = 505.918
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1367.586 ; gain = 505.918
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1365.781 ; gain = 503.805
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1367.586 ; gain = 505.918
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1365.781 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1367.586 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -103,28 +106,28 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/system_uart_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1473.043 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1459.809 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1473.043 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1459.809 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:15 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_tx'
 ---------------------------------------------------------------------------------------------------
@@ -138,7 +141,7 @@ INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'uart_
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'sequential' in module 'uart_tx'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:15 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -148,17 +151,18 @@ Detailed RTL Component Info :
 	   2 Input   32 Bit       Adders := 2     
 	   2 Input   12 Bit       Adders := 1     
 	   2 Input   11 Bit       Adders := 1     
-	   2 Input    8 Bit       Adders := 1     
-	   2 Input    3 Bit       Adders := 2     
+	   2 Input    3 Bit       Adders := 6     
 	   2 Input    2 Bit       Adders := 1     
 +---Registers : 
 	               16 Bit    Registers := 2     
 	               12 Bit    Registers := 1     
 	               11 Bit    Registers := 1     
-	                8 Bit    Registers := 4     
+	                8 Bit    Registers := 6     
 	                3 Bit    Registers := 3     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 51    
+	                1 Bit    Registers := 57    
++---RAMs : 
+	               64 Bit	(8 X 8 bit)          RAMs := 2     
 +---Muxes : 
 	   2 Input   12 Bit        Muxes := 1     
 	   6 Input   12 Bit        Muxes := 1     
@@ -190,7 +194,6 @@ Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-3917] design system_uart has port dp driven by constant 1
-WARNING: [Synth 8-7129] Port led[15] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[14] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[13] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[12] in module system_uart is either unconnected or has no load
@@ -198,13 +201,6 @@ WARNING: [Synth 8-7129] Port led[11] in module system_uart is either unconnected
 WARNING: [Synth 8-7129] Port led[10] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[9] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port led[8] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[7] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[6] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[5] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[4] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[3] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[2] in module system_uart is either unconnected or has no load
-WARNING: [Synth 8-7129] Port led[1] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[15] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[14] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[13] in module system_uart is either unconnected or has no load
@@ -221,26 +217,92 @@ WARNING: [Synth 8-7129] Port sw[3] in module system_uart is either unconnected o
 WARNING: [Synth 8-7129] Port sw[2] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[1] in module system_uart is either unconnected or has no load
 WARNING: [Synth 8-7129] Port sw[0] in module system_uart is either unconnected or has no load
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/r_ptr_reg[2]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/r_ptr_reg[1]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/r_ptr_reg[0]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/w_ptr_reg[2]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/w_ptr_reg[1]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/w_ptr_reg[0]__0/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:23]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[7]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[6]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[5]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[4]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[3]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[2]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[1]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/tx_fifo/data_out_reg[0]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[7]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[6]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[5]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[4]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[3]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[2]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[1]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'the_uart/rx_fifo/data_out_reg[0]/Q' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/verilog_modules/fifo.v:24]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:17 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:22 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:23 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Timing Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:23 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:23 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:23 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -258,37 +320,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -305,42 +367,40 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     1|
-|2     |CARRY4 |     8|
+|2     |CARRY4 |     5|
 |3     |LUT1   |     4|
-|4     |LUT2   |    11|
+|4     |LUT2   |    15|
 |5     |LUT3   |     9|
-|6     |LUT4   |    25|
-|7     |LUT5   |    22|
-|8     |LUT6   |    43|
-|9     |FDRE   |    88|
-|10    |FDSE   |    11|
-|11    |IBUF   |     2|
-|12    |OBUF   |    14|
-|13    |OBUFT  |    15|
+|6     |LUT4   |     7|
+|7     |LUT5   |     7|
+|8     |LUT6   |    12|
+|9     |FDRE   |    50|
+|10    |IBUF   |     2|
+|11    |OBUF   |    22|
+|12    |OBUFT  |     7|
 +------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 33 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:25 . Memory (MB): peak = 1473.043 ; gain = 503.805
-Synthesis Optimization Complete : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1473.043 ; gain = 611.066
+Synthesis finished with 0 errors, 66 critical warnings and 25 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:15 ; elapsed = 00:00:26 . Memory (MB): peak = 1459.809 ; gain = 505.918
+Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:28 . Memory (MB): peak = 1459.809 ; gain = 598.141
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1473.043 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 8 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1459.809 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1473.043 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1459.809 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: 2305f80c
+Synth Design complete | Checksum: 9eea77ef
 INFO: [Common 17-83] Releasing license: Synthesis
-45 Infos, 50 Warnings, 0 Critical Warnings and 0 Errors encountered.
+51 Infos, 33 Warnings, 66 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:32 . Memory (MB): peak = 1473.043 ; gain = 989.926
-INFO: [Common 17-600] The following parameters have non-default value.
-general.maxThreads
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:33 . Memory (MB): peak = 1459.809 ; gain = 977.188
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
 INFO: [Common 17-1381] The checkpoint 'C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.runs/synth_1/system_uart.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file system_uart_utilization_synth.rpt -pb system_uart_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Oct 17 03:54:04 2023...
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 17 13:08:07 2023...
