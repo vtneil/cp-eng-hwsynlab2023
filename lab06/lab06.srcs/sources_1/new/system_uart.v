@@ -48,76 +48,54 @@ module system_uart(
     assign {digits[1], digits[0]} = rdata_tx;
     
     // LEDs
-//    assign led = {data_rx, data_tx};
+    assign led = {data_rx, data_tx};
         
-    // State Machine
-    reg write;
+    // State Machine and Signals
+    reg sig_write;
+    reg sig_read;
     
     // UART
     wire tx_cplt;
+    wire tx_full;
+    wire tx_empty;
+    
     wire rx_cplt;
+    wire rx_full;
+    wire rx_empty;
     
-    uart_rx #(
+    wire available_for_read;
+    assign available_for_read = !rx_empty;
+    
+    uart_core #(
         .CLOCK_SPEED(SYSTEM_CORE_CLOCK),
         .BAUD_RATE(UART_BAUD_RATE),
-        .DATA_BITS(UART_DATA_BITS)
-    ) rx_handler(
-        .rx_byte(data_rx),
-        .rx_cplt(rx_cplt),
-        .rx_data_in(RsTx),
-        .clk(iclk)
-    );
-    
-    uart_tx #(
-        .CLOCK_SPEED(SYSTEM_CORE_CLOCK),
-        .BAUD_RATE(UART_BAUD_RATE),
-        .DATA_BITS(UART_DATA_BITS)
-    ) tx_handler(
-        .tx_serial(RsRx),
+        .DATA_BITS(UART_DATA_BITS),
+        .BUFFER_SIZE(UART_BUFFER_SIZE)
+    ) the_uart(
+        .data_out(data_rx),
+        .port_tx(RsRx),
         .tx_cplt(tx_cplt),
-        .tx_byte(data_tx),
-        .tx_en(write),
-        .clk(iclk)
+        .tx_full(tx_full),
+        .tx_empty(tx_empty),
+        .rx_cplt(rx_cplt),
+        .rx_full(rx_full),
+        .rx_empty(rx_empty),
+        
+        .data_in(data_tx),
+        .port_rx(RsTx),
+        .pulse_rx(sig_read),
+        .pulse_tx(sig_write),
+        .clk(iclk),
+        .nrst(1'b1)
     );
-    
-    wire asignal;
-    assign asignal = rx_cplt | tx_cplt;
-    
-    reg x;
-    assign led[0] = x;
-    always @(posedge rx_cplt) begin
-        x <= ~x;
-    end
-    
-    always @(posedge asignal) begin
-        write <= rx_cplt & ~tx_cplt;
-    end
     
     always @(posedge iclk) begin
         rdata_rx <= data_rx;
         rdata_tx <= data_tx;
+        
+        if (btn) begin
+            sig_write <= 1'b1;
+        end
     end
-    
-//    uart_core #(
-//        .CLOCK_SPEED(SYSTEM_CORE_CLOCK),
-//        .BAUD_RATE(UART_BAUD_RATE),
-//        .DATA_BITS(UART_DATA_BITS),
-//        .BUFFER_SIZE(UART_BUFFER_SIZE)
-//    ) the_uart(
-//        .data_out(data_rx),
-//        .port_tx(RsRx),
-//        .tx_cplt(tx_cplt),
-//        .tx_full(tx_full),
-//        .tx_empty(tx_empty),
-//        .rx_cplt(rx_cplt),
-//        .rx_full(rx_full),
-//        .rx_empty(rx_empty),
-//        .data_in(data_tx),
-//        .port_rx(RsTx),
-//        .pulse_rx(sig_read),
-//        .pulse_tx(sig_write),
-//        .clk(iclk),
-//        .nrst(1'b1)
-//    );
 
 endmodule

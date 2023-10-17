@@ -1,18 +1,14 @@
 Time resolution is 1 ps
-Time: 0ns, tx_en: 0, tx_byte: 00, tx_active: x, tx_serial: x, tx_cplt: x
-Time: 10000ns, tx_en: 0, tx_byte: 00, tx_active: x, tx_serial: 1, tx_cplt: 0
-Time: 500000ns, tx_en: 1, tx_byte: 55, tx_active: x, tx_serial: 1, tx_cplt: 0
-Time: 505000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 510000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 0, tx_cplt: 0
-Time: 940000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 1370000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 0, tx_cplt: 0
-Time: 1800000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 2230000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 0, tx_cplt: 0
-Time: 2660000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 3090000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 0, tx_cplt: 0
-Time: 3520000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 3950000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 0, tx_cplt: 0
-Time: 4380000ns, tx_en: 0, tx_byte: 55, tx_active: 1, tx_serial: 1, tx_cplt: 0
-Time: 4805000ns, tx_en: 0, tx_byte: 55, tx_active: 0, tx_serial: 1, tx_cplt: 1
-Time: 4810000ns, tx_en: 0, tx_byte: 55, tx_active: 0, tx_serial: 1, tx_cplt: 0
-$finish called at time : 50505 ns : File "C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sim_1/new/tb_fifo.v" Line 50
+Time: 0, Input: 0, Output: x
+Time: 5000, Input: 0, Output: 0
+Time: 120000, Input: 1, Output: 0
+Time: 130000, Input: 0, Output: 0
+Time: 135000, Input: 0, Output: 1
+Time: 140000, Input: 1, Output: 1
+Time: 145000, Input: 1, Output: 0
+Time: 150000, Input: 0, Output: 0
+Time: 155000, Input: 0, Output: 1
+Time: 160000, Input: 1, Output: 1
+Time: 165000, Input: 1, Output: 0
+Time: 175000, Input: 1, Output: 1
+$finish called at time : 270 ns : File "C:/Users/vivat/Desktop/cp-eng-hwsynlab2023/lab06/lab06.srcs/sim_1/new/tb_delayer.v" Line 47

@@ -21,16 +21,17 @@ module uart_core #(
     input wire clk,
     input wire nrst
 );
-
-    wire dclk;
-    clk_div cdd(dclk, clk, 32'd10);
+    
+    wire sig_rx, sig_tx;
+    single_pulser sp_tx(sig_tx, pulse_tx, clk);
+    single_pulser sp_rx(sig_rx, pulse_rx, clk);
+    
+    wire sig_tx_delay;
+    delayer del_tx(sig_tx_delay, sig_tx, clk);
     
     // Tx Part
     wire [DATA_BITS - 1:0] tx_data;
     wire tx_active;
-    wire tx_ready;
-    
-    assign tx_ready = !tx_active;
     
     uart_tx #(
         .CLOCK_SPEED(CLOCK_SPEED),
@@ -41,7 +42,7 @@ module uart_core #(
         .tx_serial(port_tx),
         .tx_cplt(tx_cplt),
         .tx_byte(tx_data),
-        .tx_en(tx_ready),
+        .tx_en(sig_tx_delay),
         .clk(clk)
     );
     
@@ -55,8 +56,8 @@ module uart_core #(
         .data_in(data_in),
         .clk(clk),
         .nrst(nrst),
-        .w_en(pulse_tx),
-        .r_en(tx_ready)
+        .w_en(sig_tx_delay),
+        .r_en(sig_tx)
     );
     
     // Rx Part
@@ -84,7 +85,7 @@ module uart_core #(
         .clk(clk),
         .nrst(nrst),
         .w_en(rx_cplt),
-        .r_en(pulse_rx)
+        .r_en(sig_rx)
     );
     
 endmodule
