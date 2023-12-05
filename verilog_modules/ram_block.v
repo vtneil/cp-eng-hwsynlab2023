@@ -4,7 +4,7 @@ module ram_block #(
     parameter RAM_WIDTH = 8,
     parameter RAM_ADDR_BITS = 8
 ) (
-    output reg [RAM_WIDTH - 1:0] data_out,
+    output wire [RAM_WIDTH - 1:0] data_out,
     input wire [RAM_WIDTH - 1:0] data_in,
     input wire [RAM_ADDR_BITS - 1:0] wa,
     input wire [RAM_ADDR_BITS - 1:0] ra,
@@ -14,11 +14,14 @@ module ram_block #(
 
     localparam RAM_SIZE = 2 ** RAM_ADDR_BITS;
     
-    reg [RAM_WIDTH - 1:0] ram [RAM_SIZE - 1:0];
-
+    reg [RAM_WIDTH - 1:0] memory_block [RAM_SIZE - 1:0];
+    
+    // Synchronous write and read
     always @(posedge clk) begin
-        if (we) ram[wa] <= data_in;
-        data_out <= ram[ra];
+        if (we) memory_block[wa] <= data_in;
+        
     end
+    
+    assign data_out = memory_block[ra];
 
 endmodule

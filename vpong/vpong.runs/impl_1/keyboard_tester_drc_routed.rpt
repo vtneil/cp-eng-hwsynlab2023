@@ -1,0 +1,87 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Dec  6 02:44:53 2023
+| Host         : vt_g14 running 64-bit major release  (build 9200)
+| Command      : report_drc -file keyboard_tester_drc_routed.rpt -pb keyboard_tester_drc_routed.pb -rpx keyboard_tester_drc_routed.rpx
+| Design       : keyboard_tester
+| Device       : xc7a35tcpg236-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 7
++-------------+----------+-------------------------------------------------------------+------------+
+| Rule        | Severity | Description                                                 | Violations |
++-------------+----------+-------------------------------------------------------------+------------+
+| DPIP-1      | Warning  | Input pipelining                                            | 2          |
+| DPOP-1      | Warning  | PREG Output pipelining                                      | 2          |
+| DPOP-2      | Warning  | MREG Output pipelining                                      | 1          |
+| PDRC-153    | Warning  | Gated clock check                                           | 1          |
+| PLHOLDVIO-2 | Warning  | Non-Optimal connections which could lead to hold violations | 1          |
++-------------+----------+-------------------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+DPIP-1#1 Warning
+Input pipelining  
+DSP vram_ra input vram_ra/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPIP-1#2 Warning
+Input pipelining  
+DSP vram_ra input vram_ra/C[47:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPOP-1#1 Warning
+PREG Output pipelining  
+DSP vram_ra output vram_ra/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-1#2 Warning
+PREG Output pipelining  
+DSP vram_wa output vram_wa/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-2#1 Warning
+MREG Output pipelining  
+DSP vram_ra multiplier stage vram_ra/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+PDRC-153#1 Warning
+Gated clock check  
+Net main_vga_sync/vga_tick is a gated clock net sourced by a combinational pin main_vga_sync/h_count_reg[9]_i_1/O, cell main_vga_sync/h_count_reg[9]_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PLHOLDVIO-2#1 Warning
+Non-Optimal connections which could lead to hold violations  
+A LUT main_vga_sync/h_count_reg[9]_i_1 is driving clock pin of 27 cells. This could lead to large hold time violations. Involved cells are:
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_0_cooolgate_en_gate_33_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_10_cooolgate_en_gate_36_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_12_cooolgate_en_gate_39_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_14_cooolgate_en_gate_42_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_2_cooolgate_en_gate_45_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_4_cooolgate_en_gate_48_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_6_cooolgate_en_gate_51_cooolDelFlop,
+main_vga_vram_bw/main_vga_vram_bw/memory_block_reg_8_cooolgate_en_gate_54_cooolDelFlop,
+main_vga_vram_bw/memory_block_reg_0, main_vga_vram_bw/memory_block_reg_1,
+main_vga_vram_bw/memory_block_reg_10, main_vga_vram_bw/memory_block_reg_11,
+main_vga_vram_bw/memory_block_reg_12, main_vga_vram_bw/memory_block_reg_13,
+main_vga_vram_bw/memory_block_reg_14 (the first 15 of 27 listed)
+Related violations: <none>
+
+
