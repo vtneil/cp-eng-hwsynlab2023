@@ -1,8 +1,16 @@
 Max 1.8 MBit (1_800_000 bit) incl. ROMs
 
+
+WXGA 1366 * 768 (1 bit) = 1_049_088 bit
+SXGA 1280 * 1024 (1 bit) = 1_310_720 bit
+FWVGA 854 * 480 (1 bit) = 409_920 bit
+
+SVGA 800 * 600 (1 bit) = 480_000 bit
 VGA 640 * 480 (1 bit) = 307_200 bit
 QVGA 320 * 240 (1 bit) = 76_800 bit
 
+
+SVGA 3 bit (RGB) = 1_440_000 bit
 VGA 3 bit (RGB) = 921_600 bit
 QVGA 12 bit (RGB) = 921_600 bit
 

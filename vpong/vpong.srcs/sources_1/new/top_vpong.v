@@ -32,13 +32,15 @@ module top_vpong #(
     localparam VGA_VRAM_ADDR_BITS = $clog2(VGA_PIXEL_COUNT);
     localparam GPU_COLOR_BITS = GPU_COLOR_DEPTH * 3;
     
-    // Text Generation Local Parameters
-    localparam ROM_MAX_CHAR = 16;       // 16 characters per line
-    localparam ROM_MAX_CHAR_BITS = 8 * ROM_MAX_CHAR;
-    localparam ROM_MAX_STR = 16;        // 16 strings in text ROM
-    localparam ROM_MAX_STR_ADDR = $clog2(ROM_MAX_STR);
-    
     // Clocks and Dividers
+    // 1000 Hz (1ms) general-purpose clock
+    wire clk_1ms;
+    clk_div clk_1ms_div(clk_1ms, clk, 32'd100_000);
+    
+    // 1 Hz (1s) general-purpose clock
+    wire clk_1s;
+    clk_div clk_1s_div(clk_1s, clk_1ms, 32'd1_000);
+    
     // 200 Hz for Display 50 Hz (4 digits)
     wire clk_disp;
     clk_div clk_disp_div(clk_disp, clk, 32'd500_000);
@@ -77,7 +79,7 @@ module top_vpong #(
         .num0(digits[0])
     );
     
-    // VGA Display
+    // VGA Display ////////////////////////////////////////////
     reg [VGA_COLOR_DEPTH - 1:0] vga_r;
     reg [VGA_COLOR_DEPTH - 1:0] vga_g;
     reg [VGA_COLOR_DEPTH - 1:0] vga_b;
@@ -93,11 +95,8 @@ module top_vpong #(
     wire [9:0] vga_pos_x;
     wire [9:0] vga_pos_y;
     
-    // VGA Synchronizer
-    vga_sync #(
-        .RES_WIDTH(VGA_RES_WIDTH),
-        .RES_HEIGHT(VGA_RES_HEIGHT)
-    ) main_vga_sync(
+    // VGA Synchronizer ///////////////////////////////////////
+    vga_sync main_vga_sync(
         .hsync(Hsync),
         .vsync(Vsync),
         .video_on(vga_on),
@@ -108,15 +107,15 @@ module top_vpong #(
         .reset(vga_rst)
     );
     
+    // Video Memory (VRAM) ////////////////////////////////////
     // Current pixel position mapped to VRAM address
     wire [VGA_VRAM_ADDR_BITS - 1:0] vram_ra;
     wire [VGA_VRAM_ADDR_BITS - 1:0] vram_wa;
     reg vram_we;
     
     wire [GPU_COLOR_BITS - 1:0] vram_data_out;
-    reg [GPU_COLOR_BITS - 1:0] vram_data_in;
+    wire [GPU_COLOR_BITS - 1:0] vram_data_in;
     
-    // Video Memory (VRAM)
     ram_block #(
         .RAM_WIDTH(GPU_COLOR_BITS),
         .RAM_ADDR_BITS(VGA_VRAM_ADDR_BITS)
@@ -137,7 +136,7 @@ module top_vpong #(
     
     assign {vgaRed, vgaGreen, vgaBlue} = (vga_on) ? {vga_r, vga_g, vga_b} : 12'h000;
     
-    // Graphics Renderer
+    // Graphics Renderer //////////////////////////////////////
     wire [9:0] gpu_pos_x;
     wire [9:0] gpu_pos_y;
     wire gpu_rst = 0;
@@ -145,82 +144,67 @@ module top_vpong #(
     graphics_renderer #(
         .CANVAS_WIDTH(VGA_RES_WIDTH),
         .CANVAS_HEIGHT(VGA_RES_HEIGHT)
-    ) gpu_renderer(
+    ) graphics_renderer_inst(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
         .clk(clk),
         .reset(gpu_rst)
     );
     
-    // ASCII Text Generation
-    wire [(8 * GPU_COLOR_BITS) - 1:0] ascii_row_out;
-    wire [6:0] ascii_char;          // 7-bit ASCII character code
-    wire [3:0] char_row;            // 4-bit row of ASCII character
+    // Text Renderer //////////////////////////////////////////
+//    text_renderer #(
+//        .GPU_COLOR_BITS(GPU_COLOR_BITS)
+//    ) text_renderer_inst(
+//        .pixel_data(vram_data_in),
+//        .x(gpu_pos_x),
+//        .y(gpu_pos_y),
+//        .clk(clk),
+//        .en(1'b1),
+//        .render_flag(16'd0)
+//    );
     
-    ascii_text_generator #(
-        .GPU_COLOR_BITS(GPU_COLOR_BITS)
-    ) text_generator(
-        .row_out(ascii_row_out),
-        .ascii_char(ascii_char),
-        .char_row(char_row),
-        .fg(i_sw[2:0]),
-        .bg(i_sw[15:13]),
-        .clk(clk),
-        .en(1'b1)
-    );
+    // Game Objects Renderer //////////////////////////////////
+    wire [47:0] rom_ball_line_data;
+    wire [2:0] rom_ball_line [15:0];
+    wire [3:0] rom_ball_line_addr;
     
-    reg [ROM_MAX_CHAR_BITS - 1:0] rom_text_line_data;
-    reg [ROM_MAX_STR_ADDR - 1:0] rom_text_line_addr;
-    
-    rom_block_hex #(
-        .MEM_INIT_FILE("rom_prog_text.mem"),
-        .ROM_WIDTH(ROM_MAX_CHAR_BITS),
-        .ROM_ADDR_BITS(ROM_MAX_STR_ADDR)
+    rom_block #(
+        .MEM_INIT_FILE("rom_ball_texture.mem"),
+        .ROM_WIDTH(48),
+        .ROM_ADDR_BITS(4)
     ) rom_prog_text(
-        .data(rom_text_line_data),
-        .addr(rom_text_line_addr),
+        .data(rom_ball_line_data),
+        .addr(rom_ball_line_addr),
         .clk(clk),
         .en(1'b1)
     );
     
-    reg [9:0] text_start_x;
-    reg [9:0] text_start_y;
-    wire [9:0] offset_x = gpu_pos_x - text_start_x;
-    wire [9:0] offset_y = gpu_pos_y - text_start_y;
+    reg [GPU_COLOR_BITS - 1:0] vin;
+    assign vram_data_in = vin;
+    assign rom_ball_line_addr = gpu_pos_y % 16;
     
-    initial begin
-        text_start_x <= 100; // Example start position X
-        text_start_y <= 50;  // Example start position Y
-    end
-    
-    always @(posedge clk) begin
-        if ((offset_x >= 0 && offset_x < 8) &&
-            (offset_y >= 0 && offset_y < 16)) begin
+    genvar i;
+    generate
+        for (i = 0; i < 16; i = i + 1) begin
+            assign rom_ball_line[i] = rom_ball_line_data[(i + 1) * 3 - 1: i * 3];
+        end
+    endgenerate
 
-            vram_data_in <= {ascii_row_out[16 + offset_x],   // Red
-                             ascii_row_out[8 + offset_x],    // Green
-                             ascii_row_out[offset_x]};       // Blue
+    always @(posedge clk) begin
+        if (gpu_pos_x < 16 && gpu_pos_y < 16) begin
+            vin <= rom_ball_line[gpu_pos_x % 16];
         end else begin
-            vram_data_in <= 3'b111;
+            vin <= 3'b011;
         end
     end
     
-    // Canvas renderer
-//    wire [9:0] checker_x = gpu_pos_x / 40;
-//    wire [9:0] checker_y = gpu_pos_y / 40;
-//    wire [10:0] sum_checker = checker_x + checker_y;
-
-//    always @(posedge clk) begin
-//        vram_data_in <= {GPU_COLOR_BITS{sum_checker % 2 == 0}};
-//    end
-    
-    // VRAM Read/Write Address
+    // VRAM Read/Write Address ////////////////////////////////
     // Read: Direct VRAM to VGA
     // Write: Direct GPU to VRAM
     assign vram_ra = (vga_pos_y * VGA_RES_WIDTH) + vga_pos_x;
     assign vram_wa = (gpu_pos_y * VGA_RES_WIDTH) + gpu_pos_x;
     
-    // UART Controller
+    // UART Controller ////////////////////////////////////////
     wire baud;
     wire received, sent;
     wire [7:0] uart_data_rx;
@@ -275,9 +259,8 @@ module top_vpong #(
         received_old <= received;
     end
     
-    assign {digits[1], digits[0]} = uart_data_rx;
-    assign {digits[3], digits[2]} = uart_data_tx;
+    // Post-Assignment ////////////////////////////////////////
     
-    assign ascii_char = uart_data_rx[6:0];
-    assign char_row = gpu_pos_y[3:0];
+    assign {digits[1], digits[0]} = uart_data_rx;
+//    assign {digits[3], digits[2]} = uart_data_tx;
 endmodule

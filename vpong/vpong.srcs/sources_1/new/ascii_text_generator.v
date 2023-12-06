@@ -22,6 +22,7 @@ module ascii_text_generator #(
         .en(en)
     );
     
+    // Reverse bit order
     genvar i, j;
     generate
         for (i = 0; i < GPU_COLOR_BITS; i = i + 1) begin
