@@ -3,12 +3,12 @@
 # SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Wed Dec  6 02:43:28 2023
-# Process ID: 40292
+# Start of session at: Wed Dec  6 17:30:49 2023
+# Process ID: 11340
 # Current directory: C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1
-# Command line: vivado.exe -log keyboard_tester.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source keyboard_tester.tcl
-# Log file: C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1/keyboard_tester.vds
+# Command line: vivado.exe -log top_vpong.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_vpong.tcl
+# Log file: C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1/top_vpong.vds
 # Journal file: C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1\vivado.jou
 # Running On: vt_g14, OS: Windows, CPU Frequency: 3993 MHz, CPU Physical cores: 16, Host memory: 33515 MB
 #-----------------------------------------------------------
-source keyboard_tester.tcl -notrace
+source top_vpong.tcl -notrace
