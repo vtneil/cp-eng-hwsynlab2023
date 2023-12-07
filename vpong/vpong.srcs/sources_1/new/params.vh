@@ -19,3 +19,20 @@ localparam GP_PADDLE        = 3;
 localparam GP_BALL          = 4;
 localparam GP_TEXT_FG       = 5;
 localparam GP_FOREGROUND    = 6;
+
+// Global State and Game State ////////////////////////////////
+localparam GLOB_STATE_MENU  = 2'd0;
+localparam GLOB_STATE_RULE  = 2'd1;
+localparam GLOB_STATE_GAME  = 2'd2;
+localparam GLOB_STATE_OVER  = 2'd3;
+
+localparam GAME_STATE_NEW   = 2'd0;
+localparam GAME_STATE_PLAY  = 2'd1;
+localparam GAME_STATE_BALL  = 2'd2;
+localparam GAME_STATE_OVER  = 2'd3;
+
+// Game Constants /////////////////////////////////////////////
+localparam BALL_DIR_LEFT    = 1'b1;
+localparam BALL_DIR_RIGHT   = 1'b0;
+localparam BALL_DIR_UP      = 1'b1;
+localparam BALL_DIR_DOWN    = 1'b0;

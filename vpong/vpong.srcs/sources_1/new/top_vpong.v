@@ -30,6 +30,8 @@ module top_vpong #(
     `include "params.vh"
     
     // Graphics Local Parameters //////////////////////////////
+    localparam VGA_MID_X            = VGA_RES_WIDTH / 2;
+    localparam VGA_MID_Y            = VGA_RES_HEIGHT / 2;
     localparam VGA_PIXEL_COUNT      = VGA_RES_WIDTH * VGA_RES_HEIGHT;
     localparam VGA_VRAM_ADDR_BITS   = $clog2(VGA_PIXEL_COUNT);
     localparam GPU_COLOR_BITS       = GPU_COLOR_DEPTH * 3;
@@ -150,7 +152,6 @@ module top_vpong #(
     // Graphics Renderer //////////////////////////////////////
     wire [9:0] gpu_pos_x;
     wire [9:0] gpu_pos_y;
-    wire gpu_rst = 0;
     
     graphics_renderer #(
         .CANVAS_WIDTH(VGA_RES_WIDTH),
@@ -159,7 +160,7 @@ module top_vpong #(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
         .clk(clk),
-        .reset(gpu_rst)
+        .reset(reset)
     );
     
     // GPU-VRAM-VGA Read/Write Address ////////////////////////
@@ -170,8 +171,8 @@ module top_vpong #(
     
     // Graphics Layer using Priority MUX //////////////////////
     wire [(GRAPHICS_LAYERS * GPU_COLOR_BITS) - 1:0] gp_data_flatten;
-    wire [GPU_COLOR_BITS - 1:0] gp_data[GRAPHICS_LAYERS - 1:0];
-    wire [GRAPHICS_LAYERS - 1:0] gp_layer;
+    wor [GPU_COLOR_BITS - 1:0] gp_data[GRAPHICS_LAYERS - 1:0];
+    wor [GRAPHICS_LAYERS - 1:0] gp_layer;
     
     assign vram_we = |gp_layer;
     
@@ -194,7 +195,6 @@ module top_vpong #(
     // Text Renderer //////////////////////////////////////////
     text_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .VOID_COLOR(COLOR3CYAN),
         .CHAR_BASE_WIDTH(8),
         .CHAR_BASE_HEIGHT(16),
         .MAX_STRLEN(16),
@@ -208,8 +208,8 @@ module top_vpong #(
         .start_x(10'd0),
         .start_y(10'd0),
         .scale(3'd1),
-        .fg_color(COLOR3BLUE),
-        .bg_color(COLOR3CYAN),
+        .fg_color(COLOR3YELLOW),
+        .bg_color(COLOR3BLACK),
         .transparent_bg(1'b0),
         .line_addr('d9),
         .clk(clk),
@@ -219,7 +219,23 @@ module top_vpong #(
     // Game Objects Renderer //////////////////////////////////
     bitmap_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .VOID_COLOR(COLOR3CYAN),
+        .IMAGE_WIDTH(160),
+        .IMAGE_HEIGHT(160),
+        .IMAGE_ROM_FILE("rom_pikachu.mem")
+    ) pikachu_renderer_inst(
+        .pixel_data(gp_data[GP_FOREGROUND]),
+        .pixel_on(gp_layer[GP_FOREGROUND]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(32),
+        .start_y(32),
+        .scale(3'd1),
+        .clk(clk),
+        .en(1'b1)
+    );
+    
+    bitmap_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
         .IMAGE_WIDTH(16),
         .IMAGE_HEIGHT(16),
         .IMAGE_ROM_FILE("rom_ball_texture.mem")
@@ -228,25 +244,57 @@ module top_vpong #(
         .pixel_on(gp_layer[GP_BALL]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(10'd64),
-        .start_y(10'd64),
-        .scale(3'd4),
+        .start_x(VGA_MID_X - (16 / 2)),
+        .start_y(VGA_MID_Y - (16 / 2)),
+        .scale(3'd1),
         .clk(clk),
         .en(1'b1)
     );
     
     rectangle_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .RECT_WIDTH(200),
-        .RECT_HEIGHT(80)
+        .RECT_WIDTH(8),
+        .RECT_HEIGHT(72)
     ) paddle1_renderer_inst(
         .pixel_data(gp_data[GP_PADDLE]),
         .pixel_on(gp_layer[GP_PADDLE]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(10'd40),
-        .start_y(10'd40),
+        .start_x(16),
+        .start_y(VGA_MID_Y - (72 / 2)),
         .color(COLOR3WHITE),
+        .clk(clk),
+        .en(1'b1)
+    );
+    
+    rectangle_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .RECT_WIDTH(8),
+        .RECT_HEIGHT(72)
+    ) paddle2_renderer_inst(
+        .pixel_data(gp_data[GP_PADDLE]),
+        .pixel_on(gp_layer[GP_PADDLE]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(VGA_RES_WIDTH - (16 + 8)),
+        .start_y(VGA_MID_Y - (72 / 2)),
+        .color(COLOR3WHITE),
+        .clk(clk),
+        .en(1'b1)
+    );
+    
+    rectangle_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .RECT_WIDTH(VGA_RES_WIDTH),
+        .RECT_HEIGHT(VGA_RES_HEIGHT)
+    ) background_renderer_inst(
+        .pixel_data(gp_data[GP_BACKGROUND]),
+        .pixel_on(gp_layer[GP_BACKGROUND]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(10'd0),
+        .start_y(10'd0),
+        .color(COLOR3CYAN),
         .clk(clk),
         .en(1'b1)
     );
@@ -310,4 +358,11 @@ module top_vpong #(
     
     assign {digits[1], digits[0]} = uart_data_rx;
 //    assign {digits[3], digits[2]} = uart_data_tx;
+    
+    game_logic game_logic_inst(
+    );
+    
+    counter_d99 counter_d99_inst(
+    );
+    
 endmodule

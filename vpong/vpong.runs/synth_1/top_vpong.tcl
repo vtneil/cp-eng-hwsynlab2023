@@ -71,6 +71,7 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param chipscope.maxJobs 4
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tcpg236-1
 
@@ -91,6 +92,7 @@ read_verilog C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.s
 read_mem {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_prog_text.mem
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_ball_texture.mem
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_pikachu.mem
 }
 read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/verilog_modules/button.v
@@ -114,6 +116,9 @@ read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/pixel_overlay.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/bitmap_renderer.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rectangle_renderer.v
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/game_logic.v
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/counter_d99.v
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/counter_d9.v
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -133,7 +138,7 @@ read_checkpoint -auto_incremental -incremental C:/Users/vivat/Desktop/git_target
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top top_vpong -part xc7a35tcpg236-1
+synth_design -top top_vpong -part xc7a35tcpg236-1 -directive AlternateRoutability -no_lc -shreg_min_size 10
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"

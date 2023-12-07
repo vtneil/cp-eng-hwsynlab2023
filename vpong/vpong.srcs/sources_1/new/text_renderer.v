@@ -2,7 +2,6 @@
 
 module text_renderer #(
     parameter GPU_COLOR_BITS    = 3,
-    parameter VOID_COLOR        = 3'b011,
     parameter CHAR_BASE_WIDTH   = 8,
     parameter CHAR_BASE_HEIGHT  = 16,
     parameter MAX_STRLEN        = 16,

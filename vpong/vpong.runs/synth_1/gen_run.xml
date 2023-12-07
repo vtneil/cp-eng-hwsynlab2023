@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1701951885" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/keyboard_tester.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1701960352" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/keyboard_tester.dcp">
   <File Type="PA-TCL" Name="top_vpong.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="top_vpong_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="top_vpong_reports.tcl"/>
@@ -177,6 +177,33 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
+    <File Path="$PSRCDIR/sources_1/new/game_logic.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/counter_d99.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/counter_d9.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/rom_pikachu.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
       <Option Name="TopModule" Val="top_vpong"/>
@@ -211,7 +238,11 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2023"/>
-    <Step Id="synth_design"/>
+    <StratHandle Name="Flow_AlternateRoutability" Flow="Vivado Synthesis 2023"/>
+    <Step Id="synth_design">
+      <Option Id="Directive">3</Option>
+      <Option Id="NoCombineLuts">1</Option>
+      <Option Id="ShregMinSize">10</Option>
+    </Step>
   </Strategy>
 </GenRun>

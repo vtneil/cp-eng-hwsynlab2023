@@ -2,7 +2,6 @@
 
 module bitmap_renderer #(
     parameter GPU_COLOR_BITS    = 3,
-    parameter VOID_COLOR        = 3'b011,
     parameter IMAGE_WIDTH       = 16,
     parameter IMAGE_HEIGHT      = 16,
     parameter IMAGE_ROM_FILE    = "rom_ball_texture.mem"
@@ -32,7 +31,7 @@ module bitmap_renderer #(
     genvar i;
     generate
         for (i = 0; i < IMAGE_WIDTH; i = i + 1) begin
-            assign rom_image_line[i] = rom_image_line_data[i * GPU_COLOR_BITS_ALPHA +: GPU_COLOR_BITS_ALPHA];
+            assign rom_image_line[IMAGE_WIDTH - i - 1] = rom_image_line_data[i * GPU_COLOR_BITS_ALPHA +: GPU_COLOR_BITS_ALPHA];
         end
     endgenerate
     
