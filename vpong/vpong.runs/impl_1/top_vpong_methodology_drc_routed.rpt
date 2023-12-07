@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Thu Dec  7 16:12:05 2023
+| Date         : Thu Dec  7 19:26:23 2023
 | Host         : vt_g14 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_vpong_methodology_drc_routed.rpt -pb top_vpong_methodology_drc_routed.pb -rpx top_vpong_methodology_drc_routed.rpx
 | Design       : top_vpong
@@ -23,12 +23,13 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max violations: <unlimited>
-             Violations found: 152
+             Violations found: 177
 +-----------+------------------+-------------------------------+------------+
 | Rule      | Severity         | Description                   | Violations |
 +-----------+------------------+-------------------------------+------------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 85         |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 101        |
 | DPIR-1    | Warning          | Asynchronous driver check     | 20         |
+| TIMING-16 | Warning          | Large setup violation         | 9          |
 | TIMING-18 | Warning          | Missing input or output delay | 47         |
 +-----------+------------------+-------------------------------+------------+
 
@@ -51,42 +52,42 @@ Related violations: <none>
 
 TIMING-17#4 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_0_0_cooolgate_en_gate_65_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_0_0_cooolgate_en_gate_49_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#5 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_10_0_cooolgate_en_gate_70_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_10_0_cooolgate_en_gate_56_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#6 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_12_0_cooolgate_en_gate_75_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_12_0_cooolgate_en_gate_63_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#7 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_14_0_cooolgate_en_gate_80_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_14_0_cooolgate_en_gate_70_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#8 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_2_0_cooolgate_en_gate_85_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_2_0_cooolgate_en_gate_77_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#9 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_4_0_cooolgate_en_gate_90_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_4_0_cooolgate_en_gate_84_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#10 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_6_0_cooolgate_en_gate_95_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_6_0_cooolgate_en_gate_91_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#11 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_8_0_cooolgate_en_gate_100_cooolDelFlop/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/main_vga_vram_buffer/memory_block_reg_8_0_cooolgate_en_gate_98_cooolDelFlop/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#12 Critical Warning
@@ -96,365 +97,445 @@ Related violations: <none>
 
 TIMING-17#13 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_0_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_0_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#14 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_10_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_0_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#15 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_10_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_10_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#16 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_11_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_10_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#17 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_11_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_10_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#18 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_12_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_11_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#19 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_12_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_11_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#20 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_13_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_11_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#21 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_13_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_12_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#22 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_14_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_12_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#23 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_14_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_12_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#24 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_15_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_13_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#25 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_15_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_13_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#26 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_1_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_13_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#27 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_1_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_14_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#28 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_2_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_14_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#29 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_2_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_14_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#30 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_3_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_15_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#31 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_3_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_15_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#32 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_4_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_15_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#33 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_4_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_1_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#34 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_5_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_1_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#35 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_5_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_1_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#36 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_6_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_2_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#37 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_6_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_2_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#38 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_7_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_2_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#39 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_7_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_3_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#40 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_8_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_3_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#41 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_8_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_3_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#42 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_9_0/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_4_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#43 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_9_2/CLKBWRCLK is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_4_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#44 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_0__1/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_4_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#45 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_1__1/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_5_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#46 Critical Warning
 Non-clocked sequential cell  
-The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_2__1/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_5_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#47 Critical Warning
 Non-clocked sequential cell  
-The clock pin received_old_reg/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_5_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#48 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[0]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_6_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#49 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[1]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_6_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#50 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[2]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_6_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#51 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[3]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_7_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#52 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[4]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_7_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#53 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[5]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_7_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#54 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[6]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_8_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#55 Critical Warning
 Non-clocked sequential cell  
-The clock pin uart_data_tx_reg[7]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_8_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#56 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[0]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_8_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#57 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[1]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_9_0/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#58 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[2]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_9_1/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#59 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[3]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_9_2/CLKBWRCLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#60 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[4]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_0__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#61 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[5]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_1__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#62 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[6]/C is not reached by a timing clock
+The clock pin main_vga_vram_buffer/memory_block_reg_mux_sel_b_pos_2__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#63 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/count_reg[7]/C is not reached by a timing clock
+The clock pin received_old_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#64 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[0]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#65 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[1]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#66 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[2]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#67 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[3]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#68 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[4]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#69 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[5]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#70 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[6]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#71 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/dout_reg[7]/C is not reached by a timing clock
+The clock pin uart_data_tx_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#72 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/is_received_reg/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#73 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/is_receiving_reg/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#74 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_rx/last_reg/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#75 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[0]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#76 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[1]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#77 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[2]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#78 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[3]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#79 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[4]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/count_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#80 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[5]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/dout_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#81 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[6]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/dout_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#82 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/count_reg[7]/C is not reached by a timing clock
+The clock pin usb_rs232_rx/dout_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#83 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/dout_reg/C is not reached by a timing clock
+The clock pin usb_rs232_rx/dout_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#84 Critical Warning
 Non-clocked sequential cell  
-The clock pin usb_rs232_tx/is_sending_reg/C is not reached by a timing clock
+The clock pin usb_rs232_rx/dout_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#85 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/dout_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#86 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/dout_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#87 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/dout_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#88 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/is_received_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#89 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/is_receiving_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#90 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_rx/last_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#91 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[0]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#92 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[1]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#93 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[2]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#94 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[3]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#95 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[4]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#96 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[5]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#97 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[6]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#98 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/count_reg[7]/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#99 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/dout_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#100 Critical Warning
+Non-clocked sequential cell  
+The clock pin usb_rs232_tx/is_sending_reg/C is not reached by a timing clock
+Related violations: <none>
+
+TIMING-17#101 Critical Warning
 Non-clocked sequential cell  
 The clock pin usb_rs232_tx/last_reg/C is not reached by a timing clock
 Related violations: <none>
@@ -557,6 +638,51 @@ Related violations: <none>
 DPIR-1#20 Warning
 Asynchronous driver check  
 DSP vram_ra input pin vram_ra/C[9] is connected to registers with an asynchronous reset. This is preventing the possibility of merging these registers in to the DSP Block since the DSP block registers only possess synchronous reset capability.  It is suggested to recode or change these registers to remove the reset or use a synchronous reset to get the best optimization for performance, power and area.
+Related violations: <none>
+
+TIMING-16#1 Warning
+Large setup violation  
+There is a large setup violation of -2.525 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/pixel_on_reg/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#2 Warning
+Large setup violation  
+There is a large setup violation of -2.529 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/pixel_data_reg[1]/D (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#3 Warning
+Large setup violation  
+There is a large setup violation of -5.189 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[10] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#4 Warning
+Large setup violation  
+There is a large setup violation of -5.199 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[8] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#5 Warning
+Large setup violation  
+There is a large setup violation of -5.206 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[9] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#6 Warning
+Large setup violation  
+There is a large setup violation of -5.330 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[11] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#7 Warning
+Large setup violation  
+There is a large setup violation of -5.333 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[13] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#8 Warning
+Large setup violation  
+There is a large setup violation of -5.338 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[7] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#9 Warning
+Large setup violation  
+There is a large setup violation of -5.343 ns between graphics_renderer_inst/gpu_px_reg[1]_replica/C (clocked by sys_clk_pin) and text_renderer_inst/text_generator/ascii_rom_inst/addr_reg_reg/ADDRARDADDR[12] (clocked by sys_clk_pin). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning

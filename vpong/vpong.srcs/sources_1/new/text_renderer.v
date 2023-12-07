@@ -10,12 +10,12 @@ module text_renderer #(
     parameter TEXT_ROM_FILE     = "rom_prog_text.mem"
 ) (
     output reg [GPU_COLOR_BITS - 1:0] pixel_data,
+    output reg pixel_on,
     input wire [9:0] x,
     input wire [9:0] y,
-    input wire [9:0] text_start_x,
-    input wire [9:0] text_start_y,
-    input wire [2:0] text_scale,
-    input wire [15:0] render_flag,
+    input wire [9:0] start_x,
+    input wire [9:0] start_y,
+    input wire [2:0] scale,
     input wire [GPU_COLOR_BITS - 1:0] fg_color,
     input wire [GPU_COLOR_BITS - 1:0] bg_color,
     input wire transparent_bg,
@@ -59,7 +59,7 @@ module text_renderer #(
     genvar i;
     generate
         for (i = 0; i < ROM_MAX_CHAR; i = i + 1) begin
-            assign rom_text_line[i] = rom_text_line_data[7 + (8 * i):0 + (8 * i)];
+            assign rom_text_line[i] = rom_text_line_data[8 * i +: 8];
         end
     endgenerate
     
@@ -74,15 +74,15 @@ module text_renderer #(
         .en(en)
     );
     
-    wire [9:0] offset_x = x - text_start_x;
-    wire [9:0] offset_y = y - text_start_y;
-    wire valid_start_x = x >= text_start_x;
-    wire valid_start_y = y >= text_start_y;
+    wire [9:0] offset_x = x - start_x;
+    wire [9:0] offset_y = y - start_y;
+    wire valid_start_x = x >= start_x;
+    wire valid_start_y = y >= start_y;
     
-    wire [9:0] char_width_scaled = CHAR_BASE_WIDTH * text_scale;
-    wire [9:0] char_height_scaled = CHAR_BASE_HEIGHT * text_scale;
-    wire [9:0] offset_x_scaled = offset_x / text_scale;
-    wire [9:0] offset_y_scaled = offset_y / text_scale;
+    wire [9:0] char_width_scaled = CHAR_BASE_WIDTH * scale;
+    wire [9:0] char_height_scaled = CHAR_BASE_HEIGHT * scale;
+    wire [9:0] offset_x_scaled = offset_x / scale;
+    wire [9:0] offset_y_scaled = offset_y / scale;
     
     assign rom_text_char_index = ROM_MAX_CHAR - (offset_x / char_width_scaled) - 1;
     assign ascii_char = rom_text_line[rom_text_char_index][6:0];
@@ -101,9 +101,12 @@ module text_renderer #(
             (ascii_char != 0) && (pixel_a)) begin
             
             pixel_data <= pixel_rgb;
+            pixel_on <= 1'b1;
             
         end else begin
-            pixel_data <= VOID_COLOR;
+        
+            pixel_on <= 1'b0;
+            
         end
     end
 

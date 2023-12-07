@@ -124,3 +124,19 @@ module baudrate_generator #(
     assign counter_inc = counter + 1;
     
 endmodule
+
+// Prototype
+module uart_core #(
+    parameter BASE_CLOCK = 100_000_000,
+    parameter BAUDRATE = 9_600
+) (
+    output wire [7:0] rx_data,
+    output wire has_new_data,
+    output wire tx_wire,
+    input wire rx_wire,
+    input wire [7:0] tx_data,
+    input wire tx_enable,
+    input wire clk
+);
+
+endmodule

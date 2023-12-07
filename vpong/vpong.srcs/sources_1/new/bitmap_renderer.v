@@ -8,11 +8,12 @@ module bitmap_renderer #(
     parameter IMAGE_ROM_FILE    = "rom_ball_texture.mem"
 ) (
     output reg [GPU_COLOR_BITS - 1:0] pixel_data,
+    output reg pixel_on,
     input wire [9:0] x,
     input wire [9:0] y,
-    input wire [9:0] image_start_x,
-    input wire [9:0] image_start_y,
-    input wire [2:0] image_scale,
+    input wire [9:0] start_x,
+    input wire [9:0] start_y,
+    input wire [2:0] scale,
     input wire clk,
     input wire en
 );
@@ -31,7 +32,7 @@ module bitmap_renderer #(
     genvar i;
     generate
         for (i = 0; i < IMAGE_WIDTH; i = i + 1) begin
-            assign rom_image_line[i] = rom_image_line_data[(i + 1) * GPU_COLOR_BITS_ALPHA - 1: i * GPU_COLOR_BITS_ALPHA];
+            assign rom_image_line[i] = rom_image_line_data[i * GPU_COLOR_BITS_ALPHA +: GPU_COLOR_BITS_ALPHA];
         end
     endgenerate
     
@@ -46,15 +47,15 @@ module bitmap_renderer #(
         .en(en)
     );
     
-    wire [9:0] offset_x = x - image_start_x;
-    wire [9:0] offset_y = y - image_start_y;
-    wire valid_start_x = x >= image_start_x;
-    wire valid_start_y = y >= image_start_y;
+    wire [9:0] offset_x = x - start_x;
+    wire [9:0] offset_y = y - start_y;
+    wire valid_start_x = x >= start_x;
+    wire valid_start_y = y >= start_y;
     
-    wire [9:0] image_width_scaled = IMAGE_WIDTH * image_scale;
-    wire [9:0] image_height_scaled = IMAGE_HEIGHT * image_scale;
-    wire [9:0] offset_x_scaled = offset_x / image_scale;
-    wire [9:0] offset_y_scaled = offset_y / image_scale;
+    wire [9:0] image_width_scaled = IMAGE_WIDTH * scale;
+    wire [9:0] image_height_scaled = IMAGE_HEIGHT * scale;
+    wire [9:0] offset_x_scaled = offset_x / scale;
+    wire [9:0] offset_y_scaled = offset_y / scale;
     
     assign rom_image_line_addr = offset_y_scaled % IMAGE_HEIGHT;
     
@@ -69,9 +70,12 @@ module bitmap_renderer #(
             (pixel_a)) begin
             
             pixel_data <= pixel_rgb;
+            pixel_on <= 1'b1;
             
         end else begin
-            pixel_data <= VOID_COLOR;
+        
+            pixel_on <= 1'b0;
+            
         end
     end
 

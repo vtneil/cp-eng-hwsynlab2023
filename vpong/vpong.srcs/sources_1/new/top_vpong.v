@@ -29,12 +29,17 @@ module top_vpong #(
     
     `include "params.vh"
     
-    // Graphics Local Parameters
-    localparam VGA_PIXEL_COUNT = VGA_RES_WIDTH * VGA_RES_HEIGHT;
-    localparam VGA_VRAM_ADDR_BITS = $clog2(VGA_PIXEL_COUNT);
-    localparam GPU_COLOR_BITS = GPU_COLOR_DEPTH * 3;
+    // Graphics Local Parameters //////////////////////////////
+    localparam VGA_PIXEL_COUNT      = VGA_RES_WIDTH * VGA_RES_HEIGHT;
+    localparam VGA_VRAM_ADDR_BITS   = $clog2(VGA_PIXEL_COUNT);
+    localparam GPU_COLOR_BITS       = GPU_COLOR_DEPTH * 3;
+    localparam GRAPHICS_LAYERS      = 8;  // 8 layers rendering
     
-    // Clocks and Dividers
+    // Clocks and Dividers ////////////////////////////////////
+    // 50 MHz clock
+    wire clk_50mhz;
+    clk_div clk_50mhz_div(clk_50mhz, clk, 32'd2);
+    
     // 1000 Hz (1ms) general-purpose clock
     wire clk_1ms;
     clk_div clk_1ms_div(clk_1ms, clk, 32'd100_000);
@@ -47,10 +52,13 @@ module top_vpong #(
     wire clk_disp;
     clk_div clk_disp_div(clk_disp, clk, 32'd500_000);
     
-    // Input Buttons and Switches
-    wire vga_rst;
-    switch_button btn_vga_rst(
-        .q(vga_rst),
+    wire clk_render;
+    assign clk_render = clk_50mhz;
+    
+    // Input Buttons and Switches /////////////////////////////
+    wire reset;
+    switch_button btn_reset(
+        .q(reset),
         .d(btnC),
         .clk(clk)
     );
@@ -64,10 +72,10 @@ module top_vpong #(
         .clk(clk)
     );
     
-    // LEDs
+    // LEDs ///////////////////////////////////////////////////
     assign led = i_sw;
     
-    // Quad 7-Segment Display
+    // Quad 7-Segment Display /////////////////////////////////
     wire [3:0] digits [3:0];
     wire [15:0] all_digits = {digits[3], digits[2], digits[1], digits[0]};
     quad_7_seg main_display(
@@ -107,14 +115,13 @@ module top_vpong #(
         .x(vga_pos_x),
         .y(vga_pos_y),
         .clk(clk),
-        .reset(vga_rst)
+        .reset(reset)
     );
     
     // Video Memory (VRAM) ////////////////////////////////////
-    // Current pixel position mapped to VRAM address
     wire [VGA_VRAM_ADDR_BITS - 1:0] vram_ra;
     wire [VGA_VRAM_ADDR_BITS - 1:0] vram_wa;
-    reg vram_we;
+    wire vram_we;
     
     wire [GPU_COLOR_BITS - 1:0] vram_data_out;
     wire [GPU_COLOR_BITS - 1:0] vram_data_in;
@@ -128,9 +135,10 @@ module top_vpong #(
         .wa(vram_wa),
         .ra(vram_ra),
         .clk(clk),
-        .we(1'b1 | vram_we)
+        .we(vram_we)
     );
     
+    // VRAM-VGA Pixel Mapping /////////////////////////////////
     always @(posedge vga_tick) begin
         vga_r <= (vram_data_out[2]) ? 4'hF : 4'h0;
         vga_g <= (vram_data_out[1]) ? 4'hF : 4'h0;
@@ -154,30 +162,59 @@ module top_vpong #(
         .reset(gpu_rst)
     );
     
+    // GPU-VRAM-VGA Read/Write Address ////////////////////////
+    // Read: Direct VRAM to VGA
+    // Write: Direct GPU to VRAM
+    assign vram_ra = (vga_pos_y * VGA_RES_WIDTH) + vga_pos_x;
+    assign vram_wa = (gpu_pos_y * VGA_RES_WIDTH) + gpu_pos_x;
+    
+    // Graphics Layer using Priority MUX //////////////////////
+    wire [(GRAPHICS_LAYERS * GPU_COLOR_BITS) - 1:0] gp_data_flatten;
+    wire [GPU_COLOR_BITS - 1:0] gp_data[GRAPHICS_LAYERS - 1:0];
+    wire [GRAPHICS_LAYERS - 1:0] gp_layer;
+    
+    assign vram_we = |gp_layer;
+    
+    pixel_overlay #(
+        .LAYERS(GRAPHICS_LAYERS),
+        .DATA_WIDTH(GPU_COLOR_BITS)
+    ) overlay_inst(
+        .out_data(vram_data_in),
+        .data(gp_data_flatten),
+        .select(gp_layer)
+    );
+    
+    genvar i;
+    generate
+        for (i = 0; i < GRAPHICS_LAYERS; i = i + 1) begin
+            assign gp_data_flatten[GPU_COLOR_BITS * i +: GPU_COLOR_BITS] = gp_data[i];
+        end
+    endgenerate
+    
     // Text Renderer //////////////////////////////////////////
-//    text_renderer #(
-//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-//        .VOID_COLOR(COLOR3CYAN),
-//        .CHAR_BASE_WIDTH(8),
-//        .CHAR_BASE_HEIGHT(16),
-//        .MAX_STRLEN(16),
-//        .MAX_NUM_STR(16),
-//        .TEXT_ROM_FILE("rom_prog_text.mem")
-//    ) text_renderer_inst(
-//        .pixel_data(vram_data_in),
-//        .x(gpu_pos_x),
-//        .y(gpu_pos_y),
-//        .text_start_x(),
-//        .text_start_y(),
-//        .text_scale(),
-//        .render_flag(16'd0),
-//        .fg_color(),
-//        .bg_color(),
-//        .transparent_bg(1'b1),
-//        .line_addr(),
-//        .clk(clk),
-//        .en(1'b1)
-//    );
+    text_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .VOID_COLOR(COLOR3CYAN),
+        .CHAR_BASE_WIDTH(8),
+        .CHAR_BASE_HEIGHT(16),
+        .MAX_STRLEN(16),
+        .MAX_NUM_STR(16),
+        .TEXT_ROM_FILE("rom_prog_text.mem")
+    ) text_renderer_inst(
+        .pixel_data(gp_data[GP_TEXT_FG]),
+        .pixel_on(gp_layer[GP_TEXT_FG]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(10'd0),
+        .start_y(10'd0),
+        .scale(3'd1),
+        .fg_color(COLOR3BLUE),
+        .bg_color(COLOR3CYAN),
+        .transparent_bg(1'b0),
+        .line_addr('d9),
+        .clk(clk),
+        .en(1'b1)
+    );
     
     // Game Objects Renderer //////////////////////////////////
     bitmap_renderer #(
@@ -187,21 +224,32 @@ module top_vpong #(
         .IMAGE_HEIGHT(16),
         .IMAGE_ROM_FILE("rom_ball_texture.mem")
     ) ball_renderer_inst(
-        .pixel_data(vram_data_in),
+        .pixel_data(gp_data[GP_BALL]),
+        .pixel_on(gp_layer[GP_BALL]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .image_start_x(10'd0),
-        .image_start_y(10'd0),
-        .image_scale(3'd1),
+        .start_x(10'd64),
+        .start_y(10'd64),
+        .scale(3'd4),
         .clk(clk),
         .en(1'b1)
     );
     
-    // VRAM Read/Write Address ////////////////////////////////
-    // Read: Direct VRAM to VGA
-    // Write: Direct GPU to VRAM
-    assign vram_ra = (vga_pos_y * VGA_RES_WIDTH) + vga_pos_x;
-    assign vram_wa = (gpu_pos_y * VGA_RES_WIDTH) + gpu_pos_x;
+    rectangle_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .RECT_WIDTH(200),
+        .RECT_HEIGHT(80)
+    ) paddle1_renderer_inst(
+        .pixel_data(gp_data[GP_PADDLE]),
+        .pixel_on(gp_layer[GP_PADDLE]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(10'd40),
+        .start_y(10'd40),
+        .color(COLOR3WHITE),
+        .clk(clk),
+        .en(1'b1)
+    );
     
     // UART Controller ////////////////////////////////////////
     wire baud;
@@ -250,7 +298,7 @@ module top_vpong #(
             // If received, do something.
             uart_data_tx <= uart_data_rx;
             
-            // Enable Tx to send somethinh.
+            // Enable Tx to send something.
             en_write_uart <= 1'b1;
         end
         

@@ -26,7 +26,7 @@ module ascii_text_generator #(
     genvar i, j;
     generate
         for (i = 0; i < GPU_COLOR_BITS; i = i + 1) begin
-            assign row_out_inv[(i + 1) * 8 - 1:i * 8] = {(row_out_raw & {8{fg[i]}}) | 
+            assign row_out_inv[i * 8 +: 8] = {(row_out_raw & {8{fg[i]}}) | 
                                                          (~row_out_raw & {8{bg[i]}})};
             for (j = 0; j < 8; j = j + 1) begin
                 assign row_out[(8 * i) + j] = row_out_inv[(8 * i) + (8 - j - 1)];
