@@ -32,7 +32,8 @@ module graphics_renderer #(
                 gpu_py <= gpu_py_next;
             end
         
-            if (gpu_py_next >= CANVAS_HEIGHT) begin
+            if (gpu_px_next >= CANVAS_WIDTH && 
+                gpu_py_next >= CANVAS_HEIGHT) begin
                 gpu_py <= 0;
             end
         end

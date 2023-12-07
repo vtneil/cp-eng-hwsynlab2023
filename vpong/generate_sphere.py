@@ -1,5 +1,5 @@
-FILL = '100'
-VOID = '000'
+FILL = '1100'
+VOID = '0000'
 
 diameter = int(input().strip())
 

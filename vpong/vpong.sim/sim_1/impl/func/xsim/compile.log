@@ -1,0 +1,35 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.sim/sim_1/impl/func/xsim/tb_graphics_renderer_func_impl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ascii_rom
+INFO: [VRFC 10-311] analyzing module ascii_text_generator
+INFO: [VRFC 10-311] analyzing module baudrate_generator
+INFO: [VRFC 10-311] analyzing module clk_div
+INFO: [VRFC 10-311] analyzing module debouncer
+INFO: [VRFC 10-311] analyzing module debouncer_0
+INFO: [VRFC 10-311] analyzing module debouncer_1
+INFO: [VRFC 10-311] analyzing module debouncer_10
+INFO: [VRFC 10-311] analyzing module debouncer_11
+INFO: [VRFC 10-311] analyzing module debouncer_12
+INFO: [VRFC 10-311] analyzing module debouncer_13
+INFO: [VRFC 10-311] analyzing module debouncer_14
+INFO: [VRFC 10-311] analyzing module debouncer_15
+INFO: [VRFC 10-311] analyzing module debouncer_2
+INFO: [VRFC 10-311] analyzing module debouncer_3
+INFO: [VRFC 10-311] analyzing module debouncer_4
+INFO: [VRFC 10-311] analyzing module debouncer_5
+INFO: [VRFC 10-311] analyzing module debouncer_6
+INFO: [VRFC 10-311] analyzing module debouncer_7
+INFO: [VRFC 10-311] analyzing module debouncer_8
+INFO: [VRFC 10-311] analyzing module debouncer_9
+INFO: [VRFC 10-311] analyzing module graphics_renderer
+INFO: [VRFC 10-311] analyzing module quad_7_seg
+INFO: [VRFC 10-311] analyzing module ram_block
+INFO: [VRFC 10-311] analyzing module switch_button
+INFO: [VRFC 10-311] analyzing module switch_button__parameterized0
+INFO: [VRFC 10-311] analyzing module text_renderer
+INFO: [VRFC 10-311] analyzing module top_vpong
+INFO: [VRFC 10-311] analyzing module uart_rx
+INFO: [VRFC 10-311] analyzing module uart_tx
+INFO: [VRFC 10-311] analyzing module vga_sync
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sim_1/new/tb_graphics_renderer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_graphics_renderer

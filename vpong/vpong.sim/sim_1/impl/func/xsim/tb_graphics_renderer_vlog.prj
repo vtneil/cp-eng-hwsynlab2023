@@ -1,0 +1,7 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../vpong.srcs/sources_1/new" \
+"tb_graphics_renderer_func_impl.v" \
+"../../../../../vpong.srcs/sim_1/new/tb_graphics_renderer.v" \
+
+# Do not sort compile order
+nosort

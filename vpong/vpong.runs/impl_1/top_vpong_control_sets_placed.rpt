@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Thu Dec  7 02:13:39 2023
+| Date         : Thu Dec  7 16:11:49 2023
 | Host         : vt_g14 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_vpong_control_sets_placed.rpt
 | Design       : top_vpong
@@ -23,8 +23,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    56 |
-|    Minimum number of control sets                        |    56 |
+| Total control sets                                       |    57 |
+|    Minimum number of control sets                        |    57 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
 | Unused register locations in slices containing registers |   287 |
@@ -39,12 +39,12 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    56 |
-| >= 0 to < 4        |    26 |
+| Total control sets |    57 |
+| >= 0 to < 4        |    27 |
 | >= 4 to < 6        |     1 |
-| >= 6 to < 8        |     1 |
-| >= 8 to < 10       |     3 |
-| >= 10 to < 12      |     5 |
+| >= 6 to < 8        |     2 |
+| >= 8 to < 10       |     4 |
+| >= 10 to < 12      |     3 |
 | >= 12 to < 14      |     0 |
 | >= 14 to < 16      |     0 |
 | >= 16              |    20 |
@@ -58,77 +58,78 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              80 |           52 |
-| No           | No                    | Yes                    |               4 |            2 |
-| No           | Yes                   | No                     |              74 |           19 |
-| Yes          | No                    | No                     |              33 |           28 |
+| No           | No                    | No                     |              85 |           50 |
+| No           | No                    | Yes                    |               4 |            3 |
+| No           | Yes                   | No                     |              70 |           19 |
+| Yes          | No                    | No                     |              41 |           31 |
 | Yes          | No                    | Yes                    |              20 |            7 |
-| Yes          | Yes                   | No                     |             366 |           94 |
+| Yes          | Yes                   | No                     |             357 |           91 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
 4. Detailed Control Set Information
 -----------------------------------
 
-+-------------------+-----------------------------------------------------------+------------------------------------------------------------+------------------+----------------+--------------+
-|    Clock Signal   |                       Enable Signal                       |                      Set/Reset Signal                      | Slice Load Count | Bel Load Count | Bels / Slice |
-+-------------------+-----------------------------------------------------------+------------------------------------------------------------+------------------+----------------+--------------+
-|  clk_IBUF_BUFG    | sw_array/genblk1[15].the_debouncer/btn_out_i_1__15_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[3].the_debouncer/btn_out_i_1__3_n_1      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[7]                                      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[2].the_debouncer/btn_out_i_1__2_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[1].the_debouncer/btn_out_i_1__1_n_1      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[6]                                      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[9].the_debouncer/btn_out_i_1__9_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[8].the_debouncer/btn_out_i_1__8_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[0].the_debouncer/btn_out_i_1__0_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[10].the_debouncer/btn_out_i_1__10_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[14].the_debouncer/btn_out_i_1__14_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[11].the_debouncer/btn_out_i_1__11_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[4].the_debouncer/btn_out_i_1__4_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[5].the_debouncer/btn_out_i_1__5_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[12].the_debouncer/btn_out_i_1__12_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[13].the_debouncer/btn_out_i_1__13_n_1    |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[6].the_debouncer/btn_out_i_1__6_n_1      |                                                            |                1 |              1 |         1.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[7].the_debouncer/btn_out_i_1__7_n_1      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[2]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[0]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[3]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[4]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[1]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_rx/dout[5]                                      |                                                            |                1 |              1 |         1.00 |
-|  baud_BUFG        | usb_rs232_tx/dout                                         |                                                            |                1 |              1 |         1.00 |
-|  clk_disp_div/CLK |                                                           |                                                            |                1 |              2 |         2.00 |
-|  clk_IBUF_BUFG    |                                                           | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                 |                2 |              4 |         2.00 |
-|  baud_BUFG        |                                                           |                                                            |                5 |              7 |         1.40 |
-|  baud_BUFG        | usb_rs232_rx/is_receiving                                 | usb_rs232_rx/count[7]_i_1__0_n_1                           |                2 |              8 |         4.00 |
-|  baud_BUFG        | usb_rs232_rx/E[0]                                         |                                                            |                3 |              8 |         2.67 |
-|  baud_BUFG        | usb_rs232_tx/is_sending                                   | usb_rs232_tx/count[7]_i_1_n_1                              |                2 |              8 |         4.00 |
-|  clk_IBUF_BUFG    | graphics_renderer_inst/gpu_px[9]_i_1_n_1                  | graphics_renderer_inst/gpu_py[9]_i_1_n_1                   |                5 |             10 |         2.00 |
-|  clk_IBUF_BUFG    | n_0_414_BUFG                                              | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                 |                4 |             10 |         2.50 |
-|  clk_IBUF_BUFG    | main_vga_sync/v_count_reg0                                | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                 |                3 |             10 |         3.33 |
-|  clk_IBUF_BUFG    |                                                           | graphics_renderer_inst/gpu_px[9]_i_1_n_1                   |                3 |             10 |         3.33 |
-|  n_0_414_BUFG     |                                                           |                                                            |                9 |             11 |         1.22 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[10].the_debouncer/counter[0]_i_2__11_n_1 | sw_array/genblk1[10].the_debouncer/counter[0]_i_1__11_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[11].the_debouncer/counter[0]_i_2__12_n_1 | sw_array/genblk1[11].the_debouncer/counter[0]_i_1__12_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[5].the_debouncer/counter[0]_i_2__6_n_1   | sw_array/genblk1[5].the_debouncer/counter[0]_i_1__6_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[6].the_debouncer/counter[0]_i_2__7_n_1   | sw_array/genblk1[6].the_debouncer/counter[0]_i_1__7_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[8].the_debouncer/counter[0]_i_2__9_n_1   | sw_array/genblk1[8].the_debouncer/counter[0]_i_1__9_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[9].the_debouncer/counter[0]_i_2__10_n_1  | sw_array/genblk1[9].the_debouncer/counter[0]_i_1__10_n_1   |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[13].the_debouncer/counter[0]_i_2__14_n_1 | sw_array/genblk1[13].the_debouncer/counter[0]_i_1__14_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[14].the_debouncer/counter[0]_i_2__15_n_1 | sw_array/genblk1[14].the_debouncer/counter[0]_i_1__15_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[0].the_debouncer/counter[0]_i_2__1_n_1   | sw_array/genblk1[0].the_debouncer/counter[0]_i_1__1_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[12].the_debouncer/counter[0]_i_2__13_n_1 | sw_array/genblk1[12].the_debouncer/counter[0]_i_1__13_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[1].the_debouncer/counter[0]_i_2__2_n_1   | sw_array/genblk1[1].the_debouncer/counter[0]_i_1__2_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[2].the_debouncer/counter[0]_i_2__3_n_1   | sw_array/genblk1[2].the_debouncer/counter[0]_i_1__3_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[3].the_debouncer/counter[0]_i_2__4_n_1   | sw_array/genblk1[3].the_debouncer/counter[0]_i_1__4_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[15].the_debouncer/counter[0]_i_2__16_n_1 | sw_array/genblk1[15].the_debouncer/counter[0]_i_1__16_n_1  |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[4].the_debouncer/counter[0]_i_2__5_n_1   | sw_array/genblk1[4].the_debouncer/counter[0]_i_1__5_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | btn_vga_rst/genblk1[0].the_debouncer/sel                  | btn_vga_rst/genblk1[0].the_debouncer/counter[0]_i_1__0_n_1 |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    | sw_array/genblk1[7].the_debouncer/counter[0]_i_2__8_n_1   | sw_array/genblk1[7].the_debouncer/counter[0]_i_1__8_n_1    |                5 |             20 |         4.00 |
-|  clk_IBUF_BUFG    |                                                           | clk_disp_div/clear                                         |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG    |                                                           | main_uart_baudrate_generator/counter[0]_i_1_n_1            |                8 |             32 |         4.00 |
-|  clk_IBUF_BUFG    |                                                           |                                                            |               37 |             60 |         1.62 |
-+-------------------+-----------------------------------------------------------+------------------------------------------------------------+------------------+----------------+--------------+
++-------------------+-----------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+--------------+
+|    Clock Signal   |                       Enable Signal                       |                      Set/Reset Signal                     | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------+-----------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+--------------+
+|  baud_BUFG        | usb_rs232_rx/dout[2]                                      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[5].the_debouncer/btn_out_i_1__4_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | graphics_renderer_inst/gpu_px_reg[7]_0                    | graphics_renderer_inst/gpu_py[5]_i_1_n_1                  |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[7].the_debouncer/btn_out_i_1__6_n_1      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[4]                                      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[5]                                      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[0]                                      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[3].the_debouncer/btn_out_i_1__2_n_1      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[6]                                      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[1]                                      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[3]                                      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_rx/dout[7]                                      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[6].the_debouncer/btn_out_i_1__5_n_1      |                                                           |                1 |              1 |         1.00 |
+|  baud_BUFG        | usb_rs232_tx/dout                                         |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[4].the_debouncer/btn_out_i_1__3_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[2].the_debouncer/btn_out_i_1__1_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[1].the_debouncer/btn_out_i_1__0_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[15].the_debouncer/btn_out_i_1__14_n_1    |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[14].the_debouncer/btn_out_i_1__13_n_1    |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[13].the_debouncer/btn_out_i_1__12_n_1    |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[0].the_debouncer/btn_out_i_1_n_1         |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[9].the_debouncer/btn_out_i_1__8_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[10].the_debouncer/btn_out_i_1__9_n_1     |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[12].the_debouncer/btn_out_i_1__11_n_1    |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[11].the_debouncer/btn_out_i_1__10_n_1    |                                                           |                1 |              1 |         1.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[8].the_debouncer/btn_out_i_1__7_n_1      |                                                           |                1 |              1 |         1.00 |
+|  clk_disp_div/CLK |                                                           |                                                           |                1 |              2 |         2.00 |
+|  clk_IBUF_BUFG    |                                                           | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                |                3 |              4 |         1.33 |
+|  clk_IBUF_BUFG    |                                                           | graphics_renderer_inst/gpu_px_reg[7]_0                    |                3 |              6 |         2.00 |
+|  baud_BUFG        |                                                           |                                                           |                3 |              7 |         2.33 |
+|  baud_BUFG        | usb_rs232_rx/is_receiving                                 | usb_rs232_rx/count[7]_i_1__0_n_1                          |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG    | graphics_renderer_inst/gpu_px_reg[7]_0                    |                                                           |                4 |              8 |         2.00 |
+|  baud_BUFG        | usb_rs232_tx/is_sending                                   | usb_rs232_tx/count[7]_i_1_n_1                             |                3 |              8 |         2.67 |
+|  baud_BUFG        | usb_rs232_rx/E[0]                                         |                                                           |                2 |              8 |         4.00 |
+|  clk_IBUF_BUFG    | main_vga_sync/v_count_reg0                                | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                |                4 |             10 |         2.50 |
+|  clk_IBUF_BUFG    | n_0_407_BUFG                                              | btn_vga_rst/genblk1[0].the_debouncer/AR[0]                |                3 |             10 |         3.33 |
+|  n_0_407_BUFG     |                                                           |                                                           |                8 |             11 |         1.38 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[5].the_debouncer/counter[0]_i_2__6_n_1   | sw_array/genblk1[5].the_debouncer/counter[0]_i_1__5_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[11].the_debouncer/counter[0]_i_2__12_n_1 | sw_array/genblk1[11].the_debouncer/counter[0]_i_1__11_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[8].the_debouncer/counter[0]_i_2__9_n_1   | sw_array/genblk1[8].the_debouncer/counter[0]_i_1__8_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[9].the_debouncer/counter[0]_i_2__10_n_1  | sw_array/genblk1[9].the_debouncer/counter[0]_i_1__9_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[0].the_debouncer/counter[0]_i_2__1_n_1   | sw_array/genblk1[0].the_debouncer/counter[0]_i_1__0_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[12].the_debouncer/counter[0]_i_2__13_n_1 | sw_array/genblk1[12].the_debouncer/counter[0]_i_1__12_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[10].the_debouncer/counter[0]_i_2__11_n_1 | sw_array/genblk1[10].the_debouncer/counter[0]_i_1__10_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | btn_vga_rst/genblk1[0].the_debouncer/sel                  | btn_vga_rst/genblk1[0].the_debouncer/counter[0]_i_1_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[13].the_debouncer/counter[0]_i_2__14_n_1 | sw_array/genblk1[13].the_debouncer/counter[0]_i_1__13_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[14].the_debouncer/counter[0]_i_2__15_n_1 | sw_array/genblk1[14].the_debouncer/counter[0]_i_1__14_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[15].the_debouncer/counter[0]_i_2__16_n_1 | sw_array/genblk1[15].the_debouncer/counter[0]_i_1__15_n_1 |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[1].the_debouncer/counter[0]_i_2__2_n_1   | sw_array/genblk1[1].the_debouncer/counter[0]_i_1__1_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[2].the_debouncer/counter[0]_i_2__3_n_1   | sw_array/genblk1[2].the_debouncer/counter[0]_i_1__2_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[3].the_debouncer/counter[0]_i_2__4_n_1   | sw_array/genblk1[3].the_debouncer/counter[0]_i_1__3_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[4].the_debouncer/counter[0]_i_2__5_n_1   | sw_array/genblk1[4].the_debouncer/counter[0]_i_1__4_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[6].the_debouncer/counter[0]_i_2__7_n_1   | sw_array/genblk1[6].the_debouncer/counter[0]_i_1__6_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    | sw_array/genblk1[7].the_debouncer/counter[0]_i_2__8_n_1   | sw_array/genblk1[7].the_debouncer/counter[0]_i_1__7_n_1   |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG    |                                                           | clk_disp_div/clear                                        |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG    |                                                           | main_uart_baudrate_generator/counter[0]_i_1__16_n_1       |                8 |             32 |         4.00 |
+|  clk_IBUF_BUFG    |                                                           |                                                           |               38 |             65 |         1.71 |
++-------------------+-----------------------------------------------------------+-----------------------------------------------------------+------------------+----------------+--------------+
 
 

@@ -27,6 +27,8 @@ module top_vpong #(
     input wire clk
 );
     
+    `include "params.vh"
+    
     // Graphics Local Parameters
     localparam VGA_PIXEL_COUNT = VGA_RES_WIDTH * VGA_RES_HEIGHT;
     localparam VGA_VRAM_ADDR_BITS = $clog2(VGA_PIXEL_COUNT);
@@ -96,6 +98,7 @@ module top_vpong #(
     wire [9:0] vga_pos_y;
     
     // VGA Synchronizer ///////////////////////////////////////
+    // For 640x480 60 Hz at 25 MHz Pixel Refresh
     vga_sync main_vga_sync(
         .hsync(Hsync),
         .vsync(Vsync),
@@ -153,50 +156,46 @@ module top_vpong #(
     
     // Text Renderer //////////////////////////////////////////
 //    text_renderer #(
-//        .GPU_COLOR_BITS(GPU_COLOR_BITS)
+//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+//        .VOID_COLOR(COLOR3CYAN),
+//        .CHAR_BASE_WIDTH(8),
+//        .CHAR_BASE_HEIGHT(16),
+//        .MAX_STRLEN(16),
+//        .MAX_NUM_STR(16),
+//        .TEXT_ROM_FILE("rom_prog_text.mem")
 //    ) text_renderer_inst(
 //        .pixel_data(vram_data_in),
 //        .x(gpu_pos_x),
 //        .y(gpu_pos_y),
+//        .text_start_x(),
+//        .text_start_y(),
+//        .text_scale(),
+//        .render_flag(16'd0),
+//        .fg_color(),
+//        .bg_color(),
+//        .transparent_bg(1'b1),
+//        .line_addr(),
 //        .clk(clk),
-//        .en(1'b1),
-//        .render_flag(16'd0)
+//        .en(1'b1)
 //    );
     
     // Game Objects Renderer //////////////////////////////////
-    wire [47:0] rom_ball_line_data;
-    wire [2:0] rom_ball_line [15:0];
-    wire [3:0] rom_ball_line_addr;
-    
-    rom_block #(
-        .MEM_INIT_FILE("rom_ball_texture.mem"),
-        .ROM_WIDTH(48),
-        .ROM_ADDR_BITS(4)
-    ) rom_prog_text(
-        .data(rom_ball_line_data),
-        .addr(rom_ball_line_addr),
+    bitmap_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .VOID_COLOR(COLOR3CYAN),
+        .IMAGE_WIDTH(16),
+        .IMAGE_HEIGHT(16),
+        .IMAGE_ROM_FILE("rom_ball_texture.mem")
+    ) ball_renderer_inst(
+        .pixel_data(vram_data_in),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .image_start_x(10'd0),
+        .image_start_y(10'd0),
+        .image_scale(3'd1),
         .clk(clk),
         .en(1'b1)
     );
-    
-    reg [GPU_COLOR_BITS - 1:0] vin;
-    assign vram_data_in = vin;
-    assign rom_ball_line_addr = gpu_pos_y % 16;
-    
-    genvar i;
-    generate
-        for (i = 0; i < 16; i = i + 1) begin
-            assign rom_ball_line[i] = rom_ball_line_data[(i + 1) * 3 - 1: i * 3];
-        end
-    endgenerate
-
-    always @(posedge clk) begin
-        if (gpu_pos_x < 16 && gpu_pos_y < 16) begin
-            vin <= rom_ball_line[gpu_pos_x % 16];
-        end else begin
-            vin <= 3'b011;
-        end
-    end
     
     // VRAM Read/Write Address ////////////////////////////////
     // Read: Direct VRAM to VGA
