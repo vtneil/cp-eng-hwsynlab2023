@@ -1,41 +1,42 @@
 `timescale 1ns / 1ps
 
-module tb_graphics_renderer();
+module counter_tb;
 
-    // Parameters of the graphics_renderer
-    localparam CANVAS_WIDTH = 20;
-    localparam CANVAS_HEIGHT = 10;
+    // Parameters of the counter
+    localparam BIT_WIDTH = 32;
 
     // Testbench Signals
-    reg clk;
+    reg clk_in;
+    reg [BIT_WIDTH - 1:0] target;
     reg reset;
-    wire [9:0] x;
-    wire [9:0] y;
+    wire clk_out;
+    wire [BIT_WIDTH - 1:0] cnt_out;
 
-    // Instantiate the graphics_renderer module
-    graphics_renderer #(
-        .CANVAS_WIDTH(CANVAS_WIDTH),
-        .CANVAS_HEIGHT(CANVAS_HEIGHT)
+    // Instantiate the counter module
+    counter #(
+        .BIT_WIDTH(BIT_WIDTH)
     ) uut (
-        .x(x),
-        .y(y),
-        .clk(clk),
+        .clk_out(clk_out),
+        .cnt_out(cnt_out),
+        .clk_in(clk_in),
+        .target(target),
         .reset(reset)
     );
 
-    // Clock generation (50 MHz)
+    // Clock generation for clk_in (let's say 100 MHz)
     always begin
-        #5 clk = ~clk; // Toggle clock every 10ns
+        #5 clk_in = ~clk_in; // Toggle clock every 5ns
     end
 
     // Testbench initialization and reset
     initial begin
         // Initialize
-        clk = 0;
+        clk_in = 0;
         reset = 1;
+        target = 100; // Example target value
 
         // Apply reset
-        #20 reset = 0; // Release reset after 20ns
+        #10 reset = 0; // Release reset after 10ns
 
         // Run for a specific duration to observe behavior
         #100000; // Run simulation for 100 microseconds

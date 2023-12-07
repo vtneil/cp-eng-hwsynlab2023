@@ -18,8 +18,12 @@ verilog xil_defaultlib  --include "../../../../vpong.srcs/sources_1/new" \
 "../../../../vpong.srcs/sources_1/new/ascii_rom.v" \
 "../../../../vpong.srcs/sources_1/new/ascii_text_generator.v" \
 "../../../../vpong.srcs/sources_1/new/text_renderer.v" \
-"../../../../vpong.srcs/sources_1/new/game_renderer.v" \
 "../../../../vpong.srcs/sources_1/new/pixel_overlay.v" \
+"../../../../vpong.srcs/sources_1/new/bitmap_renderer.v" \
+"../../../../vpong.srcs/sources_1/new/rectangle_renderer.v" \
+"../../../../vpong.srcs/sources_1/new/game_logic.v" \
+"../../../../vpong.srcs/sources_1/new/counter_d99.v" \
+"../../../../vpong.srcs/sources_1/new/counter_d9.v" \
 "../../../../vpong.srcs/sim_1/new/tb_graphics_renderer.v" \
 
 # compile glbl module

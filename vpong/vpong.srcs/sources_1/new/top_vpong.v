@@ -37,6 +37,13 @@ module top_vpong #(
     localparam GPU_COLOR_BITS       = GPU_COLOR_DEPTH * 3;
     localparam GRAPHICS_LAYERS      = 8;  // 8 layers rendering
     
+    // Graphics Objects ///////////////////////////////////////
+    localparam PADDLE_DIST          = 20;  // Paddle distance from left/right borders
+    localparam IMAGE_BALL_W         = 16;
+    localparam IMAGE_BALL_H         = 16;
+    localparam IMAGE_PADDLE_W       = 8;
+    localparam IMAGE_PADDLE_H       = 72;
+    
     // Clocks and Dividers ////////////////////////////////////
     // 50 MHz clock
     wire clk_50mhz;
@@ -74,8 +81,32 @@ module top_vpong #(
         .clk(clk)
     );
     
+    // Game Components ////////////////////////////////////////
+    wire [9:0] ball_px;
+    wire [9:0] ball_py;
+    
+    game_logic #(
+        .BASE_CORE_CLOCK(BASE_CORE_CLOCK),
+        .VGA_RES_WIDTH(VGA_RES_WIDTH),
+        .VGA_RES_HEIGHT(VGA_RES_HEIGHT),
+        .IMAGE_BALL_W(IMAGE_BALL_W),
+        .IMAGE_BALL_H(IMAGE_BALL_H),
+        .IMAGE_PADDLE_W(IMAGE_PADDLE_W),
+        .IMAGE_PADDLE_H(IMAGE_PADDLE_H),
+        .PADDLE1_X(PADDLE_DIST),
+        .PADDLE2_X(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
+        .BALL_VX(200),
+        .BALL_VY(200),
+        .PADDLE_VY(240)
+    ) game_logic_inst(
+        .ball_pos({ball_px, ball_py}),
+        .paddle_pos(),
+        .clk(clk),
+        .reset(reset)
+    );
+    
     // LEDs ///////////////////////////////////////////////////
-    assign led = i_sw;
+    assign led[9:0] = ball_py;
     
     // Quad 7-Segment Display /////////////////////////////////
     wire [3:0] digits [3:0];
@@ -205,84 +236,88 @@ module top_vpong #(
         .pixel_on(gp_layer[GP_TEXT_FG]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(10'd0),
-        .start_y(10'd0),
+        .start_x(10'd10),
+        .start_y(10'd464),
         .scale(3'd1),
-        .fg_color(COLOR3YELLOW),
+        .fg_color(COLOR3RED),
         .bg_color(COLOR3BLACK),
-        .transparent_bg(1'b0),
+        .transparent_bg(1'b1),
         .line_addr('d9),
         .clk(clk),
         .en(1'b1)
     );
     
     // Game Objects Renderer //////////////////////////////////
-    bitmap_renderer #(
-        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .IMAGE_WIDTH(160),
-        .IMAGE_HEIGHT(160),
-        .IMAGE_ROM_FILE("rom_pikachu.mem")
-    ) pikachu_renderer_inst(
-        .pixel_data(gp_data[GP_FOREGROUND]),
-        .pixel_on(gp_layer[GP_FOREGROUND]),
-        .x(gpu_pos_x),
-        .y(gpu_pos_y),
-        .start_x(32),
-        .start_y(32),
-        .scale(3'd1),
-        .clk(clk),
-        .en(1'b1)
-    );
+//    bitmap_renderer #(
+//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+//        .IMAGE_WIDTH(160),
+//        .IMAGE_HEIGHT(160),
+//        .IMAGE_ROM_FILE("rom_pikachu.mem")
+//    ) pikachu_renderer_inst(
+//        .pixel_data(gp_data[GP_FOREGROUND]),
+//        .pixel_on(gp_layer[GP_FOREGROUND]),
+//        .x(gpu_pos_x),
+//        .y(gpu_pos_y),
+//        .start_x(32),
+//        .start_y(32),
+//        .scale(3'd1),
+//        .clk(clk),
+//        .en(1'b1)
+//    );
     
+    // Render Ball
     bitmap_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .IMAGE_WIDTH(16),
-        .IMAGE_HEIGHT(16),
+        .IMAGE_WIDTH(IMAGE_BALL_W),
+        .IMAGE_HEIGHT(IMAGE_BALL_H),
         .IMAGE_ROM_FILE("rom_ball_texture.mem")
     ) ball_renderer_inst(
         .pixel_data(gp_data[GP_BALL]),
         .pixel_on(gp_layer[GP_BALL]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(VGA_MID_X - (16 / 2)),
-        .start_y(VGA_MID_Y - (16 / 2)),
+        .start_x(ball_px),
+        .start_y(ball_py),
         .scale(3'd1),
         .clk(clk),
         .en(1'b1)
     );
     
+    // Render Paddle 1
     rectangle_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .RECT_WIDTH(8),
-        .RECT_HEIGHT(72)
+        .RECT_WIDTH(IMAGE_PADDLE_W),
+        .RECT_HEIGHT(IMAGE_PADDLE_H)
     ) paddle1_renderer_inst(
         .pixel_data(gp_data[GP_PADDLE]),
         .pixel_on(gp_layer[GP_PADDLE]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(16),
-        .start_y(VGA_MID_Y - (72 / 2)),
-        .color(COLOR3WHITE),
+        .start_x(PADDLE_DIST),
+        .start_y(VGA_MID_Y - (IMAGE_PADDLE_H / 2)),
+        .color(COLOR3BLUE),
         .clk(clk),
         .en(1'b1)
     );
     
+    // Render Paddle 2
     rectangle_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .RECT_WIDTH(8),
-        .RECT_HEIGHT(72)
+        .RECT_WIDTH(IMAGE_PADDLE_W),
+        .RECT_HEIGHT(IMAGE_PADDLE_H)
     ) paddle2_renderer_inst(
         .pixel_data(gp_data[GP_PADDLE]),
         .pixel_on(gp_layer[GP_PADDLE]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(VGA_RES_WIDTH - (16 + 8)),
-        .start_y(VGA_MID_Y - (72 / 2)),
-        .color(COLOR3WHITE),
+        .start_x(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
+        .start_y(VGA_MID_Y - (IMAGE_PADDLE_H / 2)),
+        .color(COLOR3BLUE),
         .clk(clk),
         .en(1'b1)
     );
     
+    // Render Game Background
     rectangle_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
         .RECT_WIDTH(VGA_RES_WIDTH),
@@ -355,14 +390,9 @@ module top_vpong #(
     end
     
     // Post-Assignment ////////////////////////////////////////
+    assign {digits[3], digits[2], digits[1], digits[0]} = ball_px;
     
-    assign {digits[1], digits[0]} = uart_data_rx;
+//    assign {digits[1], digits[0]} = uart_data_rx;
 //    assign {digits[3], digits[2]} = uart_data_tx;
-    
-    game_logic game_logic_inst(
-    );
-    
-    counter_d99 counter_d99_inst(
-    );
     
 endmodule

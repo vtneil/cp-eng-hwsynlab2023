@@ -20,6 +20,7 @@ module counter #(
     always @(posedge clk_in, posedge reset) begin
         if (reset) begin
             counter <= 0;
+            clk_out <= 1'b0;
         end else begin
             if (counter < target) begin
                 counter <= counter + 1;
