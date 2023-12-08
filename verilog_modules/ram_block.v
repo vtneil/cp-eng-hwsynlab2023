@@ -16,12 +16,12 @@ module ram_block #(
     
     reg [RAM_WIDTH - 1:0] memory_block [RAM_SIZE - 1:0];
     
-    // Synchronous write and read
+    // Synchronous write
     always @(posedge clk) begin
         if (we) memory_block[wa] <= data_in;
-        
     end
     
+    // Asynchronous read
     assign data_out = memory_block[ra];
 
 endmodule

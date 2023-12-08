@@ -71,8 +71,9 @@ proc create_report { reportName command } {
 }
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param checkpoint.writeSynthRtdsInDcp 1
-set_param chipscope.maxJobs 1
+set_param chipscope.maxJobs 4
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
@@ -94,7 +95,6 @@ OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/PS2Receiver.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/bin2ascii.v
-  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/debouncer.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/uart_buf_con.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/uart_tx.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/sources_1/imports/hdl/top.v
@@ -112,6 +112,8 @@ read_xdc C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tes
 set_property used_in_implementation false [get_files C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/constrs_1/imports/constraints/Basys3_Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/kb_tester2/kb_tester2.srcs/utils_1/imports/synth_1/top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

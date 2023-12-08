@@ -21,18 +21,14 @@
 
 module ascii_rom(
     output reg [7:0] data,
-    input wire [10:0] addr,
-    input wire clk,
-    input wire en
+    input wire [10:0] addr
 );
 
     (* rom_style = "block" *)    // Infer BRAM
 
-    reg [10:0] addr_reg;
+    wire [10:0] addr_reg;
     
-    always @(posedge clk) begin
-        if (en) addr_reg <= addr;
-    end
+    assign addr_reg = addr;
 
     always @(*) begin
         case(addr_reg)

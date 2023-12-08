@@ -46,7 +46,7 @@ module top(
         CLK50MHZ<=~CLK50MHZ;
     end
     
-    PS2Receiver uut (
+    ps2_receiver uut (
         .clk(CLK50MHZ),
         .kclk(PS2Clk),
         .kdata(PS2Data),

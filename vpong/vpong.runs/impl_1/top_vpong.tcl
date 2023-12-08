@@ -115,6 +115,7 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 
@@ -140,9 +141,11 @@ OPTRACE "set parameters" START { }
   set_property parent.project_path C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.xpr [current_project]
   set_property ip_output_repo C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1/top_vpong.dcp
+  read_ip -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/ip/clock_module/clock_module.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/constrs_1/imports/cp-eng-hwsynlab2023/Basys-3-Master-Custom.xdc
 OPTRACE "read constraints: implementation" END { }
@@ -311,6 +314,7 @@ set rc [catch {
   create_msg_db write_bitstream.pb
 OPTRACE "read constraints: write_bitstream" START { }
 OPTRACE "read constraints: write_bitstream" END { }
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
   catch { write_mem_info -force -no_partial_mmi top_vpong.mmi }
 OPTRACE "write_bitstream setup" END { }
 OPTRACE "write_bitstream" START { }

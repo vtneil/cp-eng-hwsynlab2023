@@ -44,9 +44,7 @@ module text_renderer #(
         .ascii_char(ascii_char),
         .char_row(char_row),
         .fg({1'b1, fg_color}),
-        .bg({~transparent_bg, bg_color}),
-        .clk(clk),
-        .en(en)
+        .bg({~transparent_bg, bg_color})
     );
     
     wire [ROM_MAX_CHAR_BITS - 1:0] rom_text_line_data;

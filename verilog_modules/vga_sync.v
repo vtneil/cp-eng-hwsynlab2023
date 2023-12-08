@@ -27,19 +27,6 @@ module vga_sync #(
     localparam START_V_RETRACE = V_DISPLAY + V_B_BORDER;
     localparam END_V_RETRACE   = V_DISPLAY + V_B_BORDER + V_RETRACE - 1;
     
-    // mod-4 counter to generate 25 MHz pixel tick
-	reg [1:0] pixel_reg;
-	wire [1:0] pixel_next;
-	wire pixel_tick;
-	
-	always @(posedge clk, posedge reset) begin
-		if (reset) pixel_reg <= 0;
-		else pixel_reg <= pixel_next;
-    end
-    
-    assign pixel_next = pixel_reg + 1; // increment pixel_reg 
-	assign pixel_tick = (pixel_reg == 0); // assert tick 1/4 of the time
-    
     // registers to keep track of current pixel location
     reg [9:0] h_count_reg;
     reg [9:0] h_count_next;
@@ -69,12 +56,10 @@ module vga_sync #(
 
     // next-state logic of horizontal vertical sync counters
     always @(*) begin
-        h_count_next = (pixel_tick) ? 
-                            ((h_count_reg == H_MAX) ? 0 : h_count_reg + 1) : 
-                            h_count_reg;
-        v_count_next = (pixel_tick && h_count_reg == H_MAX) ? 
-                            (v_count_reg == V_MAX ? 0 : v_count_reg + 1) : 
-                            v_count_reg;
+        h_count_next = (h_count_reg == H_MAX) ? 0 : h_count_reg + 1;
+        v_count_next = (h_count_reg == H_MAX) ? 
+                           (v_count_reg == V_MAX ? 0 : v_count_reg + 1) : 
+                           (v_count_reg);
     end
         
     // hsync and vsync are active low signals
@@ -92,5 +77,6 @@ module vga_sync #(
     assign vsync  = vsync_reg;
     assign x      = h_count_reg;
     assign y      = v_count_reg;
-    assign p_tick = pixel_tick;
+    assign p_tick = clk;
 endmodule
+

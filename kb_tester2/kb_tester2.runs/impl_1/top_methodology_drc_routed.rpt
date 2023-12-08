@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Tue Dec  5 16:32:24 2023
+| Date         : Fri Dec  8 18:58:28 2023
 | Host         : vt_g14 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -170,122 +170,122 @@ Related violations: <none>
 
 TIMING-17#28 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[0]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#29 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[10]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#30 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[10]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[10]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#31 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[11]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#32 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[11]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[11]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#33 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[12]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[12]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#34 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[12]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[12]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#35 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[13]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[13]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#36 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[13]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[13]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#37 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[14]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[14]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#38 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[14]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[14]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#39 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[15]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#40 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[15]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[15]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#41 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[1]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#42 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[2]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#43 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[3]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#44 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[4]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#45 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[5]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#46 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[6]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#47 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[7]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#48 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[8]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#49 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[8]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[8]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#50 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[9]/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#51 Critical Warning
 Non-clocked sequential cell  
-The clock pin uut/keycode_reg[9]_lopt_replica/C is not reached by a timing clock
+The clock pin uut/keycode_r_reg[9]_lopt_replica/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#52 Critical Warning

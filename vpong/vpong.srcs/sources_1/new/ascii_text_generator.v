@@ -7,9 +7,7 @@ module ascii_text_generator #(
     input wire [6:0] ascii_char,    // ASCII Code of character
     input wire [3:0] char_row,      // Pixel Row: 4 bit, 0-15
     input wire [GPU_COLOR_BITS - 1:0] fg,
-    input wire [GPU_COLOR_BITS - 1:0] bg,
-    input wire clk,
-    input wire en
+    input wire [GPU_COLOR_BITS - 1:0] bg
 );
 
     wire [7:0] row_out_raw;
@@ -17,9 +15,7 @@ module ascii_text_generator #(
 
     ascii_rom ascii_rom_inst(
         .data(row_out_raw),
-        .addr({ascii_char, char_row}),
-        .clk(clk),
-        .en(en)
+        .addr({ascii_char, char_row})
     );
     
     // Reverse bit order

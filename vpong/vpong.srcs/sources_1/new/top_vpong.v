@@ -22,6 +22,9 @@ module top_vpong #(
     output wire RsTx,
     input wire RsRx,
     
+    input wire PS2Data,
+    input wire PS2Clk,
+    
     input wire [15:0] sw,
     input wire btnC,
     input wire clk
@@ -44,14 +47,30 @@ module top_vpong #(
     localparam IMAGE_PADDLE_W       = 8;
     localparam IMAGE_PADDLE_H       = 72;
     
-    // Clocks and Dividers ////////////////////////////////////
-    // 50 MHz clock
-    wire clk_50mhz;
-    clk_div clk_50mhz_div(clk_50mhz, clk, 32'd2);
+    // System /////////////////////////////////////////////////
+    wire sys_clk;
+    wire reset;
+    reg [15:0] led_r;
     
+    // Clocks and Dividers ////////////////////////////////////
+    wire CLK_400MHZ, CLK_100MHZ, CLK_50MHZ, CLK_40MHZ, CLK_25MHZ;
+    clock_module clock_inst(
+        .CLK_400MHZ(CLK_400MHZ),
+        .CLK_100MHZ(CLK_100MHZ),
+        .CLK_50MHZ(CLK_50MHZ),
+        .CLK_40MHZ(CLK_40MHZ),
+        .CLK_25MHZ(CLK_25MHZ),         
+        .reset(1'b0), 
+        .locked(locked),
+        .clk_in1(clk)
+    );
+    
+    // System clock
+    assign sys_clk = CLK_100MHZ;
+
     // 1000 Hz (1ms) general-purpose clock
     wire clk_1ms;
-    clk_div clk_1ms_div(clk_1ms, clk, 32'd100_000);
+    clk_div clk_1ms_div(clk_1ms, CLK_100MHZ, 32'd100_000);
     
     // 1 Hz (1s) general-purpose clock
     wire clk_1s;
@@ -59,17 +78,13 @@ module top_vpong #(
     
     // 200 Hz for Display 50 Hz (4 digits)
     wire clk_disp;
-    clk_div clk_disp_div(clk_disp, clk, 32'd500_000);
-    
-    wire clk_render;
-    assign clk_render = clk_50mhz;
+    clk_div clk_disp_div(clk_disp, CLK_100MHZ, 32'd500_000);
     
     // Input Buttons and Switches /////////////////////////////
-    wire reset;
     switch_button btn_reset(
         .q(reset),
         .d(btnC),
-        .clk(clk)
+        .clk(CLK_100MHZ)
     );
     
     wire [15:0] i_sw;
@@ -78,12 +93,33 @@ module top_vpong #(
     ) sw_array(
         .q(i_sw),
         .d(sw),
-        .clk(clk)
+        .clk(CLK_100MHZ)
     );
+    
+    // Keyboard Input
+    wire [255:0] key_states;
+    
+    keyboard ps2_usb_keyboard(
+        .keycode(),
+        .key_states(key_states),
+        .ps2_clk(PS2Clk),
+        .ps2_data(PS2Data),
+        .clk_50mhz(CLK_50MHZ),
+        .clk(sys_clk)
+    );
+    
+    always @(posedge sys_clk) begin
+        led_r[0] <= key_states[KEY_W];
+        led_r[1] <= key_states[KEY_S];
+        led_r[2] <= key_states[KEY_I];
+        led_r[3] <= key_states[KEY_K];
+    end
     
     // Game Components ////////////////////////////////////////
     wire [9:0] ball_px;
     wire [9:0] ball_py;
+    wire [9:0] pad1_py;
+    wire [9:0] pad2_py;
     
     game_logic #(
         .BASE_CORE_CLOCK(BASE_CORE_CLOCK),
@@ -95,22 +131,25 @@ module top_vpong #(
         .IMAGE_PADDLE_H(IMAGE_PADDLE_H),
         .PADDLE1_X(PADDLE_DIST),
         .PADDLE2_X(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
-        .BALL_VX(200),
-        .BALL_VY(200),
-        .PADDLE_VY(240)
+        .BALL_VX(1000),
+        .BALL_VY(1000),
+        .PADDLE_VY(1000)
     ) game_logic_inst(
         .ball_pos({ball_px, ball_py}),
-        .paddle_pos(),
-        .clk(clk),
+        .paddle_pos({pad1_py, pad2_py}),
+        .key_states(key_states),
+        .clk(sys_clk),
         .reset(reset)
     );
     
     // LEDs ///////////////////////////////////////////////////
-    assign led[9:0] = ball_py;
+    assign led = led_r;
+    initial led_r = 0;
     
     // Quad 7-Segment Display /////////////////////////////////
     wire [3:0] digits [3:0];
-    wire [15:0] all_digits = {digits[3], digits[2], digits[1], digits[0]};
+    wire [15:0] all_digits;
+    
     quad_7_seg main_display(
         .seg(seg), 
         .an(an), 
@@ -121,6 +160,8 @@ module top_vpong #(
         .num1(digits[1]), 
         .num0(digits[0])
     );
+    
+    assign {digits[3], digits[2], digits[1], digits[0]} = all_digits;
     
     // VGA Display ////////////////////////////////////////////
     reg [VGA_COLOR_DEPTH - 1:0] vga_r;
@@ -140,14 +181,23 @@ module top_vpong #(
     
     // VGA Synchronizer ///////////////////////////////////////
     // For 640x480 60 Hz at 25 MHz Pixel Refresh
-    vga_sync main_vga_sync(
+    vga_sync #(
+        .H_DISPLAY(VGA_RES_WIDTH),
+        .H_L_BORDER(48),
+        .H_R_BORDER(16),
+        .H_RETRACE(96),
+        .V_DISPLAY(VGA_RES_HEIGHT),
+        .V_T_BORDER(33),
+        .V_B_BORDER(10),
+        .V_RETRACE(2)
+    ) main_vga_sync(
         .hsync(Hsync),
         .vsync(Vsync),
         .video_on(vga_on),
         .p_tick(vga_tick),
         .x(vga_pos_x),
         .y(vga_pos_y),
-        .clk(clk),
+        .clk(CLK_25MHZ),
         .reset(reset)
     );
     
@@ -167,7 +217,7 @@ module top_vpong #(
         .data_in(vram_data_in),
         .wa(vram_wa),
         .ra(vram_ra),
-        .clk(clk),
+        .clk(sys_clk),
         .we(vram_we)
     );
     
@@ -190,7 +240,7 @@ module top_vpong #(
     ) graphics_renderer_inst(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .clk(clk),
+        .clk(sys_clk),
         .reset(reset)
     );
     
@@ -243,7 +293,7 @@ module top_vpong #(
         .bg_color(COLOR3BLACK),
         .transparent_bg(1'b1),
         .line_addr('d9),
-        .clk(clk),
+        .clk(sys_clk),
         .en(1'b1)
     );
     
@@ -261,7 +311,7 @@ module top_vpong #(
 //        .start_x(32),
 //        .start_y(32),
 //        .scale(3'd1),
-//        .clk(clk),
+//        .clk(sys_clk),
 //        .en(1'b1)
 //    );
     
@@ -279,7 +329,7 @@ module top_vpong #(
         .start_x(ball_px),
         .start_y(ball_py),
         .scale(3'd1),
-        .clk(clk),
+        .clk(sys_clk),
         .en(1'b1)
     );
     
@@ -294,9 +344,9 @@ module top_vpong #(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
         .start_x(PADDLE_DIST),
-        .start_y(VGA_MID_Y - (IMAGE_PADDLE_H / 2)),
+        .start_y(pad1_py),
         .color(COLOR3BLUE),
-        .clk(clk),
+        .clk(sys_clk),
         .en(1'b1)
     );
     
@@ -311,9 +361,9 @@ module top_vpong #(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
         .start_x(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
-        .start_y(VGA_MID_Y - (IMAGE_PADDLE_H / 2)),
+        .start_y(pad2_py),
         .color(COLOR3BLUE),
-        .clk(clk),
+        .clk(sys_clk),
         .en(1'b1)
     );
     
@@ -330,7 +380,7 @@ module top_vpong #(
         .start_x(10'd0),
         .start_y(10'd0),
         .color(COLOR3CYAN),
-        .clk(clk),
+        .clk(sys_clk),
         .en(1'b1)
     );
     
@@ -346,7 +396,7 @@ module top_vpong #(
         .BAUDRATE(9_600)
     ) main_uart_baudrate_generator(
         .baud(baud),
-        .base_clk(clk)
+        .base_clk(sys_clk)
     );
     
     uart_tx usb_rs232_tx(
@@ -390,8 +440,6 @@ module top_vpong #(
     end
     
     // Post-Assignment ////////////////////////////////////////
-    assign {digits[3], digits[2], digits[1], digits[0]} = ball_px;
-    
 //    assign {digits[1], digits[0]} = uart_data_rx;
 //    assign {digits[3], digits[2]} = uart_data_tx;
     
