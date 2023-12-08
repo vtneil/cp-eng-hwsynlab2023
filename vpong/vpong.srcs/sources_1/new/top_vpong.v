@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 
 module top_vpong #(
-    parameter BASE_CORE_CLOCK = 100_000_000,    // Base FPGA Clock Speed in Hz
-    parameter VGA_RES_WIDTH = 640,              // VGA Resolution (Height)
-    parameter VGA_RES_HEIGHT = 480,             // VGA Resolution (Width)
-    parameter VGA_COLOR_DEPTH = 4,              // Color per Channel
-    parameter GPU_COLOR_DEPTH = 1               // Color per Channel
+    parameter BASE_CORE_CLOCK   = 100_000_000,      // Base FPGA Clock Speed in Hz
+    parameter VGA_RES_WIDTH     = 640,              // VGA Resolution (Height)
+    parameter VGA_RES_HEIGHT    = 480,              // VGA Resolution (Width)
+    parameter VGA_COLOR_DEPTH   = 4,                // Color per Channel
+    parameter GPU_COLOR_DEPTH   = 1                 // Color per Channel
 ) (
     output wire Hsync,
     output wire Vsync,
@@ -38,7 +38,7 @@ module top_vpong #(
     localparam VGA_PIXEL_COUNT      = VGA_RES_WIDTH * VGA_RES_HEIGHT;
     localparam VGA_VRAM_ADDR_BITS   = $clog2(VGA_PIXEL_COUNT);
     localparam GPU_COLOR_BITS       = GPU_COLOR_DEPTH * 3;
-    localparam GRAPHICS_LAYERS      = 8;  // 8 layers rendering
+    localparam GRAPHICS_LAYERS      = 10;  // 10 layers rendering
     
     // Graphics Objects ///////////////////////////////////////
     localparam PADDLE_DIST          = 20;  // Paddle distance from left/right borders
@@ -47,22 +47,23 @@ module top_vpong #(
     localparam IMAGE_PADDLE_W       = 8;
     localparam IMAGE_PADDLE_H       = 72;
     
+    // Generate ///////////////////////////////////////////////
+    genvar i;
+    
     // System /////////////////////////////////////////////////
     wire sys_clk;
     wire reset;
     reg [15:0] led_r;
+    wire gpu_frame_tick;
     
     // Clocks and Dividers ////////////////////////////////////
-    wire CLK_400MHZ, CLK_100MHZ, CLK_50MHZ, CLK_40MHZ, CLK_25MHZ;
-    clock_module clock_inst(
-        .CLK_400MHZ(CLK_400MHZ),
+    wire CLK_100MHZ, CLK_50MHZ, CLK_40MHZ, CLK_25MHZ;
+    CW clock_inst(
         .CLK_100MHZ(CLK_100MHZ),
         .CLK_50MHZ(CLK_50MHZ),
         .CLK_40MHZ(CLK_40MHZ),
         .CLK_25MHZ(CLK_25MHZ),         
-        .reset(1'b0), 
-        .locked(locked),
-        .clk_in1(clk)
+        .CLK_SOURCE(clk)
     );
     
     // System clock
@@ -108,17 +109,14 @@ module top_vpong #(
         .clk(sys_clk)
     );
     
-    always @(posedge sys_clk) begin
-        led_r[0] <= key_states[KEY_W];
-        led_r[1] <= key_states[KEY_S];
-        led_r[2] <= key_states[KEY_I];
-        led_r[3] <= key_states[KEY_K];
-    end
-    
     // Game Components ////////////////////////////////////////
     wire [9:0] ball_px;
     wire [9:0] ball_py;
+    
+    wire [9:0] pad1_px;
     wire [9:0] pad1_py;
+    
+    wire [9:0] pad2_px;
     wire [9:0] pad2_py;
     
     game_logic #(
@@ -129,14 +127,16 @@ module top_vpong #(
         .IMAGE_BALL_H(IMAGE_BALL_H),
         .IMAGE_PADDLE_W(IMAGE_PADDLE_W),
         .IMAGE_PADDLE_H(IMAGE_PADDLE_H),
-        .PADDLE1_X(PADDLE_DIST),
-        .PADDLE2_X(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
+        .PADDLE1_X_MIN(PADDLE_DIST),
+        .PADDLE2_X_MAX(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
+        .PADDLE_X_ZONE(200),
         .BALL_VX(1000),
         .BALL_VY(1000),
         .PADDLE_VY(1000)
     ) game_logic_inst(
         .ball_pos({ball_px, ball_py}),
-        .paddle_pos({pad1_py, pad2_py}),
+        .paddle1_pos({pad1_px, pad1_py}),
+        .paddle2_pos({pad2_px, pad2_py}),
         .key_states(key_states),
         .clk(sys_clk),
         .reset(reset)
@@ -183,13 +183,20 @@ module top_vpong #(
     // For 640x480 60 Hz at 25 MHz Pixel Refresh
     vga_sync #(
         .H_DISPLAY(VGA_RES_WIDTH),
-        .H_L_BORDER(48),
-        .H_R_BORDER(16),
-        .H_RETRACE(96),
         .V_DISPLAY(VGA_RES_HEIGHT),
-        .V_T_BORDER(33),
-        .V_B_BORDER(10),
-        .V_RETRACE(2)
+        .H_BACK_PORCH(48),
+        .H_FRONT_PORCH(16),
+        .H_SYNC_PULSE(96),
+        .V_BACK_PORCH(33),
+        .V_FRONT_PORCH(10),
+        .V_SYNC_PULSE(2)
+//        .H_FRONT_PORCH(40),
+//        .H_BACK_PORCH(88),
+//        .H_SYNC_PULSE(128),
+//        .V_FRONT_PORCH(1),
+//        .V_BACK_PORCH(23),
+//        .V_SYNC_PULSE(4)
+
     ) main_vga_sync(
         .hsync(Hsync),
         .vsync(Vsync),
@@ -234,6 +241,8 @@ module top_vpong #(
     wire [9:0] gpu_pos_x;
     wire [9:0] gpu_pos_y;
     
+    assign gpu_frame_tick = (gpu_pos_x == 0) && (gpu_pos_y == 0);
+    
     graphics_renderer #(
         .CANVAS_WIDTH(VGA_RES_WIDTH),
         .CANVAS_HEIGHT(VGA_RES_HEIGHT)
@@ -266,7 +275,6 @@ module top_vpong #(
         .select(gp_layer)
     );
     
-    genvar i;
     generate
         for (i = 0; i < GRAPHICS_LAYERS; i = i + 1) begin
             assign gp_data_flatten[GPU_COLOR_BITS * i +: GPU_COLOR_BITS] = gp_data[i];
@@ -274,50 +282,72 @@ module top_vpong #(
     endgenerate
     
     // Text Renderer //////////////////////////////////////////
-    text_renderer #(
-        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .CHAR_BASE_WIDTH(8),
-        .CHAR_BASE_HEIGHT(16),
-        .MAX_STRLEN(16),
-        .MAX_NUM_STR(16),
-        .TEXT_ROM_FILE("rom_prog_text.mem")
-    ) text_renderer_inst(
-        .pixel_data(gp_data[GP_TEXT_FG]),
-        .pixel_on(gp_layer[GP_TEXT_FG]),
-        .x(gpu_pos_x),
-        .y(gpu_pos_y),
-        .start_x(10'd10),
-        .start_y(10'd464),
-        .scale(3'd1),
-        .fg_color(COLOR3RED),
-        .bg_color(COLOR3BLACK),
-        .transparent_bg(1'b1),
-        .line_addr('d9),
-        .clk(sys_clk),
-        .en(1'b1)
-    );
+    localparam DATA_WIDTH  = 10 + 10 + 3 + GPU_COLOR_BITS + GPU_COLOR_BITS + 1 + $clog2(16);
+    wire [9:0] tc_start_x [3:0];
+    wire [9:0] tc_start_y [3:0];
+    wire [2:0] tc_scale [3:0];
+    wire [GPU_COLOR_BITS - 1:0] tc_fg_color [3:0];
+    wire [GPU_COLOR_BITS - 1:0] tc_bg_color [3:0];
+    wire tc_transparent_bg [3:0];
+    wire [$clog2(16) - 1:0] tc_line_addr [3:0];
+    wire [DATA_WIDTH - 1:0] tc_data [3:0];
+    
+    reg [1:0] tc_state;
+    initial tc_state <= 0;
+    
+    generate
+        for (i = 0; i < 4; i = i + 1) begin
+            text_renderer #(
+                .GPU_COLOR_BITS(GPU_COLOR_BITS),
+                .CHAR_BASE_WIDTH(8),
+                .CHAR_BASE_HEIGHT(16),
+                .MAX_STRLEN(16),
+                .MAX_NUM_STR(16),
+                .TEXT_ROM_FILE("rom_prog_text.mem")
+            ) text_renderer_inst(
+                .pixel_data(gp_data[GP_TEXT_FG1 - i]),
+                .pixel_on(gp_layer[GP_TEXT_FG1 - i]),
+                .x(gpu_pos_x),
+                .y(gpu_pos_y),
+                .start_x(tc_start_x[i]),
+                .start_y(tc_start_y[i]),
+                .scale(tc_scale[i]),
+                .fg_color(tc_fg_color[i]),
+                .bg_color(tc_bg_color[i]),
+                .transparent_bg(tc_transparent_bg[i]),
+                .line_addr(tc_line_addr[i]),
+                .clk(sys_clk),
+                .en(1'b1)
+            );
+            
+            text_context #(
+                .GPU_COLOR_BITS(GPU_COLOR_BITS),
+                .MAX_NUM_STR(16),
+                .MAX_NUM_STATES(4)
+            ) tc_fg_inst(
+                .start_x(tc_start_x[i]),
+                .start_y(tc_start_y[i]),
+                .scale(tc_scale[i]),
+                .fg_color(tc_fg_color[i]),
+                .bg_color(tc_bg_color[i]),
+                .transparent_bg(tc_transparent_bg[i]),
+                .line_addr(tc_line_addr[i]),
+                .rom_data(tc_data[i]),
+                .state(tc_state)
+            );
+        end
+    endgenerate
+    
+    assign tc_data[0] = {{9'd0, 9'd0, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd2},
+                         {9'd0, 9'd16, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd3},
+                         {9'd0, 9'd32, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd4},
+                         {9'd0, 9'd48, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd5}};
     
     // Game Objects Renderer //////////////////////////////////
-//    bitmap_renderer #(
-//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-//        .IMAGE_WIDTH(160),
-//        .IMAGE_HEIGHT(160),
-//        .IMAGE_ROM_FILE("rom_pikachu.mem")
-//    ) pikachu_renderer_inst(
-//        .pixel_data(gp_data[GP_FOREGROUND]),
-//        .pixel_on(gp_layer[GP_FOREGROUND]),
-//        .x(gpu_pos_x),
-//        .y(gpu_pos_y),
-//        .start_x(32),
-//        .start_y(32),
-//        .scale(3'd1),
-//        .clk(sys_clk),
-//        .en(1'b1)
-//    );
-    
     // Render Ball
     bitmap_renderer #(
         .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .GPU_ALPHA_CHANNEL(1),
         .IMAGE_WIDTH(IMAGE_BALL_W),
         .IMAGE_HEIGHT(IMAGE_BALL_H),
         .IMAGE_ROM_FILE("rom_ball_texture.mem")
@@ -343,7 +373,7 @@ module top_vpong #(
         .pixel_on(gp_layer[GP_PADDLE]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(PADDLE_DIST),
+        .start_x(pad1_px),
         .start_y(pad1_py),
         .color(COLOR3BLUE),
         .clk(sys_clk),
@@ -360,9 +390,47 @@ module top_vpong #(
         .pixel_on(gp_layer[GP_PADDLE]),
         .x(gpu_pos_x),
         .y(gpu_pos_y),
-        .start_x(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
+        .start_x(pad2_px),
         .start_y(pad2_py),
         .color(COLOR3BLUE),
+        .clk(sys_clk),
+        .en(1'b1)
+    );
+    
+    // Render Pong in Thai
+    bitmap_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .GPU_ALPHA_CHANNEL(1),
+        .IMAGE_WIDTH(320),
+        .IMAGE_HEIGHT(240),
+        .IMAGE_ROM_FILE("pong_text.mem")
+    ) background_logo_renderer_inst(
+        .pixel_data(gp_data[GP_TEXT_BG]),
+        .pixel_on(gp_layer[GP_TEXT_BG]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(VGA_RES_WIDTH / 4),
+        .start_y(VGA_RES_HEIGHT / 4),
+        .scale(3'd1),
+        .clk(sys_clk),
+        .en(1'b1)
+    );
+    
+    // Render Hamtaro background
+    bitmap_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .GPU_ALPHA_CHANNEL(0),
+        .IMAGE_WIDTH(320),
+        .IMAGE_HEIGHT(240),
+        .IMAGE_ROM_FILE("pong_bg.mem")
+    ) background_graphics_renderer_inst(
+        .pixel_data(gp_data[GP_GRAPHICS]),
+        .pixel_on(gp_layer[GP_GRAPHICS]),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(0),
+        .start_y(0),
+        .scale(3'd2),
         .clk(sys_clk),
         .en(1'b1)
     );

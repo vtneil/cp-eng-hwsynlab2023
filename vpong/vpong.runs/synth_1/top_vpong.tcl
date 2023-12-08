@@ -99,6 +99,8 @@ read_mem {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_prog_text.mem
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_ball_texture.mem
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/rom_pikachu.mem
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/pong_bg.mem
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/pong_text.mem
 }
 read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/verilog_modules/button.v
@@ -127,11 +129,12 @@ read_verilog -library xil_defaultlib {
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/counter_d9.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/ps2_receiver.v
   C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/keyboard.v
+  C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/new/text_context.v
 }
-read_ip -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/ip/clock_module/clock_module.xci
-set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module_ooc.xdc]
+read_ip -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/ip/CW/CW.xci
+set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW_ooc.xdc]
 
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being

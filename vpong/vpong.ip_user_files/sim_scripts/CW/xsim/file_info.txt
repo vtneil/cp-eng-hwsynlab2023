@@ -1,0 +1,3 @@
+CW_clk_wiz.v,verilog,xil_defaultlib,../../../../vpong.gen/sources_1/ip/CW/CW_clk_wiz.v,incdir="../../../ipstatic"incdir="../../../ipstatic"
+CW.v,verilog,xil_defaultlib,../../../../vpong.gen/sources_1/ip/CW/CW.v,incdir="../../../ipstatic"incdir="../../../ipstatic"
+glbl.v,Verilog,xil_defaultlib,glbl.v

@@ -1,0 +1,28 @@
+Max 1.8 MBit (1_800_000 bit) incl. ROMs
+
+
+WXGA 1366 * 768 (1 bit) = 1_049_088 bit
+SXGA 1280 * 1024 (1 bit) = 1_310_720 bit
+FWVGA 854 * 480 (1 bit) = 409_920 bit
+
+SVGA 800 * 600 (1 bit) = 480_000 bit
+VGA 640 * 480 (1 bit) = 307_200 bit
+QVGA 320 * 240 (1 bit) = 76_800 bit
+
+
+SVGA 3 bit (RGB) = 1_440_000 bit
+VGA 3 bit (RGB) = 921_600 bit
+QVGA 12 bit (RGB) = 921_600 bit
+
+References
+http://tinyvga.com/vga-timing
+https://nandland.com/project-10-pong/
+https://github.com/ktrom01/Verilog-Pong
+https://github.com/maxnatchanon/basys3-pong
+https://github.com/FPGADude/Digital-Design/tree/main/FPGA%20Projects/VGA%20Projects/VGA%20Text%20Generation
+https://miscircuitos.com/vivado-synthesis-and-implementation-strategies/
+https://doodad.dev/dither-me-this/
+http://www.thealmightyguru.com/Wiki/index.php?title=3-bit_RGB_palette
+
+Tasks
+https://docs.google.com/document/u/1/d/e/2PACX-1vSpj3KOt0J0uJ3vsw3jGm1PLkiFed3rsXn_050RtGBUcAXrIEVSG97fRxYScbZYMeyYIVzNk6tS5-R9/pub?fbclid=IwAR34sAGRAZRhqoWOGwab_qL3WEYF034AN6jrffF_RXOrgT2laOTO0UufVsU

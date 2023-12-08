@@ -3,13 +3,13 @@
 
 # XDC: imports/cp-eng-hwsynlab2023/Basys-3-Master-Custom.xdc
 
-# IP: ip/clock_module/clock_module.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==clock_module || ORIG_REF_NAME==clock_module} -quiet] -quiet
+# IP: ip/CW/CW.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==CW || ORIG_REF_NAME==CW} -quiet] -quiet
 
-# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module_board.xdc
-set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==clock_module || ORIG_REF_NAME==clock_module} -quiet] {/inst } ]/inst ] -quiet] -quiet
+# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW_board.xdc
+set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==CW || ORIG_REF_NAME==CW} -quiet] {/inst } ]/inst ] -quiet] -quiet
 
-# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module.xdc
-#dup# set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==clock_module || ORIG_REF_NAME==clock_module} -quiet] {/inst } ]/inst ] -quiet] -quiet
+# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW.xdc
+#dup# set_property KEEP_HIERARCHY SOFT [get_cells [split [join [get_cells -hier -filter {REF_NAME==CW || ORIG_REF_NAME==CW} -quiet] {/inst } ]/inst ] -quiet] -quiet
 
-# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module_ooc.xdc
+# XDC: c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW_ooc.xdc

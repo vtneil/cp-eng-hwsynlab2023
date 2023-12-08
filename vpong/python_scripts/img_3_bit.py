@@ -28,6 +28,7 @@ def convert_to_argb(image):
             b_bit = '1' if blue >= 128 else '0'
             # Combine the bits
             argb = f'{a_bit}{r_bit}{g_bit}{b_bit}'
+            # argb = f'{r_bit}{g_bit}{b_bit}'
             row_data.append(argb)
         bit_strings.append(row_data)
     return bit_strings
@@ -46,11 +47,15 @@ def process_image(file_path, compression_factor):
 
 
 # Example usage
-file_path = 'pikachu-transparent-hd-1.png'
+file_path = 'pong_bg.png'
 compression_factor = 2  # Replace with your desired factor
 bit_strings = process_image(file_path, compression_factor)
 
 print(f'{len(bit_strings[0])}, {len(bit_strings)}')
 
+f = open('out.txt', mode='w')
+
 for row in bit_strings:
-    print('_'.join(row))
+    s = '_'.join(row).replace('1000', '1110')
+    print(s)
+    print(s, file=f)

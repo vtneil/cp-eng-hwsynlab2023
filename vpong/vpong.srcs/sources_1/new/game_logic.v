@@ -82,17 +82,18 @@ module game_logic #(
     wire ball_hits_paddles = ball_hits_paddle1 | ball_hits_paddle2;
     
     wire pad1_hits_left = (pad1_px <= PADDLE1_X_MIN);
-    wire pad1_hits_right = (pad1_px + IMAGE_PADDLE_H >= PADDLE1_X_MAX);
+    wire pad1_hits_right = (pad1_px + IMAGE_PADDLE_W >= PADDLE1_X_MAX);
     wire pad1_hits_top = (pad1_py <= 0);
     wire pad1_hits_bot = (pad1_py + IMAGE_PADDLE_H >= VGA_RES_HEIGHT - 1);
     
     wire pad2_hits_left = (pad2_px <= PADDLE2_X_MIN);
-    wire pad2_hits_right = (pad2_px + IMAGE_PADDLE_H >= PADDLE2_X_MAX);
+    wire pad2_hits_right = (pad2_px + IMAGE_PADDLE_W >= PADDLE2_X_MAX);
     wire pad2_hits_top = (pad2_py <= 0);
     wire pad2_hits_bot = (pad2_py + IMAGE_PADDLE_H >= VGA_RES_HEIGHT - 1);
     
     wire tick_paddle;
     
+    // Velocity Timing
     counter #(
     ) cnt_ball_movement_x(
         .clk_out(tick_ball_x),
@@ -127,10 +128,10 @@ module game_logic #(
         ball_py <= VGA_MID_Y - (IMAGE_BALL_H / 2);
         ball_dy <= BALL_DIR_UP;
         
-        pad1_px <= PADDLE1_X_MIN;
+        pad1_px <= PADDLE1_X_MIN + 1;
         pad1_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
         
-        pad2_px <= PADDLE2_X_MAX;
+        pad2_px <= PADDLE2_X_MAX - 1;
         pad2_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
     end
     
@@ -205,7 +206,7 @@ module game_logic #(
     
     // Paddle velocity and direction on key presses
     always @(*) begin
-        // Paddle 1
+        // Paddle 1 (Y)
         case ({key_states[KEY_W], key_states[KEY_S]})
             2'b10: begin
                 pad1_dy = BALL_DIR_UP;
@@ -221,7 +222,23 @@ module game_logic #(
             end
         endcase
         
-        // Paddle 2
+        // Paddle 1 (X)
+        case ({key_states[KEY_A], key_states[KEY_D]})
+            2'b10: begin
+                pad1_dx = BALL_DIR_LEFT;
+                pad1_vx = 1'b1;
+            end
+            2'b01: begin
+                pad1_dx = BALL_DIR_RIGHT;
+                pad1_vx = 1'b1;
+            end
+            default: begin
+                pad1_dx = BALL_DIR_LEFT;
+                pad1_vx = 1'b0;
+            end
+        endcase
+        
+        // Paddle 2 (Y)
         case ({key_states[KEY_I], key_states[KEY_K]})
             2'b10: begin
                 pad2_dy = BALL_DIR_UP;
@@ -236,14 +253,30 @@ module game_logic #(
                 pad2_vy = 1'b0;
             end
         endcase
+        
+        // PADDLE 2 (X)
+        case ({key_states[KEY_J], key_states[KEY_L]})
+            2'b10: begin
+                pad2_dx = BALL_DIR_LEFT;
+                pad2_vx = 1'b1;
+            end
+            2'b01: begin
+                pad2_dx = BALL_DIR_RIGHT;
+                pad2_vx = 1'b1;
+            end
+            default: begin
+                pad2_dx = BALL_DIR_LEFT;
+                pad2_vx = 1'b0;
+            end
+        endcase
     end
     
     always @(posedge tick_paddle, posedge reset) begin
         if (reset) begin
-            pad1_px <= PADDLE1_X_MIN;
+            pad1_px <= PADDLE1_X_MIN + 1;
             pad1_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
             
-            pad2_px <= PADDLE2_X_MAX;
+            pad2_px <= PADDLE2_X_MAX - 1;
             pad2_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
         end else begin
             // Paddle 1 (Y)
@@ -283,11 +316,49 @@ module game_logic #(
                     end
                 end
             end
+        
+            // Paddle 2 (Y)
+            if (pad2_dy == BALL_DIR_UP) begin
+                if (pad2_vy) begin
+                    if (~pad2_hits_top) begin
+                        pad2_py <= pad2_py - 1;
+                    end else begin
+                        pad2_py <= pad2_py + 1;
+                    end
+                end
+            end else begin
+                if (pad2_vy) begin
+                    if (~pad2_hits_bot) begin
+                        pad2_py <= pad2_py + 1;
+                    end else begin
+                        pad2_py <= pad2_py - 1;
+                    end
+                end
+            end
             
+            // Paddle 2 (X)
+            if (pad2_dx == BALL_DIR_LEFT) begin
+                if (pad2_vx) begin
+                    if (~pad2_hits_left) begin
+                        pad2_px <= pad2_px - 1;
+                    end else begin
+                        pad2_px <= pad2_px + 1;
+                    end
+                end
+            end else begin
+                if (pad2_vx) begin
+                    if (~pad2_hits_right) begin
+                        pad2_px <= pad2_px + 1;
+                    end else begin
+                        pad2_px <= pad2_px - 1;
+                    end
+                end
+            end
         end
     end
     
     assign ball_pos = {ball_px, ball_py};
-    assign paddle_pos = {pad1_py, pad2_py};
+    assign paddle1_pos = {pad1_px, pad1_py};
+    assign paddle2_pos = {pad2_px, pad2_py};
 
 endmodule

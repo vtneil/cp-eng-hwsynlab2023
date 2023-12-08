@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
 module vga_sync #(
-    parameter H_DISPLAY = 640,
-    parameter H_L_BORDER = 48,
-    parameter H_R_BORDER = 16,
-    parameter H_RETRACE = 96,
-    parameter V_DISPLAY = 480,
-    parameter V_T_BORDER = 10,
-    parameter V_B_BORDER = 33,
-    parameter V_RETRACE = 2
+    parameter H_DISPLAY         = 640,
+    parameter H_BACK_PORCH      = 48,
+    parameter H_FRONT_PORCH     = 16,
+    parameter H_SYNC_PULSE      = 96,
+    parameter V_DISPLAY         = 480,
+    parameter V_BACK_PORCH      = 33,
+    parameter V_FRONT_PORCH     = 10,
+    parameter V_SYNC_PULSE      = 2
 ) (
     output wire hsync,
     output wire vsync,
@@ -20,12 +20,12 @@ module vga_sync #(
     input wire reset
 );
 
-    localparam H_MAX           = H_DISPLAY + H_L_BORDER + H_R_BORDER + H_RETRACE - 1;
-    localparam START_H_RETRACE = H_DISPLAY + H_R_BORDER;
-    localparam END_H_RETRACE   = H_DISPLAY + H_R_BORDER + H_RETRACE - 1;
-    localparam V_MAX           = V_DISPLAY + V_T_BORDER + V_B_BORDER + V_RETRACE - 1;
-    localparam START_V_RETRACE = V_DISPLAY + V_B_BORDER;
-    localparam END_V_RETRACE   = V_DISPLAY + V_B_BORDER + V_RETRACE - 1;
+    localparam H_MAX                = H_DISPLAY + H_BACK_PORCH + H_FRONT_PORCH + H_SYNC_PULSE - 1;
+    localparam START_H_SYNC_PULSE   = H_DISPLAY + H_FRONT_PORCH;
+    localparam END_H_SYNC_PULSE     = H_DISPLAY + H_FRONT_PORCH + H_SYNC_PULSE - 1;
+    localparam V_MAX                = V_DISPLAY + V_FRONT_PORCH + V_BACK_PORCH + V_SYNC_PULSE - 1;
+    localparam START_V_SYNC_PULSE   = V_DISPLAY + V_BACK_PORCH;
+    localparam END_V_SYNC_PULSE     = V_DISPLAY + V_BACK_PORCH + V_SYNC_PULSE - 1;
     
     // registers to keep track of current pixel location
     reg [9:0] h_count_reg;
@@ -64,10 +64,10 @@ module vga_sync #(
         
     // hsync and vsync are active low signals
     // hsync signal asserted during horizontal retrace
-    assign hsync_next = (h_count_reg >= START_H_RETRACE) && (h_count_reg <= END_H_RETRACE);
+    assign hsync_next = (h_count_reg >= START_H_SYNC_PULSE) && (h_count_reg <= END_H_SYNC_PULSE);
 
     // vsync signal asserted during vertical retrace
-    assign vsync_next = (v_count_reg >= START_V_RETRACE) && (v_count_reg <= END_V_RETRACE);
+    assign vsync_next = (v_count_reg >= START_V_SYNC_PULSE) && (v_count_reg <= END_V_SYNC_PULSE);
 
     // video only on when pixels are in both horizontal and vertical display region
     assign video_on = (h_count_reg < H_DISPLAY) && (v_count_reg < V_DISPLAY);

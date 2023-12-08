@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date         : Fri Dec  8 19:57:48 2023
+| Date         : Sat Dec  9 03:11:59 2023
 | Host         : vt_g14 running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_vpong_control_sets_placed.rpt
 | Design       : top_vpong
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    36 |
-|    Minimum number of control sets                        |    36 |
+| Total control sets                                       |    29 |
+|    Minimum number of control sets                        |    29 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   157 |
+| Unused register locations in slices containing registers |   112 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,15 +39,15 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    36 |
-| >= 0 to < 4        |    16 |
+| Total control sets |    29 |
+| >= 0 to < 4        |     4 |
 | >= 4 to < 6        |     2 |
-| >= 6 to < 8        |     3 |
-| >= 8 to < 10       |     5 |
-| >= 10 to < 12      |     2 |
+| >= 6 to < 8        |     2 |
+| >= 8 to < 10       |     7 |
+| >= 10 to < 12      |     3 |
 | >= 12 to < 14      |     1 |
-| >= 14 to < 16      |     0 |
-| >= 16              |     7 |
+| >= 14 to < 16      |     1 |
+| >= 16              |     9 |
 +--------------------+-------+
 * Control sets can be remapped at either synth_design or opt_design
 
@@ -58,11 +58,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |              67 |           36 |
-| No           | No                    | Yes                    |              63 |           29 |
-| No           | Yes                   | No                     |              71 |           20 |
-| Yes          | No                    | No                     |              53 |           25 |
-| Yes          | No                    | Yes                    |              29 |           13 |
+| No           | No                    | No                     |            1426 |         1146 |
+| No           | No                    | Yes                    |              69 |           30 |
+| No           | Yes                   | No                     |             127 |           44 |
+| Yes          | No                    | No                     |              41 |            8 |
+| Yes          | No                    | Yes                    |             193 |          138 |
 | Yes          | Yes                   | No                     |              24 |            9 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -70,45 +70,38 @@ Table of Contents
 4. Detailed Control Set Information
 -----------------------------------
 
-+---------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------+------------------+----------------+--------------+
-|                    Clock Signal                   |                         Enable Signal                         |                     Set/Reset Signal                    | Slice Load Count | Bel Load Count | Bels / Slice |
-+---------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------+------------------+----------------+--------------+
-|  baud_BUFG                                        | usb_rs232_tx/dout                                             |                                                         |                1 |              1 |         1.00 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_clk/O_i_1_n_0            |                                                         |                1 |              1 |         1.00 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_data/O_i_1__0_n_0        |                                                         |                1 |              1 |         1.00 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_data/Iv_i_1__0_n_0       |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[7]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[0]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[4]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[2]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[5]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[3]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[1]                                          |                                                         |                1 |              1 |         1.00 |
-|  baud_BUFG                                        | usb_rs232_rx/dout[6]                                          |                                                         |                1 |              1 |         1.00 |
-|  clock_inst/inst/CLK_50MHZ                        |                                                               | ps2_usb_keyboard/ps2_usb_keyboard/db_data/Iv_i_1__0_n_0 |                1 |              1 |         1.00 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_clk/clear                |                                                         |                1 |              1 |         1.00 |
-|  clk_disp_div/clk_out                             |                                                               |                                                         |                1 |              2 |         2.00 |
-|  clock_inst/inst/CLK_25MHZ                        |                                                               |                                                         |                1 |              3 |         3.00 |
-| ~ps2_usb_keyboard/ps2_usb_keyboard/db_clk/O_reg_0 | ps2_usb_keyboard/ps2_usb_keyboard/cnt                         | ps2_usb_keyboard/ps2_usb_keyboard/cnt[3]_i_1_n_0        |                3 |              4 |         1.33 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_data/count[3]_i_1__0_n_0 | ps2_usb_keyboard/ps2_usb_keyboard/db_data/Iv_i_1__0_n_0 |                1 |              4 |         4.00 |
-|  clock_inst/inst/CLK_100MHZ                       |                                                               | btn_reset/genblk1[0].the_debouncer/clear                |                3 |              6 |         2.00 |
-|  baud_BUFG                                        |                                                               |                                                         |                3 |              7 |         2.33 |
-|  clock_inst/inst/CLK_50MHZ                        |                                                               |                                                         |                4 |              7 |         1.75 |
-|  baud_BUFG                                        | usb_rs232_rx/is_receiving                                     | usb_rs232_rx/count[7]_i_1__0_n_0                        |                3 |              8 |         2.67 |
-|  baud_BUFG                                        | usb_rs232_rx/E[0]                                             |                                                         |                3 |              8 |         2.67 |
-|  baud_BUFG                                        | usb_rs232_tx/is_sending                                       | usb_rs232_tx/count[7]_i_1_n_0                           |                2 |              8 |         4.00 |
-| ~ps2_usb_keyboard/ps2_usb_keyboard/db_clk/O_reg_0 |                                                               |                                                         |                3 |              9 |         3.00 |
-|  ball_px_reg[9]_i_2_n_0                           | ps2_usb_keyboard/E[0]                                         | btn_reset/genblk1[0].the_debouncer/AR[0]                |                5 |              9 |         1.80 |
-|  clock_inst/inst/CLK_25MHZ                        | main_vga_sync/v_count_reg0                                    | btn_reset/genblk1[0].the_debouncer/AR[0]                |                3 |             10 |         3.33 |
-|  clock_inst/inst/CLK_100MHZ                       | graphics_renderer_inst/gpu_py[9]_i_1_n_0                      | btn_reset/genblk1[0].the_debouncer/AR[0]                |                5 |             10 |         2.00 |
-|  clock_inst/inst/CLK_25MHZ                        |                                                               | btn_reset/genblk1[0].the_debouncer/AR[0]                |                5 |             12 |         2.40 |
-|  clock_inst/inst/CLK_100MHZ                       | ps2_usb_keyboard/ps2_usb_keyboard/keycode_r_reg[14]_0         |                                                         |                5 |             16 |         3.20 |
-|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/keycode_r[15]_i_1_n_0       |                                                         |                4 |             16 |         4.00 |
-|  ball_px_reg[9]_i_2_n_0                           |                                                               | btn_reset/genblk1[0].the_debouncer/AR[0]                |               13 |             22 |         1.69 |
-|  clock_inst/inst/CLK_100MHZ                       |                                                               | btn_reset/genblk1[0].the_debouncer/AR[0]                |               11 |             29 |         2.64 |
-|  clock_inst/inst/CLK_100MHZ                       |                                                               | main_uart_baudrate_generator/clear                      |                8 |             32 |         4.00 |
-|  clock_inst/inst/CLK_100MHZ                       |                                                               | clk_disp_div/clear                                      |                8 |             32 |         4.00 |
-|  clock_inst/inst/CLK_100MHZ                       |                                                               |                                                         |               24 |             39 |         1.62 |
-+---------------------------------------------------+---------------------------------------------------------------+---------------------------------------------------------+------------------+----------------+--------------+
++---------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------+------------------+----------------+--------------+
+|                    Clock Signal                   |                        Enable Signal                       |                        Set/Reset Signal                       | Slice Load Count | Bel Load Count | Bels / Slice |
++---------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------+------------------+----------------+--------------+
+|  clock_inst/inst/CLK_50MHZ                        |                                                            | ps2_usb_keyboard/ps2_usb_keyboard/db_data/count[3]_i_1__0_n_0 |                1 |              1 |         1.00 |
+|  baud_BUFG                                        | usb_rs232_tx/dout                                          |                                                               |                1 |              1 |         1.00 |
+|  clk_disp_div/clk_out                             |                                                            |                                                               |                1 |              2 |         2.00 |
+|  clock_inst/inst/CLK_25MHZ                        |                                                            |                                                               |                2 |              3 |         1.50 |
+|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/db_data/count[3]_i_2_n_0 | ps2_usb_keyboard/ps2_usb_keyboard/db_data/count[3]_i_1__0_n_0 |                1 |              4 |         4.00 |
+| ~ps2_usb_keyboard/ps2_usb_keyboard/db_clk/O_reg_0 | ps2_usb_keyboard/ps2_usb_keyboard/cnt                      | ps2_usb_keyboard/ps2_usb_keyboard/cnt[3]_i_1_n_0              |                2 |              4 |         2.00 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | btn_reset/genblk1[0].the_debouncer/clear                      |                3 |              6 |         2.00 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | graphics_renderer_inst/sel[3]                                 |                3 |              6 |         2.00 |
+|  baud_BUFG                                        | usb_rs232_rx/E[0]                                          |                                                               |                1 |              8 |         8.00 |
+|  baud_BUFG                                        | usb_rs232_rx/is_receiving                                  | usb_rs232_rx/count[7]_i_1__0_n_0                              |                3 |              8 |         2.67 |
+|  baud_BUFG                                        | usb_rs232_tx/is_sending                                    | usb_rs232_tx/count[7]_i_1_n_0                                 |                3 |              8 |         2.67 |
+|  ball_px_reg[9]_i_2_n_0                           | ps2_usb_keyboard/E[0]                                      | btn_reset/genblk1[0].the_debouncer/reset                      |                5 |              9 |         1.80 |
+|  ball_px_reg[9]_i_2_n_0                           | ps2_usb_keyboard/key_status_reg[28]_0[0]                   | btn_reset/genblk1[0].the_debouncer/reset                      |                6 |              9 |         1.50 |
+|  ball_px_reg[9]_i_2_n_0                           | ps2_usb_keyboard/key_status_reg[29]_0[0]                   | btn_reset/genblk1[0].the_debouncer/reset                      |                5 |              9 |         1.80 |
+| ~ps2_usb_keyboard/ps2_usb_keyboard/db_clk/O_reg_0 |                                                            |                                                               |                3 |              9 |         3.00 |
+|  clock_inst/inst/CLK_25MHZ                        | main_vga_sync/v_count_reg0                                 | btn_reset/genblk1[0].the_debouncer/reset                      |                4 |             10 |         2.50 |
+|  ball_px_reg[9]_i_2_n_0                           | ps2_usb_keyboard/key_status_reg[59]_0[0]                   | btn_reset/genblk1[0].the_debouncer/reset                      |                5 |             10 |         2.00 |
+|  clock_inst/inst/CLK_50MHZ                        |                                                            |                                                               |                5 |             11 |         2.20 |
+|  clock_inst/inst/CLK_25MHZ                        |                                                            | btn_reset/genblk1[0].the_debouncer/reset                      |                5 |             12 |         2.40 |
+|  baud_BUFG                                        |                                                            |                                                               |                5 |             15 |         3.00 |
+|  clock_inst/inst/CLK_50MHZ                        | ps2_usb_keyboard/ps2_usb_keyboard/keycode_r[15]_i_1_n_0    |                                                               |                3 |             16 |         5.33 |
+|  clock_inst/inst/CLK_100MHZ                       | ps2_usb_keyboard/ps2_usb_keyboard/oflag_reg_0              |                                                               |                3 |             16 |         5.33 |
+|  ball_px_reg[9]_i_2_n_0                           |                                                            | btn_reset/genblk1[0].the_debouncer/reset                      |               11 |             22 |         2.00 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | main_uart_baudrate_generator/clear                            |                8 |             32 |         4.00 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | clk_disp_div/clear                                            |                8 |             32 |         4.00 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | btn_reset/genblk1[0].the_debouncer/reset                      |               14 |             35 |         2.50 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            | graphics_renderer_inst/gpu_py_reg[9]_60                       |               21 |             50 |         2.38 |
+|  clock_inst/inst/CLK_100MHZ                       | graphics_renderer_inst/gpu_py[9]_i_1_n_0                   | btn_reset/genblk1[0].the_debouncer/reset                      |              113 |            146 |         1.29 |
+|  clock_inst/inst/CLK_100MHZ                       |                                                            |                                                               |             1130 |           1386 |         1.23 |
++---------------------------------------------------+------------------------------------------------------------+---------------------------------------------------------------+------------------+----------------+--------------+
 
 

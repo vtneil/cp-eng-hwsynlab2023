@@ -2,6 +2,7 @@
 
 module bitmap_renderer #(
     parameter GPU_COLOR_BITS    = 3,
+    parameter GPU_ALPHA_CHANNEL = 1,
     parameter IMAGE_WIDTH       = 16,
     parameter IMAGE_HEIGHT      = 16,
     parameter IMAGE_ROM_FILE    = "rom_ball_texture.mem"
@@ -19,7 +20,7 @@ module bitmap_renderer #(
     `include "params.vh"
     
     // Image Generation Local Parameters
-    localparam GPU_COLOR_BITS_ALPHA = GPU_COLOR_BITS + 1;       // With MSB Alpha channel: ARGB
+    localparam GPU_COLOR_BITS_ALPHA = GPU_COLOR_BITS + GPU_ALPHA_CHANNEL;       // With MSB Alpha channel: ARGB
     localparam ROM_MAX_COL_ADDR     = $clog2(IMAGE_WIDTH);
     localparam ROM_MAX_ROW_ADDR     = $clog2(IMAGE_HEIGHT);
     localparam ROM_COL_BITS         = IMAGE_WIDTH * GPU_COLOR_BITS_ALPHA;
@@ -66,7 +67,7 @@ module bitmap_renderer #(
     always @(posedge clk) begin
         if ((valid_start_x && offset_x < image_width_scaled) &&
             (valid_start_y && offset_y < image_height_scaled) &&
-            (pixel_a)) begin
+            ((GPU_ALPHA_CHANNEL) ? pixel_a : 1'b1)) begin
             
             pixel_data <= pixel_rgb;
             pixel_on <= 1'b1;

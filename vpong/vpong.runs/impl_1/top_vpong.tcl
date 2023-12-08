@@ -145,7 +145,7 @@ OPTRACE "set parameters" START { }
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.runs/synth_1/top_vpong.dcp
-  read_ip -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/ip/clock_module/clock_module.xci
+  read_ip -quiet C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/sources_1/ip/CW/CW.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/constrs_1/imports/cp-eng-hwsynlab2023/Basys-3-Master-Custom.xdc
 OPTRACE "read constraints: implementation" END { }

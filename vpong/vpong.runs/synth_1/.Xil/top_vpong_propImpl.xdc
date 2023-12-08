@@ -1,8 +1,8 @@
-set_property SRC_FILE_INFO {cfile:c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/clock_module/clock_module.xdc rfile:../../../vpong.gen/sources_1/ip/clock_module/clock_module.xdc id:1 order:EARLY scoped_inst:clock_inst/inst} [current_design]
+set_property SRC_FILE_INFO {cfile:c:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.gen/sources_1/ip/CW/CW.xdc rfile:../../../vpong.gen/sources_1/ip/CW/CW.xdc id:1 order:EARLY scoped_inst:clock_inst/inst} [current_design]
 set_property SRC_FILE_INFO {cfile:C:/Users/vivat/Desktop/git_target/cp-eng-hwsynlab2023/vpong/vpong.srcs/constrs_1/imports/cp-eng-hwsynlab2023/Basys-3-Master-Custom.xdc rfile:../../../vpong.srcs/constrs_1/imports/cp-eng-hwsynlab2023/Basys-3-Master-Custom.xdc id:2} [current_design]
 current_instance clock_inst/inst
 set_property src_info {type:SCOPED_XDC file:1 line:54 export:INPUT save:INPUT read:READ} [current_design]
-set_input_jitter [get_clocks -of_objects [get_ports clk_in1]] 0.100
+set_input_jitter [get_clocks -of_objects [get_ports CLK_SOURCE]] 0.100
 current_instance
 set_property src_info {type:XDC file:2 line:7 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN W5 [get_ports clk]

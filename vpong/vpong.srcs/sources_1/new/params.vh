@@ -17,8 +17,11 @@ localparam GP_GRAPHICS      = 1;
 localparam GP_TEXT_BG       = 2;
 localparam GP_PADDLE        = 3;
 localparam GP_BALL          = 4;
-localparam GP_TEXT_FG       = 5;
-localparam GP_FOREGROUND    = 6;
+localparam GP_TEXT_FG4      = 5;
+localparam GP_TEXT_FG3      = 6;
+localparam GP_TEXT_FG2      = 7;
+localparam GP_TEXT_FG1      = 8;
+localparam GP_FOREGROUND    = 9;
 
 // Global State and Game State ////////////////////////////////
 localparam GLOB_STATE_MENU  = 2'd0;
