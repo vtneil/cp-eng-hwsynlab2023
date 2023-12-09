@@ -68,3 +68,4 @@ localparam KEY_X            = 8'h22;
 localparam KEY_Y            = 8'h35;
 localparam KEY_Z            = 8'h1A;
 localparam KEY_SPACE        = 8'h29;
+localparam KEY_ESC          = 8'h76;

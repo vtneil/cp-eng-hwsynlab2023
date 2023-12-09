@@ -96,6 +96,8 @@ set_property src_info {type:XDC file:2 line:106 export:INPUT save:INPUT read:REA
 set_property PACKAGE_PIN W4 [get_ports {an[3]}]
 set_property src_info {type:XDC file:2 line:111 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN U18 [get_ports btnC]
+set_property src_info {type:XDC file:2 line:115 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN W19 [get_ports btnL]
 set_property src_info {type:XDC file:2 line:235 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN G19 [get_ports {vgaRed[0]}]
 set_property src_info {type:XDC file:2 line:237 export:INPUT save:INPUT read:READ} [current_design]

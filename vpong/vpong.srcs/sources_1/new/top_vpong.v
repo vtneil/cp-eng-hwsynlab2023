@@ -27,6 +27,7 @@ module top_vpong #(
     
     input wire [15:0] sw,
     input wire btnC,
+    input wire btnL,
     input wire clk
 );
     
@@ -47,12 +48,16 @@ module top_vpong #(
     localparam IMAGE_PADDLE_W       = 8;
     localparam IMAGE_PADDLE_H       = 72;
     
+    localparam MAX_NUM_STR          = 16;
+    localparam STR_PER_FRAME        = 4;
+    
     // Generate ///////////////////////////////////////////////
     genvar i;
     
     // System /////////////////////////////////////////////////
     wire sys_clk;
     wire reset;
+    wire reset_vga;
     reg [15:0] led_r;
     wire gpu_frame_tick;
     
@@ -87,8 +92,14 @@ module top_vpong #(
         .d(btnC),
         .clk(CLK_100MHZ)
     );
+    switch_button btn_reset_vga(
+        .q(reset_vga),
+        .d(btnL),
+        .clk(CLK_100MHZ)
+    );
     
     wire [15:0] i_sw;
+    
     switch_button #(
         .BUTTON_WIDTH(16)
     ) sw_array(
@@ -97,12 +108,16 @@ module top_vpong #(
         .clk(CLK_100MHZ)
     );
     
-    // Keyboard Input
+    // Keyboard Input /////////////////////////////////////////
     wire [255:0] key_states;
+    wire [255:0] key_press;
+    wire [255:0] key_release;
     
     keyboard ps2_usb_keyboard(
         .keycode(),
         .key_states(key_states),
+        .key_press(key_press),
+        .key_release(key_release),
         .ps2_clk(PS2Clk),
         .ps2_data(PS2Data),
         .clk_50mhz(CLK_50MHZ),
@@ -110,8 +125,14 @@ module top_vpong #(
     );
     
     // Game Components ////////////////////////////////////////
-    wire [9:0] ball_px;
-    wire [9:0] ball_py;
+    wire [1:0] glob_state;
+    wire [1:0] game_state;
+    wire [7:0] score_p1;
+    wire [7:0] score_p2;
+    
+    wire [1:0] ball_status;
+    wire [9:0] ball_px[1:0];
+    wire [9:0] ball_py[1:0];
     
     wire [9:0] pad1_px;
     wire [9:0] pad1_py;
@@ -130,17 +151,30 @@ module top_vpong #(
         .PADDLE1_X_MIN(PADDLE_DIST),
         .PADDLE2_X_MAX(VGA_RES_WIDTH - (PADDLE_DIST + IMAGE_PADDLE_W)),
         .PADDLE_X_ZONE(200),
-        .BALL_VX(1000),
-        .BALL_VY(1000),
-        .PADDLE_VY(1000)
+        .BALL_VX(500),
+        .BALL_VY(500),
+        .PADDLE_VY(600)
     ) game_logic_inst(
-        .ball_pos({ball_px, ball_py}),
+        .glob_state_o(glob_state),
+        .game_state_o(game_state),
+        .ball_status(ball_status),
+        .score_p1(score_p1),
+        .score_p2(score_p2),
+        .ball1_pos({ball_px[1], ball_py[1]}),
+        .ball0_pos({ball_px[0], ball_py[0]}),
         .paddle1_pos({pad1_px, pad1_py}),
         .paddle2_pos({pad2_px, pad2_py}),
         .key_states(key_states),
+        .key_press(key_press),
+        .key_release(key_release),
         .clk(sys_clk),
-        .reset(reset)
+        .btn_reset(reset)
     );
+    
+    always @(posedge sys_clk) begin
+        led_r[15:14] <= glob_state;
+        led_r[13:12] <= game_state;
+    end
     
     // LEDs ///////////////////////////////////////////////////
     assign led = led_r;
@@ -150,7 +184,7 @@ module top_vpong #(
     wire [3:0] digits [3:0];
     wire [15:0] all_digits;
     
-    quad_7_seg main_display(
+    quad_7_seg seven_seg_display(
         .seg(seg), 
         .an(an), 
         .dp(dp), 
@@ -158,7 +192,8 @@ module top_vpong #(
         .num3(digits[3]), 
         .num2(digits[2]), 
         .num1(digits[1]), 
-        .num0(digits[0])
+        .num0(digits[0]),
+        .dot_in(4'b0100)
     );
     
     assign {digits[3], digits[2], digits[1], digits[0]} = all_digits;
@@ -205,7 +240,7 @@ module top_vpong #(
         .x(vga_pos_x),
         .y(vga_pos_y),
         .clk(CLK_25MHZ),
-        .reset(reset)
+        .reset(reset_vga)
     );
     
     // Video Memory (VRAM) ////////////////////////////////////
@@ -250,7 +285,7 @@ module top_vpong #(
         .x(gpu_pos_x),
         .y(gpu_pos_y),
         .clk(sys_clk),
-        .reset(reset)
+        .reset(reset_vga)
     );
     
     // GPU-VRAM-VGA Read/Write Address ////////////////////////
@@ -282,27 +317,31 @@ module top_vpong #(
     endgenerate
     
     // Text Renderer //////////////////////////////////////////
-    localparam DATA_WIDTH  = 10 + 10 + 3 + GPU_COLOR_BITS + GPU_COLOR_BITS + 1 + $clog2(16);
-    wire [9:0] tc_start_x [3:0];
-    wire [9:0] tc_start_y [3:0];
-    wire [2:0] tc_scale [3:0];
-    wire [GPU_COLOR_BITS - 1:0] tc_fg_color [3:0];
-    wire [GPU_COLOR_BITS - 1:0] tc_bg_color [3:0];
-    wire tc_transparent_bg [3:0];
-    wire [$clog2(16) - 1:0] tc_line_addr [3:0];
-    wire [DATA_WIDTH - 1:0] tc_data [3:0];
+    localparam DATA_WIDTH  = 10 + 10 + 3 + GPU_COLOR_BITS + GPU_COLOR_BITS + 1 + $clog2(MAX_NUM_STR);
+    wire [9:0] tc_start_x [STR_PER_FRAME - 1:0];
+    wire [9:0] tc_start_y [STR_PER_FRAME - 1:0];
+    wire [2:0] tc_scale [STR_PER_FRAME - 1:0];
+    wire [GPU_COLOR_BITS - 1:0] tc_fg_color [STR_PER_FRAME - 1:0];
+    wire [GPU_COLOR_BITS - 1:0] tc_bg_color [STR_PER_FRAME - 1:0];
+    wire tc_transparent_bg [STR_PER_FRAME - 1:0];
+    wire [$clog2(MAX_NUM_STR) - 1:0] tc_line_addr [STR_PER_FRAME - 1:0];
+    wire [DATA_WIDTH - 1:0] tc_data [STR_PER_FRAME - 1:0];
     
     reg [1:0] tc_state;
     initial tc_state <= 0;
     
+//    always @(clk_1s) begin
+//        tc_state <= tc_state + 1;
+//    end
+    
     generate
-        for (i = 0; i < 4; i = i + 1) begin
+        for (i = 0; i < STR_PER_FRAME; i = i + 1) begin
             text_renderer #(
                 .GPU_COLOR_BITS(GPU_COLOR_BITS),
                 .CHAR_BASE_WIDTH(8),
                 .CHAR_BASE_HEIGHT(16),
                 .MAX_STRLEN(16),
-                .MAX_NUM_STR(16),
+                .MAX_NUM_STR(MAX_NUM_STR),
                 .TEXT_ROM_FILE("rom_prog_text.mem")
             ) text_renderer_inst(
                 .pixel_data(gp_data[GP_TEXT_FG1 - i]),
@@ -322,7 +361,7 @@ module top_vpong #(
             
             text_context #(
                 .GPU_COLOR_BITS(GPU_COLOR_BITS),
-                .MAX_NUM_STR(16),
+                .MAX_NUM_STR(MAX_NUM_STR),
                 .MAX_NUM_STATES(4)
             ) tc_fg_inst(
                 .start_x(tc_start_x[i]),
@@ -338,30 +377,41 @@ module top_vpong #(
         end
     endgenerate
     
-    assign tc_data[0] = {{9'd0, 9'd0, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd2},
+    // String in State 3 (String 0)
+    // String in State 2 (String 0)
+    // String in State 1 (String 0)
+    // String in State 0 (String 0)
+    assign tc_data[0] = {{9'd0, 9'd0, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd2},  
                          {9'd0, 9'd16, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd3},
                          {9'd0, 9'd32, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd4},
-                         {9'd0, 9'd48, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd5}};
+                         {9'd48, 9'd48, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd5}};
     
     // Game Objects Renderer //////////////////////////////////
     // Render Ball
-    bitmap_renderer #(
-        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .GPU_ALPHA_CHANNEL(1),
-        .IMAGE_WIDTH(IMAGE_BALL_W),
-        .IMAGE_HEIGHT(IMAGE_BALL_H),
-        .IMAGE_ROM_FILE("rom_ball_texture.mem")
-    ) ball_renderer_inst(
-        .pixel_data(gp_data[GP_BALL]),
-        .pixel_on(gp_layer[GP_BALL]),
-        .x(gpu_pos_x),
-        .y(gpu_pos_y),
-        .start_x(ball_px),
-        .start_y(ball_py),
-        .scale(3'd1),
-        .clk(sys_clk),
-        .en(1'b1)
-    );
+    
+    wire [1:0] ball_sel;
+    generate
+        for (i = 0; i < 2; i = i + 1) begin
+            assign gp_layer[GP_BALL] = ball_sel[i] & ~ball_status[i];
+            bitmap_renderer #(
+                .GPU_COLOR_BITS(GPU_COLOR_BITS),
+                .GPU_ALPHA_CHANNEL(1),
+                .IMAGE_WIDTH(IMAGE_BALL_W),
+                .IMAGE_HEIGHT(IMAGE_BALL_H),
+                .IMAGE_ROM_FILE("rom_ball_texture.mem")
+            ) ball_renderer_inst(
+                .pixel_data(gp_data[GP_BALL]),
+                .pixel_on(ball_sel[i]),
+                .x(gpu_pos_x),
+                .y(gpu_pos_y),
+                .start_x(ball_px[i]),
+                .start_y(ball_py[i]),
+                .scale(3'd1),
+                .clk(sys_clk),
+                .en(1'b1)
+            );
+        end
+    endgenerate
     
     // Render Paddle 1
     rectangle_renderer #(
@@ -417,23 +467,23 @@ module top_vpong #(
     );
     
     // Render Hamtaro background
-    bitmap_renderer #(
-        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-        .GPU_ALPHA_CHANNEL(0),
-        .IMAGE_WIDTH(320),
-        .IMAGE_HEIGHT(240),
-        .IMAGE_ROM_FILE("pong_bg.mem")
-    ) background_graphics_renderer_inst(
-        .pixel_data(gp_data[GP_GRAPHICS]),
-        .pixel_on(gp_layer[GP_GRAPHICS]),
-        .x(gpu_pos_x),
-        .y(gpu_pos_y),
-        .start_x(0),
-        .start_y(0),
-        .scale(3'd2),
-        .clk(sys_clk),
-        .en(1'b1)
-    );
+//    bitmap_renderer #(
+//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+//        .GPU_ALPHA_CHANNEL(0),
+//        .IMAGE_WIDTH(320),
+//        .IMAGE_HEIGHT(240),
+//        .IMAGE_ROM_FILE("pong_bg.mem")
+//    ) background_graphics_renderer_inst(
+//        .pixel_data(gp_data[GP_GRAPHICS]),
+//        .pixel_on(gp_layer[GP_GRAPHICS]),
+//        .x(gpu_pos_x),
+//        .y(gpu_pos_y),
+//        .start_x(0),
+//        .start_y(0),
+//        .scale(3'd2),
+//        .clk(sys_clk),
+//        .en(1'b1)
+//    );
     
     // Render Game Background
     rectangle_renderer #(
@@ -508,7 +558,7 @@ module top_vpong #(
     end
     
     // Post-Assignment ////////////////////////////////////////
-//    assign {digits[1], digits[0]} = uart_data_rx;
-//    assign {digits[3], digits[2]} = uart_data_tx;
+    assign {digits[1], digits[0]} = score_p2;
+    assign {digits[3], digits[2]} = score_p1;
     
 endmodule

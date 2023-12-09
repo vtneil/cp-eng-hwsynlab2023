@@ -1,48 +1,46 @@
 `timescale 1ns / 1ps
 
-module counter_tb;
+module counter_d99_tb;
 
-    // Parameters of the counter
-    localparam BIT_WIDTH = 32;
-
-    // Testbench Signals
-    reg clk_in;
-    reg [BIT_WIDTH - 1:0] target;
+    // Inputs
+    reg clk;
     reg reset;
-    wire clk_out;
-    wire [BIT_WIDTH - 1:0] cnt_out;
 
-    // Instantiate the counter module
-    counter #(
-        .BIT_WIDTH(BIT_WIDTH)
-    ) uut (
-        .clk_out(clk_out),
-        .cnt_out(cnt_out),
-        .clk_in(clk_in),
-        .target(target),
-        .reset(reset)
+    // Outputs
+    wire [3:0] d1;
+    wire [3:0] d0;
+
+    // Instantiate the Unit Under Test (UUT)
+    counter_d99 uut (
+        .clk(clk), 
+        .reset(reset), 
+        .d1(d1), 
+        .d0(d0)
     );
 
-    // Clock generation for clk_in (let's say 100 MHz)
-    always begin
-        #5 clk_in = ~clk_in; // Toggle clock every 5ns
-    end
-
-    // Testbench initialization and reset
     initial begin
-        // Initialize
-        clk_in = 0;
+        // Initialize Inputs
+        clk = 0;
         reset = 1;
-        target = 100; // Example target value
 
-        // Apply reset
-        #10 reset = 0; // Release reset after 10ns
+        // Wait 100 ns for global reset to finish
+        #100;
+        reset = 0;
 
-        // Run for a specific duration to observe behavior
-        #100000; // Run simulation for 100 microseconds
+        // Add stimulus here
+        #1000;  // Wait for 1000 ns to observe the counter behavior
 
-        // Finish simulation
-        $finish;
+        // Reset the counter
+        reset = 1;
+        #10;
+        reset = 0;
+
+        // Additional tests can be added here
+
+        #1000;  // Wait for 1000 ns to observe the counter behavior after reset
     end
+
+    // Clock generator
+    always #5 clk = ~clk; // Toggle clock every 5 ns
 
 endmodule

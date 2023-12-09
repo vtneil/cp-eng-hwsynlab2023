@@ -60,6 +60,7 @@ module text_renderer #(
         end
     endgenerate
     
+    // String data ////////////////////////////////////////////
     rom_block_hex #(
         .MEM_INIT_FILE(TEXT_ROM_FILE),
         .ROM_WIDTH(ROM_MAX_CHAR_BITS),
