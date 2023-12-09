@@ -353,7 +353,9 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Performance_NetDelay_low" Flow="Vivado Implementation 2023"/>
+    <StratHandle Name="Performance_NetDelay_low" Flow="Vivado Implementation 2023">
+      <Desc>To compensate for optimistic delay estimation, add extra delay cost to long distance and high fanout connections. low setting, least pessimistic)</Desc>
+    </StratHandle>
     <Step Id="init_design"/>
     <Step Id="opt_design">
       <Option Id="Directive">0</Option>
@@ -370,6 +372,8 @@
       <Option Id="Directive">1</Option>
     </Step>
     <Step Id="post_route_phys_opt_design"/>
-    <Step Id="write_bitstream"/>
+    <Step Id="write_bitstream">
+      <Option Id="BinFile">1</Option>
+    </Step>
   </Strategy>
 </GenRun>
