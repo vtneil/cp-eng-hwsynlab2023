@@ -31,7 +31,9 @@ module game_logic #(
     input wire [255:0] key_press,
     input wire [255:0] key_release,
     input wire clk,
-    input wire btn_reset
+    input wire btn_reset,
+    
+    input wire [7:0] MAX_SCORE
 );
 
     `include "params.vh"
@@ -61,7 +63,11 @@ module game_logic #(
     assign BALL_SPAWN_DY[1] = BALL_DIR_DOWN;
     assign BALL_SPAWN_DY[0] = BALL_DIR_UP;
     
-    wire reset = btn_reset;
+    wire reset = btn_reset | key_release[KEY_ESC];
+    
+    reg [7:0] score_p1_r;
+    reg [7:0] score_p2_r;
+    wire score_achieved = score_p1_r >= MAX_SCORE || score_p2_r >= MAX_SCORE;
     
     reg [1:0] glob_state;       // Global State [00-11]
     reg [1:0] game_state;       // Game State [00-11]
@@ -70,6 +76,8 @@ module game_logic #(
     
     assign glob_state_o = glob_state;
     assign game_state_o = game_state;
+    
+    wire [1:0] ball_enable = ~ball_status;
     
     reg [9:0] ball_px[1:0];     // Ball position X
     reg ball_dx[1:0];           // Ball direction X
@@ -118,24 +126,27 @@ module game_logic #(
     genvar i;
     generate
         for (i = 0; i < 2; i = i + 1) begin
-            assign ball_hits_left[i] = (ball_px[i] <= 0);
-            assign ball_hits_right[i] = (ball_px[i] + IMAGE_BALL_W >= VGA_RES_WIDTH - 1);
+            assign ball_hits_left[i] = ball_enable[i] && (ball_px[i] <= 0);
+            assign ball_hits_right[i] = ball_enable[i] && (ball_px[i] + IMAGE_BALL_W >= VGA_RES_WIDTH - 1);
             assign ball_hits_horz[i] = ball_hits_left[i] | ball_hits_right[i];
             assign ball_in_horz[i] = ~ball_hits_horz[i];
             
-            assign ball_hits_top[i] = (ball_py[i] <= 0);
-            assign ball_hits_bot[i] = (ball_py[i] + IMAGE_BALL_H >= VGA_RES_HEIGHT - 1);
+            assign ball_hits_top[i] = ball_enable[i] && (ball_py[i] <= 0);
+            assign ball_hits_bot[i] = ball_enable[i] && (ball_py[i] + IMAGE_BALL_H >= VGA_RES_HEIGHT - 1);
             assign ball_hits_vert[i] = ball_hits_top[i] | ball_hits_bot[i];
             assign ball_in_vert[i] = ~ball_hits_vert[i];
+            
             assign ball_in_frame[i] = ball_in_horz[i] & ball_in_vert[i];
         end
     endgenerate
     
     generate
         for (i = 0; i < 2; i = i + 1) begin
-            assign ball_hits_paddle1[i] = (ball_px[i] + IMAGE_BALL_W > pad1_px && pad1_px + IMAGE_PADDLE_W > ball_px[i]) &&
+            assign ball_hits_paddle1[i] = ball_enable[i] && 
+                                          (ball_px[i] + IMAGE_BALL_W > pad1_px && pad1_px + IMAGE_PADDLE_W > ball_px[i]) &&
                                           (ball_py[i] + IMAGE_BALL_H > pad1_py && pad1_py + IMAGE_PADDLE_H > ball_py[i]);
-            assign ball_hits_paddle2[i] = (ball_px[i] + IMAGE_BALL_W > pad2_px && pad2_px + IMAGE_PADDLE_W > ball_px[i]) &&
+            assign ball_hits_paddle2[i] = ball_enable[i] && 
+                                          (ball_px[i] + IMAGE_BALL_W > pad2_px && pad2_px + IMAGE_PADDLE_W > ball_px[i]) &&
                                           (ball_py[i] + IMAGE_BALL_H > pad2_py && pad2_py + IMAGE_PADDLE_H > ball_py[i]);
             assign ball_hits_paddles[i] = ball_hits_paddle1[i] | ball_hits_paddle2[i];
         end
@@ -143,11 +154,13 @@ module game_logic #(
     
     // For ball hitting one another
     // Horizontal collision detection
-    assign hit_horz = ((ball_px[0] <= ball_px[1] + IMAGE_BALL_W) && (ball_px[0] + IMAGE_BALL_W >= ball_px[1])) &&
+    assign hit_horz = &ball_enable && 
+                      ((ball_px[0] <= ball_px[1] + IMAGE_BALL_W) && (ball_px[0] + IMAGE_BALL_W >= ball_px[1])) &&
                       !(ball_py[0] + IMAGE_BALL_H < ball_py[1] || ball_py[1] + IMAGE_BALL_H < ball_py[0]);
     
     // Vertical collision detection
-    assign hit_vert = ((ball_py[0] < ball_py[1] + IMAGE_BALL_H) && (ball_py[0] + IMAGE_BALL_H > ball_py[1])) &&
+    assign hit_vert = &ball_enable && 
+                      ((ball_py[0] < ball_py[1] + IMAGE_BALL_H) && (ball_py[0] + IMAGE_BALL_H > ball_py[1])) &&
                       !(ball_px[0] + IMAGE_BALL_W < ball_px[1] || ball_px[1] + IMAGE_BALL_W < ball_px[0]);
 
     wire pad1_hits_left = (pad1_px <= PADDLE1_X_MIN);
@@ -168,34 +181,39 @@ module game_logic #(
         game_state <= 0;
     end
     
+    initial begin
+        ball_status <= 0;
+    end
+    
     always @(posedge clk, posedge reset) begin
         if (reset) begin
             glob_state <= 0;
             game_state <= 0;
+            
         end else begin
+            game_state <= game_state_next;
+        
             case (glob_state)
-                2'b00: begin
+                2'b00: begin  // Main Menu
                     if (key_release[KEY_SPACE]) begin
                         glob_state <= 2'b01;
                     end
                 end
                 
-                2'b01: begin
+                2'b01: begin  // Rules
                     if (key_release[KEY_SPACE]) begin
                         glob_state <= 2'b10;
-                    end else if (key_release[KEY_ESC]) begin
-                        glob_state <= 2'b00;
                     end
                 end
                 
-                2'b10: begin
-                    if (key_release[KEY_ESC]) begin
-                        glob_state <= 2'b00;
+                2'b10: begin  // Game State
+                    if (game_state == 2'b11) begin
+                        glob_state <= 2'b11;
                     end
                 end
                 
-                2'b11: begin
-                    if (key_release[KEY_SPACE] | key_release[KEY_ESC]) begin
+                2'b11: begin  // Game Over
+                    if (key_release[KEY_SPACE]) begin
                         glob_state <= 2'b00;
                     end
                 end
@@ -203,28 +221,52 @@ module game_logic #(
         end
     end
     
-    wire tx_c;
-    counter cx(
-        .clk_out(tx_c),
-        .cnt_out(),
-        .clk_in(clk),
-        .target(BASE_CORE_CLOCK / 2),
-        .reset(reset)
-    );
+    always @(*) begin
+        case (game_state)
+            2'b00: begin  // Not running
+                if (glob_state == 2'b10) begin
+                    game_state_next = 2'b01;
+                end else begin
+                    game_state_next = game_state;
+                end
+            end
+            
+            2'b01: begin  // Balls on the board
+                if (&ball_status) begin
+                    game_state_next = 2'b10;
+                end else if (score_achieved) begin
+                    game_state_next = 2'b11;
+                end else begin
+                    game_state_next = game_state;
+                end
+            end
+            
+            2'b10: begin  // Wait for next turn
+                if (key_release[KEY_SPACE]) begin
+                    game_state_next = 2'b01;
+                end else begin
+                    game_state_next = game_state;
+                end
+            end
+            
+            2'b11: begin  // Game Over, always
+                game_state_next = 2'b00;
+            end
+        endcase
+    end
     
-    // Score counter //////////////////////////////////////////
-    counter_d99 score_counter_p1(
-        .d1(score_p1[7:4]),
-        .d0(score_p1[3:0]),
-        .clk(tx_c),
-        .reset()
-    );
-    counter_d99 score_counter_p2(
-        .d1(score_p2[7:4]),
-        .d0(score_p2[3:0]),
-        .clk(tx_c),
-        .reset()
-    );
+    wire is_playing = game_state == 2'b01;
+    
+    // Score display //////////////////////////////////////////
+    initial begin
+        score_p1_r <= 0;
+        score_p2_r <= 0;
+    end
+    
+    assign score_p1[7:4] = (score_p1_r /10) % 10;
+    assign score_p1[3:0] = score_p1_r % 10;
+    assign score_p2[7:4] = (score_p2_r /10) % 10;
+    assign score_p2[3:0] = score_p2_r % 10;
     
     // Velocity Timing ////////////////////////////////////////
     counter #(
@@ -268,39 +310,37 @@ module game_logic #(
         end
     endgenerate
     
-    initial begin
-        ball_status <= 0;
-        
-        pad1_px <= PADDLE1_X_MIN + 1;
-        pad1_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
-        
-        pad2_px <= PADDLE2_X_MAX - 1;
-        pad2_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
+    always @(posedge tick_ball_x, posedge reset) begin
+        if (reset | (game_state == 2'b00 && glob_state == 2'b00)) begin
+            score_p1_r <= 0;
+            score_p2_r <= 0;
+        end else begin
+            if (|ball_hits_left) begin
+                score_p2_r <= score_p2_r + 1;
+            end else if (|ball_hits_right) begin
+                score_p1_r <= score_p1_r + 1;
+            end
+        end
     end
     
     generate
         for (i = 0; i < 2; i = i + 1) begin
             always @(posedge tick_ball_x, posedge reset) begin
-                if (reset) begin
+                if (reset | ~is_playing) begin
                     ball_status[i] <= 0;
-                    
                     ball_px[i] <= BALL_SPAWN_X[i];
                     ball_dx[i] <= BALL_SPAWN_DX[i];
-                end else begin
+                    
+                end else if (ball_enable[i]) begin
                     if (ball_hits_horz[i]) begin
-                        ball_dx[i] <= ~ball_dx[i];
-                        if (ball_dx[i] == BALL_DIR_LEFT)
-                            ball_px[i] <= ball_px[i] + 1;
-                        else
-                            ball_px[i] <= ball_px[i] - 1;
-                            
-                        if (ball_hits_left[i]) begin
-                            // Add score to player 1
-                        end else if (ball_hits_right[i]) begin
-                            // Add score to player 2
-                        end
+//                    // For testing only. (Bounce vertical wall horizontally)
+//                        ball_dx[i] <= ~ball_dx[i];  
+//                        if (ball_dx[i] == BALL_DIR_LEFT)
+//                            ball_px[i] <= ball_px[i] + 1;
+//                        else
+//                            ball_px[i] <= ball_px[i] - 1;
                         
-                        // Go to next ball state.
+                        ball_status[i] <= 1'b1;
                         
                     end else if (ball_hits_paddles[i] | hit_horz) begin
                         ball_dx[i] <= ~ball_dx[i];
@@ -320,10 +360,11 @@ module game_logic #(
             end
             
             always @(posedge tick_ball_y, posedge reset) begin
-                if (reset) begin
+                if (reset | ~is_playing) begin
                     ball_py[i] <= BALL_SPAWN_Y[i];   
                     ball_dy[i] <= BALL_SPAWN_DY[i];
-                end else begin
+                    
+                end else if (ball_enable[i] && is_playing) begin
                     if (ball_hits_vert[i] | hit_vert) begin
                         ball_dy[i] <= ~ball_dy[i];
                         if (ball_dy[i] == BALL_DIR_UP)
@@ -342,6 +383,14 @@ module game_logic #(
     endgenerate
     
     // PADDLE LOGIC ///////////////////////////////////////////
+    
+    initial begin
+        pad1_px <= PADDLE1_X_MIN + 1;
+        pad1_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
+        
+        pad2_px <= PADDLE2_X_MAX - 1;
+        pad2_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
+    end
     
     // Paddle velocity and direction on key presses
     always @(*) begin
@@ -411,13 +460,13 @@ module game_logic #(
     end
     
     always @(posedge tick_paddle, posedge reset) begin
-        if (reset) begin
+        if (reset | ~is_playing) begin
             pad1_px <= PADDLE1_X_MIN + 1;
             pad1_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
-            
             pad2_px <= PADDLE2_X_MAX - 1;
             pad2_py <= VGA_MID_Y - (IMAGE_PADDLE_H / 2);
-        end else begin
+            
+        end else if (is_playing) begin
             // Paddle 1 (Y)
             if (pad1_dy == BALL_DIR_UP) begin
                 if (pad1_vy) begin

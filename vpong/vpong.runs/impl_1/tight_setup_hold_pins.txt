@@ -1,0 +1,12 @@
++====================+===================+====================================================================+
+| Launch Setup Clock | Launch Hold Clock | Pin                                                                |
++====================+===================+====================================================================+
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[2].text_renderer_inst/pixel_data_reg[2]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[1].text_renderer_inst/pixel_data_reg[2]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[3].text_renderer_inst/pixel_data_reg[0]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[3].text_renderer_inst/pixel_data_reg[2]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[0].text_renderer_inst/pixel_data_reg[2]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | genblk2[0].text_renderer_inst/pixel_data_reg[1]/D                  |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | background_graphics_renderer_inst/rom_image_bitmap/data_reg[120]/D |
+| CLK_100MHZ_CW      | CLK_100MHZ_CW     | background_graphics_renderer_inst/rom_image_bitmap/data_reg[130]/D |
++--------------------+-------------------+--------------------------------------------------------------------+

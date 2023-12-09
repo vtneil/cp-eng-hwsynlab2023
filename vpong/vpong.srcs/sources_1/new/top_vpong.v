@@ -39,7 +39,7 @@ module top_vpong #(
     localparam VGA_PIXEL_COUNT      = VGA_RES_WIDTH * VGA_RES_HEIGHT;
     localparam VGA_VRAM_ADDR_BITS   = $clog2(VGA_PIXEL_COUNT);
     localparam GPU_COLOR_BITS       = GPU_COLOR_DEPTH * 3;
-    localparam GRAPHICS_LAYERS      = 10;  // 10 layers rendering
+    localparam GRAPHICS_LAYERS      = 11;  // 11 layers rendering
     
     // Graphics Objects ///////////////////////////////////////
     localparam PADDLE_DIST          = 20;  // Paddle distance from left/right borders
@@ -48,8 +48,12 @@ module top_vpong #(
     localparam IMAGE_PADDLE_W       = 8;
     localparam IMAGE_PADDLE_H       = 72;
     
-    localparam MAX_NUM_STR          = 16;
+    localparam MAX_NUM_STR          = 32;
     localparam STR_PER_FRAME        = 4;
+    localparam OFFSET_MEM_NUMERIC   = 10;
+    
+    // Game Parameters ////////////////////////////////////////
+    localparam MAX_GAME_SCORE       = 21;
     
     // Generate ///////////////////////////////////////////////
     genvar i;
@@ -77,6 +81,14 @@ module top_vpong #(
     // 1000 Hz (1ms) general-purpose clock
     wire clk_1ms;
     clk_div clk_1ms_div(clk_1ms, CLK_100MHZ, 32'd100_000);
+    
+    // 4 Hz (250ms) general-purpose clock
+    wire clk_250ms;
+    clk_div clk_250ms_div(clk_250ms, clk_1ms, 32'd250);
+    
+    // 2 Hz (500ms) general-purpose clock
+    wire clk_500ms;
+    clk_div clk_500ms_div(clk_500ms, clk_1ms, 32'd500);
     
     // 1 Hz (1s) general-purpose clock
     wire clk_1s;
@@ -168,13 +180,37 @@ module top_vpong #(
         .key_press(key_press),
         .key_release(key_release),
         .clk(sys_clk),
-        .btn_reset(reset)
+        .btn_reset(reset),
+        .MAX_SCORE(i_sw[0] ? 8'd99 : MAX_GAME_SCORE)
     );
     
     always @(posedge sys_clk) begin
         led_r[15:14] <= glob_state;
         led_r[13:12] <= game_state;
+        
     end
+    
+    always @(posedge clk_500ms) begin
+        if (i_sw[0]) begin
+            led_r[0] <= 1'b1;
+        end else begin
+            led_r[0] <= ~led_r[0];
+        end
+    end
+    
+    always @(posedge clk_250ms) begin
+        if (i_sw[1]) begin
+            led_r[1] <= 1'b1;
+        end else begin
+            led_r[1] <= ~led_r[1];
+        end
+    end
+    
+    // Number to Prog Text ROM
+    wire [4:0] addr_score_d3 = score_p1[7:4] + OFFSET_MEM_NUMERIC;
+    wire [4:0] addr_score_d2 = score_p1[3:0] + OFFSET_MEM_NUMERIC;
+    wire [4:0] addr_score_d1 = score_p2[7:4] + OFFSET_MEM_NUMERIC;
+    wire [4:0] addr_score_d0 = score_p2[3:0] + OFFSET_MEM_NUMERIC;
     
     // LEDs ///////////////////////////////////////////////////
     assign led = led_r;
@@ -240,7 +276,7 @@ module top_vpong #(
         .x(vga_pos_x),
         .y(vga_pos_y),
         .clk(CLK_25MHZ),
-        .reset(reset_vga)
+        .reset(reset_vga | key_release[KEY_F5])
     );
     
     // Video Memory (VRAM) ////////////////////////////////////
@@ -325,14 +361,7 @@ module top_vpong #(
     wire [GPU_COLOR_BITS - 1:0] tc_bg_color [STR_PER_FRAME - 1:0];
     wire tc_transparent_bg [STR_PER_FRAME - 1:0];
     wire [$clog2(MAX_NUM_STR) - 1:0] tc_line_addr [STR_PER_FRAME - 1:0];
-    wire [DATA_WIDTH - 1:0] tc_data [STR_PER_FRAME - 1:0];
-    
-    reg [1:0] tc_state;
-    initial tc_state <= 0;
-    
-//    always @(clk_1s) begin
-//        tc_state <= tc_state + 1;
-//    end
+    wire [(4 * DATA_WIDTH) - 1:0] tc_data [STR_PER_FRAME - 1:0];
     
     generate
         for (i = 0; i < STR_PER_FRAME; i = i + 1) begin
@@ -372,7 +401,7 @@ module top_vpong #(
                 .transparent_bg(tc_transparent_bg[i]),
                 .line_addr(tc_line_addr[i]),
                 .rom_data(tc_data[i]),
-                .state(tc_state)
+                .state(glob_state)
             );
         end
     endgenerate
@@ -381,10 +410,62 @@ module top_vpong #(
     // String in State 2 (String 0)
     // String in State 1 (String 0)
     // String in State 0 (String 0)
-    assign tc_data[0] = {{9'd0, 9'd0, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd2},  
-                         {9'd0, 9'd16, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd3},
-                         {9'd0, 9'd32, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd4},
-                         {9'd48, 9'd48, 3'd1, COLOR3WHITE, COLOR3BLACK, 1'b0, 4'd5}};
+    // [0] has the first pririty (foremost).
+    // [3] has the last priority.
+    
+    // START_X, START_Y, SCALE, FOREGROUND, BACKGROUND, TRANSPARENT?, STRING_ADDRESS
+    // {10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0}
+    
+    // Warning: May introduce timing failure from many duplicate large LUTs and/or ROMs
+    // due to slow clock and simple render algorithm.
+    
+    assign tc_data[0] = {{10'd80, 10'd192, 3'd6, COLOR3WHITE, COLOR3BLACK, 1'b0, 5'd8},  
+                         {10'd480, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d0},
+                         {10'd208, 10'd300, 3'd2, COLOR3BLACK, C3NUL, 1'b1, 5'd6},
+                         {10'd216, 10'd320, 3'd2, COLOR3BLACK, C3NUL, 1'b1, 5'd5}};
+
+    assign tc_data[1] = {{10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0},  
+                         {10'd448, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d1},
+                         {10'd208, 10'd332, 3'd2, COLOR3BLACK, C3NUL, 1'b1, 5'd7},
+                         {10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0}};
+
+    assign tc_data[2] = {{10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0},  
+                         {10'd160, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d2},
+                         {10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0},
+                         {10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0}};
+
+    assign tc_data[3] = {{10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0},  
+                         {10'd128, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d3},
+                         {10'd20, 10'd444, 3'd1, COLOR3RED, C3NUL, 1'b1, 5'd20},
+                         {10'd20, 10'd444, 3'd1, COLOR3RED, C3NUL, 1'b1, 5'd20}};
+    
+    // Popup "[SPACE] CONTINUE" in the middle of the game
+    wire popup_sel;
+    
+    assign gp_layer[GP_TEXT_FG0] = popup_sel && (game_state == 2'b10);
+    
+    text_renderer #(
+            .GPU_COLOR_BITS(GPU_COLOR_BITS),
+            .CHAR_BASE_WIDTH(8),
+            .CHAR_BASE_HEIGHT(16),
+            .MAX_STRLEN(16),
+            .MAX_NUM_STR(MAX_NUM_STR),
+            .TEXT_ROM_FILE("rom_prog_text.mem")
+        ) popup_text_renderer_inst(
+            .pixel_data(gp_data[GP_TEXT_FG0]),
+            .pixel_on(popup_sel),
+            .x(gpu_pos_x),
+            .y(gpu_pos_y),
+            .start_x((VGA_RES_WIDTH - (16 * 8 * 2)) / 2),
+            .start_y(320),
+            .scale(2),
+            .fg_color(COLOR3BLACK),
+            .bg_color(COLOR3WHITE),
+            .transparent_bg(0),
+            .line_addr(21),
+            .clk(sys_clk),
+            .en(1'b1)
+        );
     
     // Game Objects Renderer //////////////////////////////////
     // Render Ball
@@ -467,23 +548,27 @@ module top_vpong #(
     );
     
     // Render Hamtaro background
-//    bitmap_renderer #(
-//        .GPU_COLOR_BITS(GPU_COLOR_BITS),
-//        .GPU_ALPHA_CHANNEL(0),
-//        .IMAGE_WIDTH(320),
-//        .IMAGE_HEIGHT(240),
-//        .IMAGE_ROM_FILE("pong_bg.mem")
-//    ) background_graphics_renderer_inst(
-//        .pixel_data(gp_data[GP_GRAPHICS]),
-//        .pixel_on(gp_layer[GP_GRAPHICS]),
-//        .x(gpu_pos_x),
-//        .y(gpu_pos_y),
-//        .start_x(0),
-//        .start_y(0),
-//        .scale(3'd2),
-//        .clk(sys_clk),
-//        .en(1'b1)
-//    );
+    wire god_mode;
+    
+    assign gp_layer[GP_GRAPHICS] = god_mode && i_sw[1];
+    
+    bitmap_renderer #(
+        .GPU_COLOR_BITS(GPU_COLOR_BITS),
+        .GPU_ALPHA_CHANNEL(0),
+        .IMAGE_WIDTH(320),
+        .IMAGE_HEIGHT(240),
+        .IMAGE_ROM_FILE("pong_bg.mem")
+    ) background_graphics_renderer_inst(
+        .pixel_data(gp_data[GP_GRAPHICS]),
+        .pixel_on(god_mode),
+        .x(gpu_pos_x),
+        .y(gpu_pos_y),
+        .start_x(0),
+        .start_y(0),
+        .scale(2),
+        .clk(sys_clk),
+        .en(1'b1)
+    );
     
     // Render Game Background
     rectangle_renderer #(

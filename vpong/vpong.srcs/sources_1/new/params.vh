@@ -1,4 +1,5 @@
 // 3-bit RGB colors ///////////////////////////////////////////
+localparam C3NUL            = 3'b000;
 localparam COLOR3BLACK      = 3'b000;
 localparam COLOR3WHITE      = 3'b111;
 localparam COLOR3RED        = 3'b100;
@@ -7,6 +8,7 @@ localparam COLOR3BLUE       = 3'b001;
 localparam COLOR3CYAN       = 3'b011;
 localparam COLOR3MAGENTA    = 3'b101;
 localparam COLOR3YELLOW     = 3'b110;
+localparam COLOR_NUMBERS    = COLOR3MAGENTA;
 
 // Render Flags ///////////////////////////////////////////////
 localparam RF_SCORE         = 4'd15;
@@ -21,7 +23,8 @@ localparam GP_TEXT_FG4      = 5;
 localparam GP_TEXT_FG3      = 6;
 localparam GP_TEXT_FG2      = 7;
 localparam GP_TEXT_FG1      = 8;
-localparam GP_FOREGROUND    = 9;
+localparam GP_TEXT_FG0      = 9;
+localparam GP_FOREGROUND    = 10;
 
 // Global State and Game State ////////////////////////////////
 localparam GLOB_STATE_MENU  = 2'd0;
@@ -69,3 +72,4 @@ localparam KEY_Y            = 8'h35;
 localparam KEY_Z            = 8'h1A;
 localparam KEY_SPACE        = 8'h29;
 localparam KEY_ESC          = 8'h76;
+localparam KEY_F5           = 8'h03;
