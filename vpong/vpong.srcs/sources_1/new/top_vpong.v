@@ -353,7 +353,14 @@ module top_vpong #(
     endgenerate
     
     // Text Renderer //////////////////////////////////////////
+    reg blink_text;
+    
+    always @(posedge clk_500ms) begin
+        blink_text <= ~blink_text;
+    end
+    
     localparam DATA_WIDTH  = 10 + 10 + 3 + GPU_COLOR_BITS + GPU_COLOR_BITS + 1 + $clog2(MAX_NUM_STR);
+    
     wire [9:0] tc_start_x [STR_PER_FRAME - 1:0];
     wire [9:0] tc_start_y [STR_PER_FRAME - 1:0];
     wire [2:0] tc_scale [STR_PER_FRAME - 1:0];
@@ -422,7 +429,7 @@ module top_vpong #(
     assign tc_data[0] = {{10'd80, 10'd192, 3'd6, COLOR3WHITE, COLOR3BLACK, 1'b0, 5'd8},  
                          {10'd480, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d0},
                          {10'd208, 10'd300, 3'd2, COLOR3BLACK, C3NUL, 1'b1, 5'd6},
-                         {10'd216, 10'd320, 3'd2, COLOR3BLACK, C3NUL, 1'b1, 5'd5}};
+                         {10'd216, 10'd320, 3'd2, COLOR3BLACK, C3NUL, 1'b1, blink_text ? 5'd5 : 5'd0}};
 
     assign tc_data[1] = {{10'd0, 10'd0, 3'd1, C3NUL, C3NUL, 1'b0, 5'd0},  
                          {10'd448, 10'd32, 3'd4, COLOR_NUMBERS, C3NUL, 1'b1, addr_score_d1},
@@ -442,7 +449,7 @@ module top_vpong #(
     // Popup "[SPACE] CONTINUE" in the middle of the game
     wire popup_sel;
     
-    assign gp_layer[GP_TEXT_FG0] = popup_sel && (game_state == 2'b10);
+    assign gp_layer[GP_TEXT_FG0] = popup_sel && (game_state == 2'b10) && blink_text;
     
     text_renderer #(
             .GPU_COLOR_BITS(GPU_COLOR_BITS),
